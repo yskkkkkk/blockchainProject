@@ -25,3 +25,5 @@ ORM을 이용하면 객체 내부에 객체 저장을 하는 형식이 가능
 
 OOP 관점에서의 모델링 (상속, 콤포지션, 연관관계) 이 가능하다. 
 방언 처리가 용이하여 Migration에 좋음, 유지보수에도 좋음.
+
+참조: https://www.youtube.com/watch?v=XBG6CUtVCIg&list=PL93mKxaRDidG_OIfRQ4nztPQ13y74lCYg&index=2
