@@ -13,3 +13,12 @@
 | ------------------------------------------------------------ | ------------------ | -------- | ------------------------------------- | -------------- |
 | <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"> | :white_check_mark: | 8시간    | [리액트팁모음](notes/리액트팁모음.md) | 유튜브, 구글링 |
 |                                                              |                    |          |                                       |                |
+
+<br>
+
+### 4일차
+
+| 구분                                                         | 진행상태           | 학습시간 | 참고 기록                       | 학습방법       |
+| ------------------------------------------------------------ | ------------------ | -------- | ------------------------------- | -------------- |
+| <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> | :white_check_mark: | 6시간    | [nextjs팁1](notes/nextjs팁1.md) | 유튜브, 구글링 |
+|                                                              |                    |          |                                 |                |
