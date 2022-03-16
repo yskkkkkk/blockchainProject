@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {useState, useEffect} from 'react';
+import style from './navbar.module.css';
 
 
 export default function Navbar() {
@@ -26,53 +27,53 @@ export default function Navbar() {
   });
 
   return (
-    <nav>
+    <nav className={style.container}>
       <ul>
-        <li>
+        <li className={style.li}>
           <Link href="/">
-            <button>Home</button>
+            <a className={style.wow}>Home</a>
           </Link>
         </li>
-        <li>
+        <li className={style.li}>
           <Link href="/intro">
-            <button>우리두레란?</button>
+            <a>우리두레란?</a>
           </Link>
         </li>
-        <li>
+        <li className={style.li}>
           <Link href="/upcoming">
-            <button>펀딩예정</button>
+            <a>펀딩예정</a>
           </Link>
         </li>
-        <li>
+        <li className={style.li}>
           <Link href="/support">
-            <button>후원하기</button>
+            <a>후원하기</a>
           </Link>
         </li>
-        <li>
+        <li className={style.li}>
           <Link href="/project">
-            <button>프로젝트 생성</button>
+            <a>프로젝트 생성</a>
           </Link>
         </li>
         {/* 유저 로그인 상태 */}
         {isLoggedIn && (
           <>
-            <li>
+            <li className={style.li}>
               <Link href="/profile">
-                <button>profile</button>
+                <a>profile</a>
               </Link>
             </li>
-            <li>
-              <button onClick={logout}>
+            <li className={style.li}>
+              <a onClick={logout}>
                 logout
-              </button>
+              </a>
             </li>
           </>
         )}
         {/* 유저 로그아웃 상태 */}
         {!isLoggedIn && (
-          <li>
+          <li className={style.li}>
             <Link href="/login">
-              <button>login</button>
+              <a>login</a>
             </Link>
           </li>
         )}
