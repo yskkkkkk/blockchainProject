@@ -1,5 +1,6 @@
 package com.ssafy.woori.domain.funding.controller;
 
+import com.ssafy.woori.entity.Hot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ssafy.woori.domain.funding.dto.FundingListRequest;
@@ -8,15 +9,13 @@ import com.ssafy.woori.domain.funding.service.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@EnableWebMvc
-@RestController("/funding")
+@RestController
+@RequestMapping("/funding")
 public class FundingController {
 
     public static final Logger logger = LoggerFactory.getLogger(FundingController.class);
@@ -26,13 +25,8 @@ public class FundingController {
     @Autowired
     private FundingService fundingService;
 
-    @GetMapping
-    public void test(){
-        System.out.println("!@#");
-    }
 
-
-    @GetMapping("lists")
+    @PostMapping("/lists")
     public ResponseEntity<List<FundingListResponse>> fundingList(@RequestBody FundingListRequest request){
         logger.info("펀딩 리스트 조회" + request.getSort());
         String message = SUCCESS;
@@ -41,8 +35,10 @@ public class FundingController {
         List<FundingListResponse> output = new ArrayList<>();
 
         if(request.getSort() == 1){
-            output = fundingService.fundingHot();
+            //output = fundingService.fundingHot();
+            System.out.println(fundingService.fundingHot());
             status = HttpStatus.OK;
+            return (new ResponseEntity<>(fundingService.fundingHot(),status));
         }
         else if(request.getSort() == 2){
 
@@ -54,7 +50,7 @@ public class FundingController {
 
         }
 
-        return (new ResponseEntity<List<FundingListResponse>>(output, status));
+        return (new ResponseEntity<>(output, status));
     }
 
 
