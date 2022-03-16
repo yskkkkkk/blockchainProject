@@ -1,22 +1,34 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+//@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_board")
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int boardSeq;
-    @Column(unique = true)
+    @Column
     private int fundingSeq;
     @Column(length = 100)
     private String boardTitle;
     @Column(length = 1024)
     private String boardContent;
-    @Temporal(TemporalType.DATE)
-    private Date boardCreatedDate;
-    @Temporal(TemporalType.DATE)
-    private Date boardModifiedDate;
+    @CreatedDate
+    private LocalDate boardCreatedDate;
+    @LastModifiedDate
+    private LocalDate boardModifiedDate;
+
+
 }
