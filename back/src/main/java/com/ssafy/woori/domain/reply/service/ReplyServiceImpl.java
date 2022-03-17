@@ -26,4 +26,13 @@ public class ReplyServiceImpl implements ReplyService{
                         .build()
         ));
     }
+
+    @Override
+    public boolean deleteReply(int replySeq) {
+        if(replyRepository.findById(replySeq).isPresent()){
+            replyRepository.deleteById(replySeq);
+            return (true);
+        }
+        return (false);
+    }
 }
