@@ -28,21 +28,22 @@ public class BoardController {
     @PostMapping
     public ResponseEntity<Map<String, Object>>addFundingBoard(@RequestBody addBoardRequest request){
         logger.info("공지사항 추가 " +request.getBoardTitle());
-        String message = SUCCESS;
-        HttpStatus status = null;
+        String message;
+        HttpStatus status;
 
         Board board = boardService.addBoard(request);
         Map<String, Object> response = new HashMap<>();
 
         if(board != null){
-            response.put("message", "SUCCESS");
+            message = SUCCESS;
             response.put("result", board);
             status = HttpStatus.OK;
         }
         else{
-            response.put("message", "FAIL");
+            message = FAIL;
             status = HttpStatus.NOT_FOUND;
         }
+        response.put("message", message);
 
         return (new ResponseEntity<>(response, status));
     }

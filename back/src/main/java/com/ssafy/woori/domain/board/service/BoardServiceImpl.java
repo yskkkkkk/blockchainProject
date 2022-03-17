@@ -20,14 +20,14 @@ public class BoardServiceImpl implements BoardService{
     public Board addBoard(addBoardRequest request) {
 
 
-        return boardRepository.save(
+        return (boardRepository.save(
                 Board.builder()
                 .fundingSeq(request.getFundingSeq())
                 .boardTitle(request.getBoardTitle())
                 .boardContent(request.getBoardContent())
                 .boardCreatedDate(LocalDate.now())
                 .boardModifiedDate(LocalDate.now())
-                .build());
+                .build()));
     }
 
     @Override
