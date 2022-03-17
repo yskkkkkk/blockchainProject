@@ -1,8 +1,16 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_delivery_location")
 public class Delivery {
@@ -21,6 +29,6 @@ public class Delivery {
     private String userPhone;
     @Column
     private int zipCode;
-    @Temporal(TemporalType.DATE)
-    private Date userDate;
+    @CreatedDate
+    private LocalDate userDate;
 }

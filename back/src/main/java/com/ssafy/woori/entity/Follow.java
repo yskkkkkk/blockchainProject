@@ -1,8 +1,16 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name="tb_follow")
 public class Follow {
@@ -15,6 +23,6 @@ public class Follow {
     private int seller;
     @Column(columnDefinition = "boolean default true")
     private boolean alarmIsAllow;
-    @Temporal(TemporalType.DATE)
-    private Date RequestDate;
+    @CreatedDate
+    private LocalDate RequestDate;
 }

@@ -1,7 +1,14 @@
 package com.ssafy.woori.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_category")
 public class Category {

@@ -1,9 +1,18 @@
 package com.ssafy.woori.entity;
 
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_user")
 public class User {
@@ -12,14 +21,14 @@ public class User {
     private int userSeq;
     @Column(length = 100)
     private String userEmail;
-    @Temporal(TemporalType.DATE)
-    private Date userBirth;
+    @CreatedDate
+    private LocalDate userBirth;
     @Column(columnDefinition = "boolean default true")
     private boolean userIsActive;
-    @Temporal(TemporalType.DATE)
-    private Date userCreatedDate;
-    @Temporal(TemporalType.DATE)
-    private Date userModifiedDate;
+    @CreatedDate
+    private LocalDate userCreatedDate;
+    @LastModifiedDate
+    private LocalDate userModifiedDate;
     @Column(length = 20)
     private String userNickname;
     @Column(unique = true)
