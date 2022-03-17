@@ -28,4 +28,13 @@ public class BoardServiceImpl implements BoardService{
                 .boardModifiedDate(LocalDate.now())
                 .build());
     }
+
+    @Override
+    public boolean deleteBoard(int boardSeq) {
+        if(boardRepository.findById(boardSeq).isPresent()){ //삭제할값이 존재
+            boardRepository.deleteById(boardSeq);
+            return (true);
+        }
+        else return (false);
+    }
 }
