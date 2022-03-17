@@ -70,7 +70,7 @@ public class BoardController {
     public ResponseEntity<String>deleteFundingBoard(@RequestParam int boardSeq) {
         logger.info("공지사항 삭제 " + boardSeq);
         String message = FAIL;
-        HttpStatus status = null;
+        HttpStatus status;
 
         if(boardService.deleteBoard(boardSeq)) {
             message = SUCCESS;
