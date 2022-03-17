@@ -47,9 +47,26 @@ public class ReplyController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @PutMapping
+    public ResponseEntity<String> modifyFundingReply(@RequestBody addReplyRequest request){
+        logger.info("댓글 수정 " +request.getReplySeq());
+        String response = FAIL;
+        HttpStatus status;
+
+        if(replyService.modifyReply(request)){
+            response = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+
+        return (new ResponseEntity<>(response, status));
+    }
+
     @DeleteMapping
     public ResponseEntity<String> deleteFundingReply(@RequestParam int replySeq){
-        logger.info("댓글 삭제" + replySeq);
+        logger.info("댓글 삭제 " + replySeq);
         String message = FAIL;
         HttpStatus status;
 

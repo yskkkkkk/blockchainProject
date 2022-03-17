@@ -5,5 +5,6 @@ import com.ssafy.woori.entity.Reply;
 
 public interface ReplyService {
     Reply addReply(addReplyRequest request);
+    boolean modifyReply(addReplyRequest request);
     boolean deleteReply(int replySeq);
 }
