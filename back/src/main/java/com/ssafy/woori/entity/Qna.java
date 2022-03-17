@@ -18,9 +18,9 @@ public class Qna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int qnaSeq;
-    @Column(unique = true)
+    @Column
     private int fundingSeq;
-    @Column(unique = true)
+    @Column
     private int userSeq;
     @Column(length = 1024)
     private String qnaText;
@@ -29,5 +29,6 @@ public class Qna {
     @LastModifiedDate
     private LocalDate qnaModifiedDate;
     @Column(nullable = false)
-    private boolean qnaIspublic;
+    private boolean secret;
+//    private boolean isPublic;
 }
