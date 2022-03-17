@@ -28,4 +28,13 @@ public class QnaServiceImpl implements QnaService{
                         .qnaModifiedDate(LocalDate.now())
                         .build()));
     }
+
+    @Override
+    public boolean deleteQna(int qnaSeq) {
+        if(qnaRepository.findById(qnaSeq).isPresent()){
+            qnaRepository.deleteById(qnaSeq);
+            return (true);
+        }
+        return (false);
+    }
 }
