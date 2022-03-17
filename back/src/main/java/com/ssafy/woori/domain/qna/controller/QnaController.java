@@ -50,6 +50,22 @@ public class QnaController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @PutMapping
+    public ResponseEntity<String> modifyFundingQna(@RequestBody addQnaRequest request){
+        logger.info("질문 수정" +request.getUserSeq());
+        String message = FAIL;
+        HttpStatus status;
+
+        if(qnaService.modifyQna(request)){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return (new ResponseEntity<String>(message,status));
+    }
+
     @DeleteMapping
     public ResponseEntity<String> deleteFundingQna(@RequestParam int qnaSeq){
         logger.info("질문 삭제 " + qnaSeq);
