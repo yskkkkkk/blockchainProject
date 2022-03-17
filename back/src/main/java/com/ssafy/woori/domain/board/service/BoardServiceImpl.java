@@ -3,7 +3,6 @@ package com.ssafy.woori.domain.board.service;
 import com.ssafy.woori.domain.board.dao.BoardRepository;
 import com.ssafy.woori.domain.board.dto.addBoardRequest;
 import com.ssafy.woori.entity.Board;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +31,10 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public boolean modifyBoard(addBoardRequest request) {
-        Optional<Board> board = boardRepository.findById(request.getFundingSeq());
+        Optional<Board> board = boardRepository.findById(request.getBoardSeq());
 
         if(!board.isPresent()) return (false);  // 값이 존재하지 않음
 
-        System.out.println(board);
         board.ifPresent(selectBoard ->{
             boardRepository.save(
                     Board.builder()
