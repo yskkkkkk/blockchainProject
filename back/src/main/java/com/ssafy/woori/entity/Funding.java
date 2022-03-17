@@ -1,8 +1,16 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_funding")
 public class Funding {
@@ -27,8 +35,8 @@ public class Funding {
     private int fundingStatus;
     @Column
     private int fundingCheap;
-    @Temporal(TemporalType.DATE)
-    private Date fundingCreateDate;
-    @Temporal(TemporalType.DATE)
-    private Date fundingModifyDate;
+    @CreatedDate
+    private LocalDate fundingCreateDate;
+    @CreatedDate
+    private LocalDate fundingModifyDate;
 }

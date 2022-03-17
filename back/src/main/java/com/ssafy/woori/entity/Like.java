@@ -1,8 +1,16 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_like")
 public class Like {
@@ -13,6 +21,6 @@ public class Like {
     private int userSeq;
     @Column(nullable = false)
     private int fundingSeq;
-    @Temporal(TemporalType.DATE)
-    private Date likeDate;
+    @CreatedDate
+    private LocalDate likeDate;
 }

@@ -1,8 +1,17 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_qna_reply")
 public class Reply {
@@ -13,8 +22,8 @@ public class Reply {
     private int qnaSeq;
     @Column(length = 1024)
     private String replyText;
-    @Temporal(TemporalType.DATE)
-    private Date replyCreatedDate;
-    @Temporal(TemporalType.DATE)
-    private Date replyModifiedDate;
+    @CreatedDate
+    private LocalDate replyCreatedDate;
+    @LastModifiedDate
+    private LocalDate replyModifiedDate;
 }

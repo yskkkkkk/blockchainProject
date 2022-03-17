@@ -1,8 +1,16 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_file")
 public class File {
@@ -23,8 +31,8 @@ public class File {
     private int relationSeq;
     @Column(columnDefinition = "boolean default true")
     private boolean fileIsActive;
-    @Temporal(TemporalType.DATE)
-    private Date fileRegisteredDate;
-    @Temporal(TemporalType.DATE)
-    private Date fileModifiedDate;
+    @CreatedDate
+    private LocalDate fileRegisteredDate;
+    @CreatedDate
+    private LocalDate fileModifiedDate;
 }

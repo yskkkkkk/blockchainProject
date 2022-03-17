@@ -1,8 +1,16 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_alarm")
 public class Alarm {
@@ -17,8 +25,8 @@ public class Alarm {
     private int alarmType;
     @Column
     private String alarmText;
-    @Temporal(TemporalType.DATE)
-    private Date alarmDate;
+    @CreatedDate
+    private LocalDate alarmDate;
     @Column(columnDefinition = "boolean default false")
     private boolean alarmIsRead;
     @Column(columnDefinition = "boolean default false")

@@ -1,8 +1,17 @@
 package com.ssafy.woori.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_qna")
 public class Qna {
@@ -15,10 +24,10 @@ public class Qna {
     private int userSeq;
     @Column(length = 1024)
     private String qnaText;
-    @Temporal(TemporalType.DATE)
-    private Date qnaCreatedDate;
-    @Temporal(TemporalType.DATE)
-    private Date qnaModifiedDate;
+    @CreatedDate
+    private LocalDate qnaCreatedDate;
+    @LastModifiedDate
+    private LocalDate qnaModifiedDate;
     @Column(nullable = false)
     private boolean qnaIspublic;
 }
