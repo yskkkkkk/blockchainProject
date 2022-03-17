@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class ReplyServiceImpl implements ReplyService{
@@ -25,6 +26,26 @@ public class ReplyServiceImpl implements ReplyService{
                         .replyModifiedDate(LocalDate.now())
                         .build()
         ));
+    }
+
+    @Override
+    public boolean modifyReply(addReplyRequest request) {
+        Optional<Reply> reply = replyRepository.findById(request.getReplySeq());
+
+        if(!reply.isPresent()) return (false);
+
+        reply.ifPresent(selectReply ->{
+            replyRepository.save(
+                    Reply.builder()
+                            .replySeq(selectReply.getReplySeq())
+                            .qnaSeq(selectReply.getQnaSeq())
+                            .replyText(request.getReplyText())
+                            .replyCreatedDate(selectReply.getReplyCreatedDate())
+                            .replyModifiedDate(LocalDate.now())
+                            .build()
+            );
+        });
+        return (true);
     }
 
     @Override
