@@ -6,4 +6,5 @@ import com.ssafy.woori.entity.Board;
 public interface BoardService {
     Board addBoard(addBoardRequest request);
     boolean deleteBoard(int boardSeq);
+    boolean modifyBoard(addBoardRequest request);
 }

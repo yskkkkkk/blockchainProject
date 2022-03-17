@@ -47,6 +47,24 @@ public class BoardController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @PutMapping
+    public ResponseEntity<String>modifyFundingBoard(@RequestBody addBoardRequest request){
+        logger.info("공지사항 수정 " +request.getBoardTitle());
+        String message = SUCCESS;
+        HttpStatus status = null;
+
+        if(boardService.modifyBoard(request)){
+            message = "SUCCESS";
+            status = HttpStatus.OK;
+        }
+        else{
+            message ="FAIL";
+            status = HttpStatus.NOT_FOUND;
+        }
+
+        return (new ResponseEntity<>(message, status));
+    }
+
     @DeleteMapping
     public ResponseEntity<String>deleteFundingBoard(@RequestParam int boardSeq) {
         logger.info("공지사항 삭제 " + boardSeq);

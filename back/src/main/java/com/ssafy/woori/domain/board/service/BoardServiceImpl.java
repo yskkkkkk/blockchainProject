@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -27,6 +28,29 @@ public class BoardServiceImpl implements BoardService{
                 .boardCreatedDate(LocalDate.now())
                 .boardModifiedDate(LocalDate.now())
                 .build());
+    }
+
+    @Override
+    public boolean modifyBoard(addBoardRequest request) {
+        Optional<Board> board = boardRepository.findById(request.getFundingSeq());
+
+        if(!board.isPresent()) return (false);  // 값이 존재하지 않음
+
+        System.out.println(board);
+        board.ifPresent(selectBoard ->{
+            boardRepository.save(
+                    Board.builder()
+                            .boardSeq((selectBoard.getBoardSeq()))
+                            .fundingSeq(selectBoard.getFundingSeq())
+                            .boardTitle(request.getBoardTitle())
+                            .boardContent(request.getBoardContent())
+                            .boardCreatedDate(selectBoard.getBoardCreatedDate())
+                            .boardModifiedDate(LocalDate.now())
+                            .build()
+            );
+
+        });
+        return (true);
     }
 
     @Override
