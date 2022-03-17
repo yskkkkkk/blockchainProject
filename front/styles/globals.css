@@ -18,3 +18,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#footer {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  bottom: 0;
+  width: 100%;
+}

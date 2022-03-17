@@ -7,7 +7,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>우리두레</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.png" />
       </Head>
 
       <h2>home page</h2>
