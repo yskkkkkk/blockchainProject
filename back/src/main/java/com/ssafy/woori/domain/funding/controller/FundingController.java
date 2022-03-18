@@ -1,6 +1,6 @@
 package com.ssafy.woori.domain.funding.controller;
 
-import com.ssafy.woori.entity.Hot;
+import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ssafy.woori.domain.funding.dto.FundingListRequest;
@@ -11,8 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/funding")
@@ -51,6 +50,27 @@ public class FundingController {
         }
 
         return (new ResponseEntity<>(output, status));
+    }
+
+    @GetMapping("/introduce")
+    public ResponseEntity<Map<String,Object>>fundingInfo(@RequestParam int fundingSeq){
+        logger.info("상품소개 가져오기 " + fundingSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        Optional<FundingInfoResponse> dto = fundingService.fundingInfo(fundingSeq);
+        Map<String, Object> response = new HashMap<>();
+
+        if(dto.isPresent()){
+            message = SUCCESS;
+            response.put("data",dto);
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+        return (new ResponseEntity<>(response, status));
     }
 
 

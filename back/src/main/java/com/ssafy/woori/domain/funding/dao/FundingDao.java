@@ -1,5 +1,6 @@
 package com.ssafy.woori.domain.funding.dao;
 
+import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
 import com.ssafy.woori.domain.funding.dto.FundingListResponse;
 import com.ssafy.woori.entity.Funding;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FundingDao extends JpaRepository<Funding, Integer> {
@@ -19,5 +21,7 @@ public interface FundingDao extends JpaRepository<Funding, Integer> {
 //            "(select funding_seq from tb_hot)", nativeQuery = true)
     @Query(value = "select fundingSeq, fundingImage, fundingTitle, fundingSimple " +
             "from Funding")
-    public List<FundingListResponse> findByEmailAdd();
+    List<FundingListResponse> findByEmailAdd();
+
+    Optional<FundingInfoResponse> findByFundingSeq(int fundingSeq);
 }
