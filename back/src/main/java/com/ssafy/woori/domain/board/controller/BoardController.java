@@ -1,5 +1,6 @@
 package com.ssafy.woori.domain.board.controller;
 
+import com.ssafy.woori.domain.board.dto.FundingBoardInfo;
 import com.ssafy.woori.domain.board.dto.addBoardRequest;
 import com.ssafy.woori.domain.board.service.BoardService;
 import com.ssafy.woori.domain.funding.controller.FundingController;
@@ -12,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/funding/board")
@@ -24,6 +27,27 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+
+    @GetMapping
+    public ResponseEntity<Map<String, Object>>fundingBoard(@RequestParam int fundingSeq){
+        logger.info("공지사항 가져오기 " + fundingSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        List<FundingBoardInfo> dto = boardService.fundingBoard(fundingSeq);
+        Map<String, Object> response = new HashMap<>();
+
+        if(dto != null){
+            message = SUCCESS;
+            response.put("data", dto);
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+        return (new ResponseEntity<>(response, status));
+    }
 
     @PostMapping
     public ResponseEntity<Map<String, Object>>addFundingBoard(@RequestBody addBoardRequest request){

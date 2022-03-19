@@ -1,12 +1,14 @@
 package com.ssafy.woori.domain.board.service;
 
 import com.ssafy.woori.domain.board.dao.BoardRepository;
+import com.ssafy.woori.domain.board.dto.FundingBoardInfo;
 import com.ssafy.woori.domain.board.dto.addBoardRequest;
 import com.ssafy.woori.entity.Board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,8 +18,15 @@ public class BoardServiceImpl implements BoardService{
     private BoardRepository boardRepository;
 
     @Override
-    public Board addBoard(addBoardRequest request) {
+    public List<FundingBoardInfo> fundingBoard(int fundingSeq) {
 
+        List<FundingBoardInfo> response = boardRepository.findByFundingSeq(fundingSeq);
+
+        return response;
+    }
+
+    @Override
+    public Board addBoard(addBoardRequest request) {
 
         return (boardRepository.save(
                 Board.builder()
