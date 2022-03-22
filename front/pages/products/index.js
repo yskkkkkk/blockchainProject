@@ -19,8 +19,7 @@ const Products = ({funds}) => {
       <h1>전체 펀드 상품들</h1>
       {funds.map(fund => (
         <Link href={'/products/' + fund.id} key={fund.id}>
-          <h3>{fund.col1}</h3>
-          <p>fund.fullName</p>
+          <button>{fund.fullName}</button>
         </Link>
       ))}
     </div>

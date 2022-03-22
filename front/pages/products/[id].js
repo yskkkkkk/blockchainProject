@@ -15,10 +15,23 @@ export const getStaticPaths = async () => {
   }
 }
 
-const Detail = () => {
+// 각 다이내믹 페이지마다 실행됨
+export const getStaticProps = async (context) => {  // context == getStaticPaths의 return 값 paths
+  
+  const id = context.params.id;
+  const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);
+  const data = await res.json();
+
+  return {
+    props: {fund: data}
+  }
+}
+
+const Detail = ({fund}) => {
   return (
     <div>
-      <h1>펀드 상품 상세 정보</h1>
+      <h1>{fund.fullName}</h1>
+      <img src={fund.col1} alt="thumbnail" />
     </div>
   );
 }
