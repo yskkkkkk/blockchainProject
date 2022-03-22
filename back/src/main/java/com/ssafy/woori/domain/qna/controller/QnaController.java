@@ -1,6 +1,7 @@
 package com.ssafy.woori.domain.qna.controller;
 
 import com.ssafy.woori.domain.funding.controller.FundingController;
+import com.ssafy.woori.domain.qna.dto.FundingQnaInfo;
 import com.ssafy.woori.domain.qna.dto.addQnaRequest;
 import com.ssafy.woori.domain.qna.service.QnaService;
 import com.ssafy.woori.entity.Qna;
@@ -12,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/funding/qna")
@@ -25,10 +28,31 @@ public class QnaController {
     @Autowired
     private QnaService qnaService;
 
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> fundingQna(@RequestParam int fundingSeq){
+        logger.info("질문 목록 불러오기 " +fundingSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        Optional<List<FundingQnaInfo>> dto = qnaService.fundingQna(fundingSeq);
+        Map<String, Object> response = new HashMap<>();
+
+        if(dto.isPresent()){
+            message = SUCCESS;
+            response.put("data", dto);
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+        return (new ResponseEntity<>(response, status));
+    }
+
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addFundingBoard(@RequestBody addQnaRequest request){
-        logger.info("질문 추가" +request.getUserSeq());
-        String message;
+    public ResponseEntity<Map<String, Object>> addFundingQna(@RequestBody addQnaRequest request){
+        logger.info("질문 추가 " +request.getUserSeq());
+        String message = FAIL;
         HttpStatus status;
 
         System.out.println("cont : " + request);
@@ -42,7 +66,6 @@ public class QnaController {
             response.put("result", qna);
         }
         else{
-            message = FAIL;
             status = HttpStatus.NOT_FOUND;
         }
         response.put("message", message);

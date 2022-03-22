@@ -1,6 +1,7 @@
 package com.ssafy.woori.domain.qna.service;
 
 import com.ssafy.woori.domain.qna.dao.QnaRepository;
+import com.ssafy.woori.domain.qna.dto.FundingQnaInfo;
 import com.ssafy.woori.domain.qna.dto.addQnaRequest;
 import com.ssafy.woori.entity.Qna;
 import org.apache.tomcat.jni.Local;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,7 +35,7 @@ public class QnaServiceImpl implements QnaService{
 
     @Override
     public boolean modifyQna(addQnaRequest request) {
-        Optional<Qna> qna =qnaRepository.findById(request.getQnaSeq());
+        Optional<Qna> qna =qnaRepository.findById(request.getFundingSeq());
 
         System.out.println(qna);
         if(!qna.isPresent()) return (false);
@@ -53,6 +55,12 @@ public class QnaServiceImpl implements QnaService{
         });
 
         return (true);
+    }
+
+    @Override
+    public Optional<List<FundingQnaInfo>> fundingQna(int fundingSeq) {
+
+        return (qnaRepository.findByFundingSeq(fundingSeq));
     }
 
     @Override

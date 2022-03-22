@@ -30,5 +30,4 @@ public class Qna {
     private LocalDate qnaModifiedDate;
     @Column(nullable = false)
     private boolean secret;
-//    private boolean isPublic;
 }
