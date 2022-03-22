@@ -9,9 +9,6 @@ export default function Home() {
         <title>우리두레</title>
         <link rel="icon" href="/logo.png" />
       </Head>
-
-      <h2>home page</h2>
-
     </div>
   )
 }
