@@ -27,3 +27,5 @@ const Products = ({funds}) => {
   )
 
 }
+
+export default Products;
