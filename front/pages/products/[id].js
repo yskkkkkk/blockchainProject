@@ -1,3 +1,4 @@
+// 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
   
   const res = await fetch('https://retoolapi.dev/X9nA53/dummy');
@@ -10,7 +11,7 @@ export const getStaticPaths = async () => {
   })
 
   return {
-    paths: paths,
+    paths: paths,     // key값 이름이 paths인것은 convention 이고, 해당 값은 아래의 getStaticProps 의 context값으로 자동 전달됩니다.
     fallback: false,  // 유효하지 않은 id값의 페이지로 라우팅 되면 자동으로 404페이지 표시 
   }
 }

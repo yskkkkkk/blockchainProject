@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+// 상품 페이지를 통해 상세 페이지로의 이동을 임시 구현하기 위해 만든 테스트 페이지
 export const getStaticProps = async () => {
 
   const res = await fetch('https://retoolapi.dev/X9nA53/dummy');
