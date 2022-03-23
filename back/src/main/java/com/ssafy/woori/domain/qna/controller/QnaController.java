@@ -34,7 +34,7 @@ public class QnaController {
         String message = FAIL;
         HttpStatus status;
 
-        Optional<List<FundingQnaInfo>> dto = qnaService.fundingQna(fundingSeq);
+        Optional<List<Map<String,Object>>> dto = qnaService.fundingQna(fundingSeq);
         Map<String, Object> response = new HashMap<>();
 
         if(dto.isPresent()){
