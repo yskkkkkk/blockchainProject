@@ -3,6 +3,7 @@ package com.ssafy.woori.domain.funding.service;
 import com.ssafy.woori.domain.funding.dao.FundingDao;
 import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
 import com.ssafy.woori.domain.funding.dto.FundingListResponse;
+import com.ssafy.woori.domain.funding.dto.OptionListResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +36,12 @@ public class FundingServiceImpl implements FundingService{
 //        funding.ifPresent(selectFunding ->{
 //
 //        });
-
-
         return response;
+    }
+
+    @Override
+    public Optional<List<OptionListResponse>> getOptions(int fundingSeq) {
+        return fundingDao.findOptions(fundingSeq);
+        //return Optional.empty();
     }
 }
