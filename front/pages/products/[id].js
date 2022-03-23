@@ -32,9 +32,21 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund}) => {
   return (
-    <div>
-      <h1>{fund.fullName}</h1>
-      <img src={fund.col1} alt="thumbnail" />
+    <div className="flex flex-col gap-[5rem]">
+      <div className="flex flex-row border-2 border-black justify-evenly">
+        <img src={fund.col1} alt="thumbnail" />
+        <h1>{fund.fullName}</h1>
+      </div>
+      <div className="flex flex-row justify-evenly">
+        <div className="border-2 border-black">
+          <img src="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80" alt="road" width="800"/>
+        </div>
+        <div className="border-2 border-black">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
+        </div>
+      </div>
     </div>
   );
 }
