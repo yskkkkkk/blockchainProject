@@ -13,9 +13,9 @@ import java.util.Optional;
 
 @Repository
 public interface QnaRepository extends JpaRepository<Qna, Integer> {
-    @Query(value = "select q.qnaText as qnaText, q.qnaCreatedDate as qnaCreatedDate, q.secret as secret, (select u.userNickname from User u) as userNickname," +
-            "(select r.replyCreatedDate from Reply r where r.qnaSeq=q.qnaSeq) as replyCreatedDate, (select r.replyText from Reply r where r.qnaSeq=q.qnaSeq) as replyText " +
-            "from Qna q where q.fundingSeq = :fundingSeq")
-//    @Query(value = "select distinct new map (q.fundingSeq, r.qnaSeq) from Qna q, Reply r where q.fundingSeq = :fundingSeq")
+//    @Query(value = "select q.qnaText as qnaText, q.qnaCreatedDate as qnaCreatedDate, q.secret as secret, (select u.userNickname from User u) as userNickname," +
+//            "(select r.replyCreatedDate from Reply r where r.qnaSeq=q.qnaSeq) as replyCreatedDate, (select r.replyText from Reply r where r.qnaSeq=q.qnaSeq) as replyText " +
+//            "from Qna q where q.fundingSeq = :fundingSeq")
+    @Query(value = "select new map (q, r) from Qna q left join Reply r on q.qnaSeq = r.qnaSeq where q.fundingSeq = :fundingSeq")
     Optional<List<Map<String, Object>>> findByFundingSeq(@Param("fundingSeq") Integer fundingSeq);
 }

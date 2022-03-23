@@ -6,8 +6,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,4 +33,9 @@ public class Qna {
     private LocalDate qnaModifiedDate;
     @Column(nullable = false)
     private boolean secret;
+    
+    @ManyToOne
+    @JoinColumn(name = "fundingSeq", insertable=false, updatable=false)
+    private Funding funding;
+    
 }

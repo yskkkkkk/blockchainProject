@@ -1,12 +1,17 @@
 package com.ssafy.woori.entity;
 
 import lombok.*;
+import lombok.Builder.Default;
+
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,4 +44,14 @@ public class Funding {
     private LocalDate fundingCreateDate;
     @CreatedDate
     private LocalDate fundingModifyDate;
+    
+    @Default
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "funding")
+    private List<Qna> qnas = new ArrayList<>();
+    
+    public void addPost(Qna qna)
+    {
+    	this.qnas.add(qna);
+    	qna.setFunding(this);
+    }
 }
