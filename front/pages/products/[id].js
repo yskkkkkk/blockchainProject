@@ -1,7 +1,7 @@
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
   
-  const res = await fetch('https://retoolapi.dev/X9nA53/dummy');
+  const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
   const data = await res.json();
 
   const paths = data.map(fund => {
@@ -21,7 +21,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {  // context == getStaticPaths의 return 값 paths
   
   const id = context.params.id;
-  const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);
+  const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
   const data = await res.json();
 
   return {
