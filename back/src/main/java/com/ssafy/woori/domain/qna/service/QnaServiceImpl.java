@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -58,7 +59,7 @@ public class QnaServiceImpl implements QnaService{
     }
 
     @Override
-    public Optional<List<FundingQnaInfo>> fundingQna(int fundingSeq) {
+    public Optional<List<Map<String,Object>>> fundingQna(int fundingSeq) {
 
         return (qnaRepository.findByFundingSeq(fundingSeq));
     }
