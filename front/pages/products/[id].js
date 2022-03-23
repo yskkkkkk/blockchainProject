@@ -34,13 +34,33 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund}) => {
   return (
-    <div className="flex flex-col gap-[5rem]">
+    <main className="flex flex-col gap-[5rem]">
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
-      <div className="flex flex-row border-2 border-black justify-evenly">
-        <img src={fund.col1} alt="thumbnail" />
-        <h1>{fund.fullName}</h1>
-      </div>
-      <div className="flex flex-row justify-evenly">
+      <header className="flex flex-row border-2 border-black justify-evenly">
+        <section>
+          <img src={fund.col1} alt="thumbnail" />
+        </section>
+        <aside className="flex flex-col gap-[1rem] w-96">
+          <h2>Ambitious funding by {fund.fullName}</h2>
+          <div className="w-full mt-4 bg-gray-200 rounded-full dark:bg-gray-700">
+            <div className="p-1 rounded-full bg-theme-color" style={{width:'45%'}}></div>
+          </div>
+          <p>45% 달성 (100,000원)</p>
+          <p>겉바속촉의 정석! 유명 식당에서 눈치 봐가며 시키던 멘보샤를 집에서도 푸짐하게 즐기세요! 홈메이드 칠리소스도 함께 드립니다:)</p>
+          <div className="flex flex-row justify-evenly">
+            <button>펀딩하기</button>
+            <button>찜하기</button>
+          </div>
+          <div className="flex flex-row justify-evenly">
+            <p> 파트너 정보: 
+              <button>블루샹하이</button>
+            </p>
+            <button>follow</button>
+            <button>알림받기</button>
+          </div>
+        </aside>
+      </header>
+      <section className="flex flex-row justify-evenly">
         {/* 펀딩 상세정보 컴포넌트 */}
         <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
@@ -49,8 +69,8 @@ const Detail = ({fund}) => {
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
         </aside>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
