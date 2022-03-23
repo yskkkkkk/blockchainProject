@@ -5,6 +5,9 @@ import lombok.Builder.Default;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +49,8 @@ public class Funding {
     private LocalDate fundingModifyDate;
     
     @Default
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "funding")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "funding")
+    @JsonManagedReference
     private List<Qna> qnas = new ArrayList<>();
     
     public void addPost(Qna qna)

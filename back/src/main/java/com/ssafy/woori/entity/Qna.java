@@ -4,6 +4,9 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,8 +37,9 @@ public class Qna {
     @Column(nullable = false)
     private boolean secret;
     
-    @ManyToOne
-    @JoinColumn(name = "fundingSeq", insertable=false, updatable=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fund", insertable=false, updatable=false)
+    @JsonBackReference
     private Funding funding;
     
 }
