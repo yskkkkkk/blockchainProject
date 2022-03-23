@@ -16,16 +16,17 @@ export const getStaticProps = async () => {
 const Products = ({funds}) => {
 
   return (
-    <div className="grid grid-cols-4 gap-5 mt-10 text-center">
-      <h1>전체 펀드 상품들</h1>
-      {funds.map(fund => (
-        <Link href={'/products/' + fund.id} key={fund.id}>
-          <div>
+    <>
+      <h1 className="text-center">전체 펀드 상품들</h1>
+      <div className="grid grid-cols-4 gap-5 mt-10 text-center">
+        {funds.map(fund => (
+          <Link href={'/products/' + fund.id} key={fund.id}>
             <button>{fund.fullName}</button>
-          </div>
-        </Link>
-      ))}
-    </div>
+          </Link>
+        ))}
+      </div>
+    
+    </>
   )
 
 }
