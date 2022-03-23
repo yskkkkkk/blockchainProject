@@ -1,20 +1,13 @@
 package com.ssafy.woori.entity;
 
 import lombok.*;
-import lombok.Builder.Default;
 
 import org.springframework.data.annotation.CreatedDate;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,14 +41,4 @@ public class Funding {
     @CreatedDate
     private LocalDate fundingModifyDate;
     
-    @Default
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "funding")
-    @JsonManagedReference
-    private List<Qna> qnas = new ArrayList<>();
-    
-    public void addPost(Qna qna)
-    {
-    	this.qnas.add(qna);
-    	qna.setFunding(this);
-    }
 }
