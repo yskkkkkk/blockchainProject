@@ -1,3 +1,5 @@
+import ProductDetail from "../../components/productDetail";
+
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
   
@@ -38,9 +40,7 @@ const Detail = ({fund}) => {
         <h1>{fund.fullName}</h1>
       </div>
       <div className="flex flex-row justify-evenly">
-        <div className="border-2 border-black">
-          <img src="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80" alt="road" width="800"/>
-        </div>
+        <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
         <div className="border-2 border-black">
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
