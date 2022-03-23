@@ -35,13 +35,16 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 const Detail = ({fund}) => {
   return (
     <div className="flex flex-col gap-[5rem]">
+      {/* 펀드 상품 상단정보가 들어갈 위치 */}
       <div className="flex flex-row border-2 border-black justify-evenly">
         <img src={fund.col1} alt="thumbnail" />
         <h1>{fund.fullName}</h1>
       </div>
       <div className="flex flex-row justify-evenly">
+        {/* 펀딩 상세정보 컴포넌트 */}
         <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
-        <aside className="border-2 border-black">
+        {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
+        <aside className="flex flex-col gap-[2rem] border-2 border-black">
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
