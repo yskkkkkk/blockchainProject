@@ -16,19 +16,19 @@ import java.time.LocalDate;
 public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int alarmSeq;
+    private Integer alarmSeq;
     @Column(nullable = false)
-    private int userSeq;
+    private Integer userSeq;
     @Column(nullable = true)
-    private int fundingSeq;
+    private Integer fundingSeq;
     @Column
-    private int alarmType;
+    private Integer alarmType;
     @Column
     private String alarmText;
     @CreatedDate
     private LocalDate alarmDate;
     @Column(columnDefinition = "boolean default false")
-    private boolean alarmIsRead;
+    private Boolean alarmIsRead;
     @Column(columnDefinition = "boolean default false")
-    private boolean alarmIsActive;
+    private Boolean alarmIsActive;
 }
