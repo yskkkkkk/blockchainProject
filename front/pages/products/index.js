@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import style from './products.module.css';
 
 // 상품 페이지를 통해 상세 페이지로의 이동을 임시 구현하기 위해 만든 테스트 페이지
 export const getStaticProps = async () => {
