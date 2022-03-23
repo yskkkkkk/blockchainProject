@@ -18,7 +18,7 @@ public class Option {
     @Column(nullable = false)
     private int fundingSeq;
     @Column
-    private int optionOrder;
+    private Integer optionOrder;
     @Column(length = 100)
     private String optionTitle;
     @Column
@@ -29,6 +29,6 @@ public class Option {
     private int optionMaxamount;
     @Column(unique = true)
     private String optionContract;
-    @Column
-    private boolean optionIsmain;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean optionIsmain;
 }
