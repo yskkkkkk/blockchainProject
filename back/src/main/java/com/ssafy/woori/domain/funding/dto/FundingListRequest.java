@@ -11,7 +11,7 @@ import org.springframework.lang.Nullable;
 @AllArgsConstructor
 @ToString
 public class FundingListRequest {
-    private int sort;
+    private Integer sort;
     @Nullable
-    private int userSeq;
+    private Integer userSeq;
 }

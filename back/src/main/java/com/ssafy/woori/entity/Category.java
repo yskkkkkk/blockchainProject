@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categorySeq;
+    private Integer categorySeq;
     @Column(unique = true)
-    private int categoryNumber;
+    private Integer categoryNumber;
     @Column(length = 20)
     private String categoryName;
     @Column

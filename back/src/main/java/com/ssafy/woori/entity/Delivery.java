@@ -16,11 +16,11 @@ import java.time.LocalDate;
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int locationSeq;
+    private Integer locationSeq;
     @Column(nullable = false)
-    private int userSeq;
+    private Integer userSeq;
     @Column
-    private int orderSeq;
+    private Integer orderSeq;
     @Column(length = 100)
     private String address;
     @Column(length = 100)
@@ -28,7 +28,7 @@ public class Delivery {
     @Column(length = 20)
     private String userPhone;
     @Column
-    private int zipCode;
+    private Integer zipCode;
     @CreatedDate
     private LocalDate userDate;
 }

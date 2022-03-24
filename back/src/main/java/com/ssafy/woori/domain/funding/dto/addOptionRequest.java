@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class addOptionRequest {
     private String optionTitle;
-    private int optionPrice;
+    private Integer optionPrice;
     private String optionText;
-    private int optionMaxamount;
+    private Integer optionMaxamount;
 }

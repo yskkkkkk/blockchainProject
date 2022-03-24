@@ -17,9 +17,9 @@ import java.time.LocalDate;
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int replySeq;
+    private Integer replySeq;
     @Column(nullable = false)
-    private int qnaSeq;
+    private Integer qnaSeq;
     @Column(length = 1024)
     private String replyText;
     @CreatedDate

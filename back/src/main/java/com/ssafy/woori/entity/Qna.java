@@ -17,11 +17,11 @@ import java.time.LocalDate;
 public class Qna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int qnaSeq;
+    private Integer qnaSeq;
     @Column
-    private int fundingSeq;
+    private Integer fundingSeq;
     @Column
-    private int userSeq;
+    private Integer userSeq;
     @Column(length = 1024)
     private String qnaText;
     @CreatedDate
@@ -29,6 +29,6 @@ public class Qna {
     @LastModifiedDate
     private LocalDate qnaModifiedDate;
     @Column(nullable = false)
-    private boolean secret;
+    private Boolean secret;
     
 }

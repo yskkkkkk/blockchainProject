@@ -14,21 +14,21 @@ import javax.persistence.*;
 public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int optionSeq;
+    private Integer optionSeq;
     @Column(nullable = false)
-    private int fundingSeq;
+    private Integer fundingSeq;
     @Column
-    private int optionOrder;
+    private Integer optionOrder;
     @Column(length = 100)
     private String optionTitle;
     @Column
-    private int optionPrice;
+    private Integer optionPrice;
     @Column
     private String optionText;
     @Column
-    private int optionMaxamount;
+    private Integer optionMaxamount;
     @Column(unique = true)
     private String optionContract;
-    @Column
-    private boolean optionIsmain;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean optionIsmain;
 }

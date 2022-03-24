@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int fileSeq;
+    private Integer fileSeq;
     @Column(nullable = false)
     private String file_name;
     @Column
@@ -24,13 +24,13 @@ public class File {
     @Column(nullable = false)
     private String filePath;
     @Column
-    private int fileType;
+    private Integer fileType;
     @Column(nullable = false)
     private String relationTb;
     @Column(nullable = false)
-    private int relationSeq;
+    private Integer relationSeq;
     @Column(columnDefinition = "boolean default true")
-    private boolean fileIsActive;
+    private Boolean fileIsActive;
     @CreatedDate
     private LocalDate fileRegisteredDate;
     @CreatedDate

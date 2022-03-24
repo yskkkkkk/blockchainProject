@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Ranking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderSeq;
+    private Integer orderSeq;
     @Column(nullable = false)
-    private int fundingSeq;
+    private Integer fundingSeq;
 }
