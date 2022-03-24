@@ -1,6 +1,6 @@
 package com.ssafy.woori.domain.delivery.controller;
 
-import com.ssafy.woori.domain.delivery.dto.CreateDeliveryRequest;
+import com.ssafy.woori.domain.delivery.dto.DeliveryRequest;
 import com.ssafy.woori.domain.delivery.dto.GetLocationResponse;
 import com.ssafy.woori.domain.delivery.service.DeliveryService;
 import com.ssafy.woori.domain.funding.controller.FundingController;
@@ -49,7 +49,7 @@ public class DeliveryController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createDelivery(@RequestBody CreateDeliveryRequest request){
+    public ResponseEntity<Map<String, Object>> createDelivery(@RequestBody DeliveryRequest request){
         logger.info("배송지 추가 " +request.getUserSeq());
         String message = FAIL;
         HttpStatus status;
@@ -67,5 +67,21 @@ public class DeliveryController {
         }
         response.put("message", message);
         return (new ResponseEntity<>(response, status));
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateDelivery(@RequestBody DeliveryRequest request){
+        logger.info("배송지 수정 " +request.getLocationSeq());
+        String message = FAIL;
+        HttpStatus status;
+
+        if(deliveryService.updateDelivery(request)){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        return (new ResponseEntity<>(message, status));
     }
 }

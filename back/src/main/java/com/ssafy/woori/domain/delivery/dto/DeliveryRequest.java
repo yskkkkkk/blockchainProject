@@ -7,7 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CreateDeliveryRequest {
+public class DeliveryRequest {
+    private Integer locationSeq;
     private Integer userSeq;
     private String address;
     private String addressDetail;
