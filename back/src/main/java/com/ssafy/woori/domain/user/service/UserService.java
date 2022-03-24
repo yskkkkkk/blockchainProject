@@ -1,20 +1,11 @@
 package com.ssafy.woori.domain.user.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
-import com.ssafy.woori.domain.user.dto.AuthorizationKakao;
-import com.ssafy.woori.domain.user.dto.KakaoUserInfo;
+import com.ssafy.woori.domain.user.dto.AlarmInfoResponse;
 
-import lombok.RequiredArgsConstructor;
+public interface UserService {
+	List<AlarmInfoResponse> userAlarmList(int userSeq);
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
-    private final Oauth2Kakao oauth2Kakao;
-
-    // 카카오로 인증받기
-    public KakaoUserInfo oauth2AuthorizationKakao(String code) {
-        AuthorizationKakao authorization = oauth2Kakao.callTokenApi(code);
-        return oauth2Kakao.callGetUserByAccessToken(authorization.getAccess_token());
-    }
 }
