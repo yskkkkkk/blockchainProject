@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Footer() {
   
   return (
-    <footer id="footer" className="fixed content-center justify-center p-4 bg-white rounded-lg md:px-6 md:py-8 dark:bg-gray-800">
+    <footer id="footer" className="justify-center text-center bg-white rounded-lg dark:bg-gray-800 px-[25rem]">
       <div className="sm:flex sm:items-center sm:justify-between">
         <a href="#" className="flex items-center mb-4 sm:mb-0">
         {/* <img src="/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" /> */}
