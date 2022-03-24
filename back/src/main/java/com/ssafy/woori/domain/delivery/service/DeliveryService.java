@@ -10,4 +10,5 @@ public interface DeliveryService {
     Optional<GetLocationResponse> getLocation(Integer locationSeq);
     Delivery createDelivery(DeliveryRequest request);
     boolean updateDelivery(DeliveryRequest request);
+    boolean setLastUsedDate(int locationSeq);
 }

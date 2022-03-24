@@ -84,4 +84,22 @@ public class DeliveryController {
         }
         return (new ResponseEntity<>(message, status));
     }
+
+    @PutMapping("/date/{locationSeq}")
+    public ResponseEntity<String> setLastUsedDate(@PathVariable int locationSeq){
+        logger.info("배송지 날짜 기록 " + locationSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        if(deliveryService.setLastUsedDate(locationSeq)){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+
+        return (new ResponseEntity<>(message, status));
+    }
+
 }

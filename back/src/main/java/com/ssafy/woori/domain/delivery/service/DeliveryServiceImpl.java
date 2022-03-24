@@ -7,6 +7,7 @@ import com.ssafy.woori.entity.Delivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -38,7 +39,6 @@ public class DeliveryServiceImpl implements DeliveryService{
     public boolean updateDelivery(DeliveryRequest request) {
         Optional<Delivery> delivery = deliveryRepository.findById(request.getLocationSeq());
 
-        System.out.println(request.getLocationSeq());
         if(!delivery.isPresent()) return (false);
 
         delivery.ifPresent(one ->{
@@ -47,10 +47,34 @@ public class DeliveryServiceImpl implements DeliveryService{
                             .locationSeq(one.getLocationSeq())
                             .userSeq(one.getUserSeq())
                             .address(request.getAddress())
+                            .orderSeq(one.getOrderSeq())
                             .addressDetail(request.getAddressDetail())
                             .userPhone(request.getUserPhone())
                             .zipCode(request.getZipCode())
+                            .userDate(one.getUserDate())
                             .build()
+            );
+        });
+        return (true);
+    }
+
+    @Override
+    public boolean setLastUsedDate(int locationSeq) {
+        Optional<Delivery> delivery = deliveryRepository.findById(locationSeq);
+
+        if(!delivery.isPresent()) return (false);
+        delivery.ifPresent(one ->{
+            deliveryRepository.save(
+              Delivery.builder()
+                      .locationSeq(one.getLocationSeq())
+                      .userSeq(one.getUserSeq())
+                      .address(one.getAddress())
+                      .orderSeq(one.getOrderSeq())
+                      .addressDetail(one.getAddressDetail())
+                      .userPhone(one.getUserPhone())
+                      .zipCode(one.getZipCode())
+                      .userDate(LocalDate.now())
+                      .build()
             );
         });
         return (true);
