@@ -87,7 +87,7 @@ public class DeliveryController {
 
     @PutMapping("/date/{locationSeq}")
     public ResponseEntity<String> setLastUsedDate(@PathVariable int locationSeq){
-        logger.info("배송지 날짜 기록 " + locationSeq);
+        logger.info("배송지 날짜 기록 최신화 " + locationSeq);
         String message = FAIL;
         HttpStatus status;
 
@@ -100,6 +100,26 @@ public class DeliveryController {
         }
 
         return (new ResponseEntity<>(message, status));
+    }
+
+    @GetMapping("/last")
+    public ResponseEntity<Map<String, Object>> lastUsedLocation(@RequestParam int userSeq){
+        logger.info("최근 이용한 배송지 " + userSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        Optional<Delivery> dto = deliveryService.lastUsedLocation(userSeq);
+        Map<String,Object> response = new HashMap<>();
+
+        if(dto.isPresent()){
+            status = HttpStatus.OK;
+            message = SUCCESS;
+            response.put("lastUsedLocation", dto.get().getLocationSeq());
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        return (new ResponseEntity<>(response, status));
     }
 
 }

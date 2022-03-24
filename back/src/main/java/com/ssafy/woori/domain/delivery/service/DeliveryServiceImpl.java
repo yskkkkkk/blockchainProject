@@ -79,4 +79,9 @@ public class DeliveryServiceImpl implements DeliveryService{
         });
         return (true);
     }
+
+    @Override
+    public Optional<Delivery> lastUsedLocation(int userSeq) {
+        return (deliveryRepository.findFirstByUserSeqOrderByUserDateDesc(userSeq));
+    }
 }
