@@ -15,7 +15,7 @@ const ProductAnnouncement = ({announcements}) => {
           opacity: 1,
         },
       }}>
-      <section className="flex flex-col gap-[4rem]">
+      <section className="grid grid-cols-1 gap-[4rem]">
         {/* 상품 공지사항 들어갈 위치 */}
         {announcements.map(announcement => (
             <article className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border border-black">
@@ -27,10 +27,9 @@ const ProductAnnouncement = ({announcements}) => {
               <p className="mx-[2rem]">
                 감사합니다 {announcement}번째 공지입니다.
               </p>
-              
             </article>
           ))}
-        <button className="mx-[20rem] py-[1rem] bg-theme-color text-white font-black antialiased text-xl" >공지사항 작성</button>
+        <button className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">질문하기</button>
       </section>
     </motion.div>
   )

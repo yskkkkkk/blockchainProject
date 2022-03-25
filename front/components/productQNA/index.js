@@ -15,7 +15,7 @@ const ProductQNA = ({qnas}) => {
           opacity: 1,
         },
       }}>
-      <section className="flex flex-col gap-[4rem]">
+      <section className="grid grid-cols-1 gap-[4rem]">
         {/* 상품 QnA가 들어갈 위치 */}
         {qnas.map(qna => (
             // 스압방지를 위해서 + 질문 제목 빠르게 파악할 수 있게 하기 위해 질문 단위로 접었다 폇다 가능하게 구현
@@ -43,6 +43,7 @@ const ProductQNA = ({qnas}) => {
               </section>
             </details>
           ))}
+        <button className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">질문하기</button>
       </section>
     </motion.div>
   )
