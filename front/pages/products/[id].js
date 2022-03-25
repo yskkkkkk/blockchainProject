@@ -64,7 +64,7 @@ const Detail = ({fund}) => {
     <main className="flex flex-col gap-[5rem]">
       
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
-      <header className="flex flex-row border-2 border-black justify-evenly">
+      <header className="flex flex-row flex-1 border-2 border-black justify-evenly">
         <section>
           <img src={fund.col1} alt="thumbnail" />
         </section>
@@ -88,10 +88,10 @@ const Detail = ({fund}) => {
           </div>
         </aside>
       </header>
-      <section className="flex flex-row justify-evenly">
+      <section className="flex-1 flex flex-row gap-[4rem] justify-evenly mx-[150px]">
 
         {/* 펀딩 상세정보 컴포넌트 */}
-        <div className="flex flex-col gap-[4rem]">
+        <div className="flex-1 flex flex-col gap-[4rem]">
           {/* 상품 상세정보의 네비게이션바  */}
           <nav className="flex flex-row gap-[2rem] justify-evenly border-2 border-black">
             <button onClick={showProductDetail} className="font-sans text-2xl antialiased underline decoration-8 underline-offset-8 decoration-white hover:decoration-theme-color/70">상품 정보</button>
@@ -102,10 +102,10 @@ const Detail = ({fund}) => {
             <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {toggleAnnouncement && (
-            <ProductAnnouncement picture="https://i.pinimg.com/originals/c7/56/66/c75666d54c65bbfd0890e85f1d0270b7.jpg" />
+            <ProductAnnouncement announcements={[1, 2, 3, 4, 5]} />
           )}
           {toggleQNA && (
-            <ProductQNA picture="https://images.unsplash.com/photo-1573160059602-81357cdd480f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9uZ3xlbnwwfHwwfHw%3D&w=1000&q=80" />
+            <ProductQNA qnas={[1, 2, 3, 4, 5]} />
           )}
         </div>
         
