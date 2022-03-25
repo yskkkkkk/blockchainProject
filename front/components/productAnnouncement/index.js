@@ -1,5 +1,5 @@
 // 상품 상세정보 컴포넌트
-const ProductDetail = ({picture}) => {
+const ProductAnnouncement = ({picture}) => {
   
   return (
     <section className="flex flex-col gap-[4rem] border-2 border-black">
@@ -7,6 +7,7 @@ const ProductDetail = ({picture}) => {
       <img src={picture} alt="road" width="800"/>
     </section>
   )
+  
 }
 
-export default ProductDetail;
+export default ProductAnnouncement;

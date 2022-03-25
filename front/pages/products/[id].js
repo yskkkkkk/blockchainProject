@@ -1,4 +1,7 @@
+import {useState} from 'react';
 import ProductDetail from "../../components/productDetail";
+import ProductAnnouncement from "../../components/productAnnouncement";
+import ProductQNA from "../../components/productQNA";
 
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
@@ -33,8 +36,33 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund}) => {
+
+  const [toggleProductDetail, setToggleProductDetail] = useState(true);
+  const [toggleAnnouncement, setToggleAnnouncement] = useState(false);
+  const [toggleQNA, setToggleQNA] = useState(false);
+
+  const showProductDetail = (e) => {
+    e.preventDefault();
+    setToggleProductDetail(true);
+    setToggleAnnouncement(false);
+    setToggleQNA(false);
+  }
+  const showAnnouncement = (e) => {
+    e.preventDefault();
+    setToggleProductDetail(false);
+    setToggleAnnouncement(true);
+    setToggleQNA(false);
+  }
+  const showQNA = (e) => {
+    e.preventDefault();
+    setToggleProductDetail(false);
+    setToggleAnnouncement(false);
+    setToggleQNA(true);
+  }
+
   return (
     <main className="flex flex-col gap-[5rem]">
+      
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
       <header className="flex flex-row border-2 border-black justify-evenly">
         <section>
@@ -61,8 +89,26 @@ const Detail = ({fund}) => {
         </aside>
       </header>
       <section className="flex flex-row justify-evenly">
+
         {/* 펀딩 상세정보 컴포넌트 */}
-        <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
+        <div className="flex flex-col gap-[4rem]">
+          {/* 상품 상세정보의 네비게이션바  */}
+          <nav className="flex flex-row gap-[2rem] justify-evenly border-2 border-black">
+            <button onClick={showProductDetail} className="font-sans text-2xl antialiased underline decoration-8 underline-offset-8 decoration-white hover:decoration-theme-color/70">상품 정보</button>
+            <button onClick={showAnnouncement} className="font-sans text-2xl antialiased underline decoration-8 underline-offset-8 decoration-white hover:decoration-theme-color/70">공지사항</button>
+            <button onClick={showQNA} className="font-sans text-2xl underline decoration-8 underline-offset-8 decoration-white hover:decoration-theme-color/70">Q & A</button>
+          </nav>
+          {toggleProductDetail && (
+            <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
+          )}
+          {toggleAnnouncement && (
+            <ProductAnnouncement picture="https://i.pinimg.com/originals/c7/56/66/c75666d54c65bbfd0890e85f1d0270b7.jpg" />
+          )}
+          {toggleQNA && (
+            <ProductQNA picture="https://images.unsplash.com/photo-1573160059602-81357cdd480f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9uZ3xlbnwwfHwwfHw%3D&w=1000&q=80" />
+          )}
+        </div>
+        
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
         <aside className="flex flex-col gap-[2rem] border-2 border-black">
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
