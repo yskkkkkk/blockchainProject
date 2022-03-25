@@ -1,18 +1,17 @@
 package com.ssafy.woori.domain.follow.controller;
 
+import com.ssafy.woori.domain.follow.dto.AddFollowRequest;
 import com.ssafy.woori.domain.follow.dto.GetFollowerList;
 import com.ssafy.woori.domain.follow.dto.GetFollowingList;
 import com.ssafy.woori.domain.follow.service.FollowService;
 import com.ssafy.woori.domain.funding.controller.FundingController;
+import com.ssafy.woori.entity.Follow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,5 +69,23 @@ public class FollowController {
         }
         response.put("message", message);
         return (new ResponseEntity<>(response, status));
+    }
+
+    @PostMapping
+    public ResponseEntity<String> addFollow(@RequestBody AddFollowRequest request){
+        logger.info("팔로우 추가 " + request.getUserSeq());
+        String message = FAIL;
+        HttpStatus status;
+
+        Follow follow = followService.addFollow(request);
+
+        if(follow != null){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        return (new ResponseEntity<>(message, status));
     }
 }

@@ -1,11 +1,14 @@
 package com.ssafy.woori.domain.follow.service;
 
 import com.ssafy.woori.domain.follow.dao.FollowRepository;
+import com.ssafy.woori.domain.follow.dto.AddFollowRequest;
 import com.ssafy.woori.domain.follow.dto.GetFollowerList;
 import com.ssafy.woori.domain.follow.dto.GetFollowingList;
+import com.ssafy.woori.entity.Follow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +28,17 @@ public class FollowServiceImpl implements FollowService{
     public Optional<List<GetFollowerList>> followerList(int seller) {
         if(!followRepository.existsBySeller(seller)) return (Optional.empty());
         return (followRepository.findAllBySeller(seller));
+    }
+
+    @Override
+    public Follow addFollow(AddFollowRequest request) {
+        return (followRepository.save(
+                Follow.builder()
+                        .userSeq(request.getUserSeq())
+                        .seller(request.getSeller())
+                        .alarmIsAllow(true)
+                        .requestDate(LocalDate.now())
+                        .build()
+        ));
     }
 }
