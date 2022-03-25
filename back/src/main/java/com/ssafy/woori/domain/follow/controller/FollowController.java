@@ -1,6 +1,7 @@
 package com.ssafy.woori.domain.follow.controller;
 
 import com.ssafy.woori.domain.follow.dto.GetFollowerList;
+import com.ssafy.woori.domain.follow.dto.GetFollowingList;
 import com.ssafy.woori.domain.follow.service.FollowService;
 import com.ssafy.woori.domain.funding.controller.FundingController;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class FollowController {
         String message = FAIL;
         HttpStatus status = null;
 
-        Optional<List<GetFollowerList>> dto = followService.followingList(userSeq);
+        Optional<List<GetFollowingList>> dto = followService.followingList(userSeq);
         Map<String, Object> response = new HashMap<>();
 
         if(dto.isPresent()){
@@ -50,4 +51,24 @@ public class FollowController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @GetMapping("/followers")
+    public ResponseEntity<Map<String, Object>>followerList(@RequestParam int seller){
+        logger.info("나를 팔로우한 리스트 가져오기 " + seller);
+        String message = FAIL;
+        HttpStatus status;
+
+        Optional<List<GetFollowerList>> dto = followService.followerList(seller);
+        Map<String, Object> response = new HashMap<>();
+
+        if(dto.isPresent()){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+            response.put("data", dto);
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+        return (new ResponseEntity<>(response, status));
+    }
 }
