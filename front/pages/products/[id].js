@@ -80,12 +80,13 @@ const Detail = ({fund}) => {
           </div>
         </aside>
       </header>
+      <hr />
       <section className="flex-1 flex flex-row gap-[4rem] justify-evenly mx-[150px]">
 
         {/* 펀딩 상세정보 컴포넌트 */}
-        <div className="flex-1 flex flex-col gap-[4rem]">
+        <section className="flex-1 flex flex-col gap-[4rem]">
           {/* 상품 상세정보의 네비게이션바  */}
-          <nav className="flex flex-row gap-[2rem] justify-evenly">
+          <nav className="flex flex-row gap-[3rem]">
             <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
             <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
             <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
@@ -99,7 +100,7 @@ const Detail = ({fund}) => {
           {currentNav === 2 && (
             <ProductQNA qnas={[1, 2, 3, 4, 5]} />
           )}
-        </div>
+        </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
         <aside className="flex flex-col gap-[2rem] border-2 border-black">
