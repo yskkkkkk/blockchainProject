@@ -29,7 +29,7 @@ const ProductAnnouncement = ({announcements}) => {
               </p>
             </article>
           ))}
-        <button className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">질문하기</button>
+        <button className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">공지작성</button>
       </section>
     </motion.div>
   )
