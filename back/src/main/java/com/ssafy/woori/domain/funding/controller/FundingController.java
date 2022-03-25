@@ -1,6 +1,7 @@
 package com.ssafy.woori.domain.funding.controller;
 
 import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
+import com.ssafy.woori.domain.funding.dto.OptionListResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ssafy.woori.domain.funding.dto.FundingListRequest;
@@ -73,5 +74,26 @@ public class FundingController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @GetMapping("/options")
+    public ResponseEntity<Map<String, Object>> getOptions(@RequestParam int fundingSeq){
+        logger.info("결제 옵션 가져오기 " + fundingSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        System.out.println(fundingSeq);
+        Optional<List<OptionListResponse>> dto = fundingService.getOptions(fundingSeq);
+        Map<String, Object> response = new HashMap<>();
+
+        if(dto.isPresent()){
+            message = SUCCESS;
+            response.put("data", dto);
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+        return (new ResponseEntity<>(response, status));
+    }
 
 }

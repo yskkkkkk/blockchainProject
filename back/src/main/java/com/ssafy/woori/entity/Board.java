@@ -17,9 +17,9 @@ import java.time.LocalDate;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int boardSeq;
+    private Integer boardSeq;
     @Column
-    private int fundingSeq;
+    private Integer fundingSeq;
     @Column(length = 100)
     private String boardTitle;
     @Column(length = 1024)

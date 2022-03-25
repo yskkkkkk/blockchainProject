@@ -16,11 +16,11 @@ import java.time.LocalDate;
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int likeSeq;
+    private Integer likeSeq;
     @Column(nullable = false)
-    private int userSeq;
+    private Integer userSeq;
     @Column(nullable = false)
-    private int fundingSeq;
+    private Integer fundingSeq;
     @CreatedDate
     private LocalDate likeDate;
 }

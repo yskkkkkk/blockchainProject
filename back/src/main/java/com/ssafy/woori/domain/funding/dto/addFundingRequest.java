@@ -10,7 +10,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class addFundingRequest {
-    private int userSeq;
+    private Integer userSeq;
     private String userNickname;
     private String userPhone;
     private String userIntroduce;

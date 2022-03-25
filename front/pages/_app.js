@@ -5,9 +5,11 @@ import Footer from '../components/footer';
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
+      <div className="grid grid-cols-1 gap-[5rem] mx-[12rem]">
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </div>
     </>
   )
 }

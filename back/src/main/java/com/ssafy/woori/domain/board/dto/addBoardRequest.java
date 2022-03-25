@@ -8,8 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class addBoardRequest {
-    private int boardSeq;
-    private int fundingSeq;
+    private Integer boardSeq;
+    private Integer fundingSeq;
     private String boardTitle;
     private String boardContent;
 }

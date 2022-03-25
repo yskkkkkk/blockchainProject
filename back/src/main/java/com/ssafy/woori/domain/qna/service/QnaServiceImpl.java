@@ -28,7 +28,7 @@ public class QnaServiceImpl implements QnaService{
                         .userSeq(request.getUserSeq())
                         .qnaText(request.getQnaText())
 //                        .isPublic(request.isPublic())
-                        .secret(request.isSecret())
+                        .secret(request.getSecret())
                         .qnaCreatedDate(LocalDate.now())
                         .qnaModifiedDate(LocalDate.now())
                         .build()));
@@ -48,7 +48,7 @@ public class QnaServiceImpl implements QnaService{
                         .fundingSeq(selectQna.getFundingSeq())
                         .userSeq(selectQna.getUserSeq())
                         .qnaText(request.getQnaText())
-                        .secret(request.isSecret())
+                        .secret(request.getSecret())
                         .qnaCreatedDate(selectQna.getQnaCreatedDate())
                         .qnaModifiedDate(LocalDate.now())
                         .build()

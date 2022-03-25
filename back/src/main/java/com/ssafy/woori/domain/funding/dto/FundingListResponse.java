@@ -10,7 +10,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class FundingListResponse {
-    private int fundingSeq;
+    private Integer fundingSeq;
     private String fundingImage;
     private String fundingTitle;
     private String fundingSimple;
