@@ -4,6 +4,7 @@ import {motion} from 'framer-motion';
 const ProductQNA = ({qnas}) => {
   
   return (
+    // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
     <motion.div
       initial="initial"
       animate="animate"
@@ -22,6 +23,8 @@ const ProductQNA = ({qnas}) => {
             <details className="border border-black py-[1rem]" key={qna}>
               <summary className="font-sans text-xl antialiased list-none pl-[1rem]">Q. {qna} 제목</summary>
               {/* 카톡 메신저 창 처럼 좌측 상대방, 우측 본인 구조로 채팅을 주고받듯이 말풍선 구현 */}
+              {/* map 함수 활용하여 글이 작성된 시간 순으로 위에서 아래로 채팅html 생성할 예정  */}
+              {/* reply text 면 좌측, qna text 면 우측 */}
               <hr className="m-[1rem] py-[1rem]" />
               <section className="flex flex-row justify-end gap-[2rem] my-[1rem] mr-[1rem]">
                 <p className="mr-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-theme-color/80 max-w-[25rem]">wdsasss asdasds asdsassss asdsad sssssssssss ssssss asdasdads asssow!</p>

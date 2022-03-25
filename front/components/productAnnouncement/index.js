@@ -4,6 +4,7 @@ import {motion} from 'framer-motion';
 const ProductAnnouncement = ({announcements}) => {
   
   return (
+    // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
     <motion.div
       initial="initial"
       animate="animate"
