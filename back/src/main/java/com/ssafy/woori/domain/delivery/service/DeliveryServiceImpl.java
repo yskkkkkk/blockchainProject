@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -83,5 +84,20 @@ public class DeliveryServiceImpl implements DeliveryService{
     @Override
     public Optional<Delivery> lastUsedLocation(int userSeq) {
         return (deliveryRepository.findFirstByUserSeqOrderByUserDateDesc(userSeq));
+    }
+
+    @Override
+    public Optional<List<GetLocationResponse>> locationList(int userSeq) {
+        if(!deliveryRepository.existsByUserSeq(userSeq)) return (Optional.empty());
+        return (deliveryRepository.findAllByUserSeq(userSeq));
+    }
+
+    @Override
+    public boolean deleteDelivery(int locationSeq) {
+        if(deliveryRepository.findById(locationSeq).isPresent()){
+            deliveryRepository.deleteById(locationSeq);
+            return (true);
+        }
+        return false;
     }
 }
