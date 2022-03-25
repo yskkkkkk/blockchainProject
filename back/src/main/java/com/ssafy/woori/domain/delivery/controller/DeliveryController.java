@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -119,6 +120,28 @@ public class DeliveryController {
         else{
             status = HttpStatus.NOT_FOUND;
         }
+        return (new ResponseEntity<>(response, status));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Map<String,Object>> locationList(@RequestParam int userSeq){
+        logger.info("배송지 리스트 가져오기 " + userSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        Map<String,Object> response = new HashMap<>();
+        Optional<List<GetLocationResponse>> dto = deliveryService.locationList(userSeq);
+
+        if(dto.isPresent()){
+
+            response.put("data", dto);
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message",message);
         return (new ResponseEntity<>(response, status));
     }
 
