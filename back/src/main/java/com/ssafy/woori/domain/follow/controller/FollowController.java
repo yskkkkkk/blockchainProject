@@ -3,6 +3,7 @@ package com.ssafy.woori.domain.follow.controller;
 import com.ssafy.woori.domain.follow.dto.AddFollowRequest;
 import com.ssafy.woori.domain.follow.dto.GetFollowerList;
 import com.ssafy.woori.domain.follow.dto.GetFollowingList;
+import com.ssafy.woori.domain.follow.dto.ModifyAlarmRequest;
 import com.ssafy.woori.domain.follow.service.FollowService;
 import com.ssafy.woori.domain.funding.controller.FundingController;
 import com.ssafy.woori.entity.Follow;
@@ -98,6 +99,21 @@ public class FollowController {
         if(followService.deleteFollow(request)){
             message = SUCCESS;
             status = HttpStatus.OK;
+        }
+        else status = HttpStatus.NOT_FOUND;
+
+        return (new ResponseEntity<>(message, status));
+    }
+
+    @PutMapping("/alarm")
+    public ResponseEntity<String> modifyFollowAlarm(@RequestBody ModifyAlarmRequest request){
+        logger.info("팔로우 알림 상태 변경 " + request.getUserSeq());
+        String message = FAIL;
+        HttpStatus status;
+
+        if(followService.modifyFollowAlarm(request)){
+            status = HttpStatus.OK;
+            message = SUCCESS;
         }
         else status = HttpStatus.NOT_FOUND;
 

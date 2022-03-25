@@ -4,6 +4,7 @@ import com.ssafy.woori.domain.follow.dao.FollowRepository;
 import com.ssafy.woori.domain.follow.dto.AddFollowRequest;
 import com.ssafy.woori.domain.follow.dto.GetFollowerList;
 import com.ssafy.woori.domain.follow.dto.GetFollowingList;
+import com.ssafy.woori.domain.follow.dto.ModifyAlarmRequest;
 import com.ssafy.woori.entity.Follow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,25 @@ public class FollowServiceImpl implements FollowService{
             return (true);
         }
         return false;
+    }
+
+    @Override
+    public boolean modifyFollowAlarm(ModifyAlarmRequest request) {
+        if(followRepository.existsByUserSeqAndSeller(request.getUserSeq(), request.getSeller())){
+            Follow follow = followRepository.findByUserSeqAndSeller(request.getUserSeq(), request.getSeller());
+            followRepository.save(
+                    Follow.builder()
+                            .followSeq(follow.getFollowSeq())
+                            .userSeq(request.getUserSeq())
+                            .seller(request.getSeller())
+                            .alarmIsAllow(request.getAlarmIsAllow())
+                            .requestDate(follow.getRequestDate())
+                            .build()
+            );
+
+            return (true);
+        }
+
+        return (false);
     }
 }
