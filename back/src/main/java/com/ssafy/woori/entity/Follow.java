@@ -24,5 +24,5 @@ public class Follow {
     @Column(columnDefinition = "boolean default true")
     private Boolean alarmIsAllow;
     @CreatedDate
-    private LocalDate RequestDate;
+    private LocalDate requestDate;
 }
