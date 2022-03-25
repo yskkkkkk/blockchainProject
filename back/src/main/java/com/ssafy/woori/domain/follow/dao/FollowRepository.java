@@ -15,4 +15,6 @@ public interface FollowRepository extends JpaRepository<Follow, Integer> {
     boolean existsByUserSeq(int userSeq);
     Optional<List<GetFollowerList>> findAllBySeller(int seller);
     boolean existsBySeller(int seller);
+    boolean existsByUserSeqAndSeller(int userSeq, int seller);
+    void deleteByUserSeqAndSeller(int userSeq, int seller);
 }

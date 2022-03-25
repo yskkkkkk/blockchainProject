@@ -8,6 +8,7 @@ import com.ssafy.woori.entity.Follow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +20,14 @@ public class FollowServiceImpl implements FollowService{
     FollowRepository followRepository;
 
     @Override
+    @Transactional
     public Optional<List<GetFollowingList>> followingList(int userSeq) {
         if(!followRepository.existsByUserSeq(userSeq)) return (Optional.empty());
         return (followRepository.findAllByUserSeq(userSeq));
     }
 
     @Override
+    @Transactional
     public Optional<List<GetFollowerList>> followerList(int seller) {
         if(!followRepository.existsBySeller(seller)) return (Optional.empty());
         return (followRepository.findAllBySeller(seller));
@@ -40,5 +43,15 @@ public class FollowServiceImpl implements FollowService{
                         .requestDate(LocalDate.now())
                         .build()
         ));
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteFollow(AddFollowRequest request) {
+        if(followRepository.existsByUserSeqAndSeller(request.getUserSeq(), request.getSeller())){
+            followRepository.deleteByUserSeqAndSeller(request.getUserSeq(), request.getSeller());
+            return (true);
+        }
+        return false;
     }
 }

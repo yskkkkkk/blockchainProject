@@ -12,4 +12,5 @@ public interface FollowService {
     Optional<List<GetFollowingList>> followingList(int userSeq);
     Optional<List<GetFollowerList>> followerList(int seller);
     Follow addFollow(AddFollowRequest request);
+    boolean deleteFollow(AddFollowRequest request);
 }

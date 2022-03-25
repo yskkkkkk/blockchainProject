@@ -88,4 +88,19 @@ public class FollowController {
         }
         return (new ResponseEntity<>(message, status));
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteFollow(@RequestBody AddFollowRequest request){
+        logger.info("팔로우 삭제 " + request.getUserSeq());
+        String message = FAIL;
+        HttpStatus status;
+
+        if(followService.deleteFollow(request)){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else status = HttpStatus.NOT_FOUND;
+
+        return (new ResponseEntity<>(message, status));
+    }
 }
