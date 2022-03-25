@@ -36,28 +36,20 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund}) => {
-
-  const [toggleProductDetail, setToggleProductDetail] = useState(true);
-  const [toggleAnnouncement, setToggleAnnouncement] = useState(false);
-  const [toggleQNA, setToggleQNA] = useState(false);
+ 
+  const [currentNav, setCurrentNav] = useState(0);
 
   const showProductDetail = (e) => {
     e.preventDefault();
-    setToggleProductDetail(true);
-    setToggleAnnouncement(false);
-    setToggleQNA(false);
+    setCurrentNav(0);
   }
   const showAnnouncement = (e) => {
     e.preventDefault();
-    setToggleProductDetail(false);
-    setToggleAnnouncement(true);
-    setToggleQNA(false);
+    setCurrentNav(1);
   }
   const showQNA = (e) => {
     e.preventDefault();
-    setToggleProductDetail(false);
-    setToggleAnnouncement(false);
-    setToggleQNA(true);
+    setCurrentNav(2);
   }
 
   return (
@@ -94,17 +86,17 @@ const Detail = ({fund}) => {
         <div className="flex-1 flex flex-col gap-[4rem]">
           {/* 상품 상세정보의 네비게이션바  */}
           <nav className="flex flex-row gap-[2rem] justify-evenly">
-            <button onClick={showProductDetail} className="font-sans text-2xl antialiased text-black text-opacity-50 underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70 focus:decoration-theme-color/70 focus:text-theme-color focus:font-semibold">상품 정보</button>
-            <button onClick={showAnnouncement} className="font-sans text-2xl antialiased text-black text-opacity-50 underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70 focus:decoration-theme-color/70 focus:text-theme-color focus:font-semibold">공지사항</button>
-            <button onClick={showQNA} className="font-sans text-2xl text-black text-opacity-50 underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70 focus:decoration-theme-color/70 focus:text-theme-color focus:font-semibold">Q & A</button>
+            <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
+            <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
+            <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
           </nav>
-          {toggleProductDetail && (
+          {currentNav === 0 && (
             <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
-          {toggleAnnouncement && (
+          {currentNav === 1 && (
             <ProductAnnouncement announcements={[1, 2, 3, 4, 5]} />
           )}
-          {toggleQNA && (
+          {currentNav === 2 && (
             <ProductQNA qnas={[1, 2, 3, 4, 5]} />
           )}
         </div>
