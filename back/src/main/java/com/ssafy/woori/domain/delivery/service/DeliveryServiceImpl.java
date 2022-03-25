@@ -91,4 +91,13 @@ public class DeliveryServiceImpl implements DeliveryService{
         if(!deliveryRepository.existsByUserSeq(userSeq)) return (Optional.empty());
         return (deliveryRepository.findAllByUserSeq(userSeq));
     }
+
+    @Override
+    public boolean deleteDelivery(int locationSeq) {
+        if(deliveryRepository.findById(locationSeq).isPresent()){
+            deliveryRepository.deleteById(locationSeq);
+            return (true);
+        }
+        return false;
+    }
 }

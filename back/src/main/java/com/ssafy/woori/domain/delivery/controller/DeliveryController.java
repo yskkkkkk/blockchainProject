@@ -145,4 +145,21 @@ public class DeliveryController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @DeleteMapping
+    public ResponseEntity<String> deleteDelivery(@RequestParam int locationSeq){
+        logger.info("배송지 삭제 " + locationSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+
+        if(deliveryService.deleteDelivery(locationSeq)){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else
+            status = HttpStatus.NOT_FOUND;
+
+        return (new ResponseEntity<>(message, status));
+    }
+
 }

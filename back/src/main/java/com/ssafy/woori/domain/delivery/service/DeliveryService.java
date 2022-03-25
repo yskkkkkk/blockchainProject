@@ -14,4 +14,5 @@ public interface DeliveryService {
     boolean setLastUsedDate(int locationSeq);
     Optional<Delivery> lastUsedLocation(int userSeq);
     Optional<List<GetLocationResponse>> locationList(int userSeq);
+    boolean deleteDelivery(int locationSeq);
 }
