@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class addReplyRequest {
-    private int replySeq;
-    private int qnaSeq;
+    private Integer replySeq;
+    private Integer qnaSeq;
     private String replyText;
 }

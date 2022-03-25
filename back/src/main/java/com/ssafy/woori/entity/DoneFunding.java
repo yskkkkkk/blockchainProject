@@ -16,13 +16,13 @@ import java.time.LocalDate;
 public class DoneFunding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int fundingSeq;
+    private Integer fundingSeq;
     @Column
     private String fundingImage;
     @Column(nullable = false)
-    private int userSeq;
+    private Integer userSeq;
     @Column(nullable = false)
-    private int fundingCategory;
+    private Integer fundingCategory;
     @Column(nullable = false, length = 100)
     private String fundingTitle;
     @Column(nullable = false, length = 1024)
@@ -32,13 +32,13 @@ public class DoneFunding {
     @Column
     private String fundingWarning;
     @Column
-    private int fundingStatus;
+    private Integer fundingStatus;
     @Column
-    private int fundingCheap;
+    private Integer fundingCheap;
     @Column
-    private int raisedMoney;
+    private Integer raisedMoney;
     @Column
-    private int targetMoney;
+    private Integer targetMoney;
     @CreatedDate
     private LocalDate startDate;
     @CreatedDate

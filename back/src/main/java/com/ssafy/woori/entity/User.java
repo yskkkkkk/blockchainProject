@@ -18,13 +18,13 @@ import java.time.LocalDate;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userSeq;
+    private Integer userSeq;
     @Column(length = 100)
     private String userEmail;
     @CreatedDate
     private LocalDate userBirth;
     @Column(columnDefinition = "boolean default true")
-    private boolean userIsActive;
+    private Boolean userIsActive;
     @CreatedDate
     private LocalDate userCreatedDate;
     @LastModifiedDate

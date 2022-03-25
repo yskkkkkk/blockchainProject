@@ -2,9 +2,11 @@ package com.ssafy.woori.domain.funding.dao;
 
 import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
 import com.ssafy.woori.domain.funding.dto.FundingListResponse;
+import com.ssafy.woori.domain.funding.dto.OptionListResponse;
 import com.ssafy.woori.entity.Funding;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -24,4 +26,8 @@ public interface FundingDao extends JpaRepository<Funding, Integer> {
     List<FundingListResponse> findByEmailAdd();
 
     Optional<FundingInfoResponse> findByFundingSeq(int fundingSeq);
+
+
+    @Query(value = "select o.optionTitle as optionTitle, o.optionPrice as optionPrice, o.optionText as optionText, o.optionMaxamount as optionMaxamount from Option o where o.fundingSeq = :fundingSeq ")
+    Optional<List<OptionListResponse>> findOptions(int fundingSeq);
 }

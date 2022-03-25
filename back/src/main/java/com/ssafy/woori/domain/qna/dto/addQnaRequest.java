@@ -13,5 +13,5 @@ public class addQnaRequest {
     private Integer fundingSeq;
     private Integer userSeq;
     private String qnaText;
-    private boolean secret;
+    private Boolean secret;
 }

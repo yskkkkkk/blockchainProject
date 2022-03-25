@@ -16,13 +16,13 @@ import java.time.LocalDate;
 public class Follow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int followSeq;
+    private Integer followSeq;
     @Column(nullable = false)
-    private int userSeq;
+    private Integer userSeq;
     @Column(nullable = false)
-    private int seller;
+    private Integer seller;
     @Column(columnDefinition = "boolean default true")
-    private boolean alarmIsAllow;
+    private Boolean alarmIsAllow;
     @CreatedDate
     private LocalDate RequestDate;
 }

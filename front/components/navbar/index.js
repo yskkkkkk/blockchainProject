@@ -31,27 +31,29 @@ export default function Navbar() {
       <ul className="border-b-4">
         <li className={style.li}>
           <Link href="/">
-            <a className={style.wow}>Home</a>
+            <button>
+              <img className="-mb-4" src="logo.png" width="50" alt="home logo" />
+            </button>
           </Link>
         </li>
         <li className={style.li}>
           <Link href="/intro">
-            <a>우리두레란?</a>
+            <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">우리두레란?</button>
           </Link>
         </li>
         <li className={style.li}>
           <Link href="/upcoming">
-            <a>펀딩예정</a>
+            <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">펀딩예정</button>
           </Link>
         </li>
         <li className={style.li}>
-          <Link href="/support">
-            <a>후원하기</a>
+          <Link href="/products">
+            <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">후원하기</button>
           </Link>
         </li>
         <li className={style.li}>
           <Link href="/project">
-            <a>프로젝트 생성</a>
+            <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">프로젝트 생성</button>
           </Link>
         </li>
         <li className={style.li}>
