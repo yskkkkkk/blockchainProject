@@ -36,7 +36,7 @@ public class QnaServiceImpl implements QnaService{
 
     @Override
     public boolean modifyQna(addQnaRequest request) {
-        Optional<Qna> qna =qnaRepository.findById(request.getFundingSeq());
+        Optional<Qna> qna =qnaRepository.findById(request.getQnaSeq());
 
         System.out.println(qna);
         if(!qna.isPresent()) return (false);

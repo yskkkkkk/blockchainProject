@@ -75,7 +75,7 @@ public class QnaController {
 
     @PutMapping
     public ResponseEntity<String> modifyFundingQna(@RequestBody addQnaRequest request){
-        logger.info("질문 수정" +request.getUserSeq());
+        logger.info("질문 수정 " +request.getQnaSeq());
         String message = FAIL;
         HttpStatus status;
 

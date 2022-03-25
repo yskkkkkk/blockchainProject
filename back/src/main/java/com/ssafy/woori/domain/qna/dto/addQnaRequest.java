@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class addQnaRequest {
+    private Integer qnaSeq;
     private Integer fundingSeq;
     private Integer userSeq;
     private String qnaText;
