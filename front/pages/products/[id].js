@@ -84,25 +84,24 @@ const Detail = ({fund}) => {
         </aside>
       </header>
       <hr />
-      <section className="flex-1 flex flex-row gap-[4rem] justify-evenly mx-[150px]">
-
+      {/* 상품 상세정보의 네비게이션바  */}
+      <nav className="flex flex-row gap-[3rem] mx-[150px]">
+        <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
+        <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
+        <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
+      </nav>
+      <section className="flex-1 flex flex-row gap-[8rem] justify-evenly mx-[150px]">
         {/* 펀딩 상세정보 컴포넌트 */}
         <section className="flex-1 flex flex-col gap-[4rem]">
-          {/* 상품 상세정보의 네비게이션바  */}
-          <nav className="flex flex-row gap-[3rem]">
-            <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
-            <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
-            <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
-          </nav>
-            {currentNav === 0 && (
-              <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
-            )}
-            {currentNav === 1 && (
-              <ProductAnnouncement announcements={[1, 2, 3, 4, 5]} />
-            )}
-            {currentNav === 2 && (
-              <ProductQNA qnas={[1, 2, 3, 4, 5]} />
-            )}
+          {currentNav === 0 && (
+            <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
+          )}
+          {currentNav === 1 && (
+            <ProductAnnouncement announcements={[1, 2, 3, 4, 5]} />
+          )}
+          {currentNav === 2 && (
+            <ProductQNA qnas={[1, 2, 3, 4, 5]} />
+          )}
         </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
