@@ -85,14 +85,15 @@ const Detail = ({fund}) => {
       </header>
       <hr />
       {/* 상품 상세정보의 네비게이션바  */}
-      <nav className="flex flex-row gap-[3rem] mx-[150px]">
+      <nav className="flex flex-row gap-[3rem] justify-center mr-[50rem]">
         <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
         <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
         <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
       </nav>
-      <section className="flex flex-row gap-[8rem] justify-evenly mx-[150px]">
+      <section className="flex flex-row gap-[8rem] justify-center">
         {/* 펀딩 상세정보 컴포넌트 */}
-        <section className="flex-1 flex flex-col gap-[4rem]">
+        {/* 하단 section 태그에 flex-1 을 쓴 이유는, 하위 컴포넌트들의 크기를 flex 구조대로 고정시키기 위함입니다 */}
+        <section className="flex flex-col gap-[4rem] basis-[50rem]">
           {currentNav === 0 && (
             <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
