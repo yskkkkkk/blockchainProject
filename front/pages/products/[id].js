@@ -56,10 +56,10 @@ const Detail = ({fund}) => {
   }
 
   return (
-    <main className="flex flex-col gap-[5rem]">
+    <main className="flex flex-col gap-[4rem]">
       
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
-      <header className="flex flex-row flex-1 border-2 border-black justify-evenly">
+      <header className="flex flex-row justify-center gap-[10rem]">
         <section>
           <Image src={fund.col1} alt="thumbnail" width={300} height={300} />
         </section>
@@ -90,7 +90,7 @@ const Detail = ({fund}) => {
         <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
         <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
       </nav>
-      <section className="flex-1 flex flex-row gap-[8rem] justify-evenly mx-[150px]">
+      <section className="flex flex-row gap-[8rem] justify-evenly mx-[150px]">
         {/* 펀딩 상세정보 컴포넌트 */}
         <section className="flex-1 flex flex-col gap-[4rem]">
           {currentNav === 0 && (
@@ -105,7 +105,7 @@ const Detail = ({fund}) => {
         </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
-        <aside className="flex flex-col gap-[2rem] border-2 border-black">
+        <aside className="flex flex-col gap-[2rem]">
           <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
           <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
           <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />

@@ -17,9 +17,9 @@ const ProductDetail = ({picture}) => {
           opacity: 1,
         },
       }}>
-      <section className="flex flex-col gap-[4rem] border-2 border-black">
+      <section className="flex flex-col gap-[4rem]">
         {/* 상품 상세정보가 들어갈 위치 */}
-        <Image src={picture} alt="road" width={150} height={1250} />
+        <Image src={picture} alt="road" width={900} height={1275} />
       </section>
     </motion.div>
   )
