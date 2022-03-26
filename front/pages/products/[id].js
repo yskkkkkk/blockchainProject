@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import Image from 'next/image';
 
 import ProductDetail from "../../components/productDetail";
 import ProductAnnouncement from "../../components/productAnnouncement";
@@ -35,6 +36,7 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   }
 }
 
+
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund}) => {
  
@@ -59,7 +61,7 @@ const Detail = ({fund}) => {
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
       <header className="flex flex-row flex-1 border-2 border-black justify-evenly">
         <section>
-          <img src={fund.col1} alt="thumbnail" />
+          <Image src={fund.col1} alt="thumbnail" width={300} height={300} />
         </section>
         <aside className="flex flex-col gap-[1rem] w-96">
           <h2>Ambitious funding by {fund.fullName}</h2>
@@ -105,9 +107,9 @@ const Detail = ({fund}) => {
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
         <aside className="flex flex-col gap-[2rem] border-2 border-black">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
         </aside>
       </section>
     </main>

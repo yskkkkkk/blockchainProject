@@ -1,4 +1,6 @@
 import {motion} from 'framer-motion';
+import Image from 'next/image';
+
 // 상품 상세정보 컴포넌트
 const ProductDetail = ({picture}) => {
   
@@ -17,7 +19,7 @@ const ProductDetail = ({picture}) => {
       }}>
       <section className="flex flex-col gap-[4rem] border-2 border-black">
         {/* 상품 상세정보가 들어갈 위치 */}
-        <img src={picture} alt="road" width="800"/>
+        <Image src={picture} alt="road" width={150} height={1250} />
       </section>
     </motion.div>
   )

@@ -19,7 +19,7 @@ const ProductAnnouncement = ({announcements}) => {
       <section className="grid grid-cols-1 gap-[4rem]">
         {/* 상품 공지사항 들어갈 위치 */}
         {announcements.map(announcement => (
-            <article className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border border-black">
+            <article key={announcement} className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border border-black">
               <header className="flex flex-row justify-between mx-[2rem]">
                 <h2 className="text-3xl">announcement {announcement}</h2>
                 <button>삭제</button>

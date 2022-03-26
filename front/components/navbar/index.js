@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import {useState, useEffect} from 'react';
 import style from './navbar.module.css';
 
@@ -30,29 +31,29 @@ export default function Navbar() {
     <nav className={style.container} >
       <ul className="border-b-4">
         <li className={style.li}>
-          <Link href="/">
+          <Link href="/" passHref>
             <button>
               <img className="-mb-4" src="logo.png" width="50" alt="home logo" />
             </button>
           </Link>
         </li>
         <li className={style.li}>
-          <Link href="/intro">
+          <Link href="/intro" passHref>
             <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">우리두레란?</button>
           </Link>
         </li>
         <li className={style.li}>
-          <Link href="/upcoming">
+          <Link href="/upcoming" passHref>
             <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">펀딩예정</button>
           </Link>
         </li>
         <li className={style.li}>
-          <Link href="/products">
+          <Link href="/products" passHref>
             <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">후원하기</button>
           </Link>
         </li>
         <li className={style.li}>
-          <Link href="/project">
+          <Link href="/project" passHref>
             <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">프로젝트 생성</button>
           </Link>
         </li>
