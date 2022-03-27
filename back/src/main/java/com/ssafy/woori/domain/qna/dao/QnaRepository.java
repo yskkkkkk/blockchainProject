@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Repository
 public interface QnaRepository extends JpaRepository<Qna, Integer> {
-    @Query(value = "select q.qnaText as qnaText, q.qnaCreatedDate as qnaCreatedDate, q.secret as secret, (select u.userNickname from User u where u.userSeq=q.userSeq) as userNickname," +
+    @Query(value = "select q.qnaTitle as qnaTitle, q.qnaText as qnaText, q.qnaCreatedDate as qnaCreatedDate, q.secret as secret, (select u.userNickname from User u where u.userSeq=q.userSeq) as userNickname," +
             "(select r.replyCreatedDate from Reply r where r.qnaSeq=q.qnaSeq) as replyCreatedDate, (select r.replyText from Reply r where r.qnaSeq=q.qnaSeq) as replyText " +
             "from Qna q where q.fundingSeq = :fundingSeq")
 //    @Query(value = "select new map (q, r) from Qna q left join Reply r on q.qnaSeq = r.qnaSeq where q.fundingSeq = :fundingSeq")

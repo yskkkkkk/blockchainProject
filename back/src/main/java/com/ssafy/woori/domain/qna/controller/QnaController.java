@@ -55,15 +55,13 @@ public class QnaController {
         String message = FAIL;
         HttpStatus status;
 
-        System.out.println("cont : " + request);
-
         Qna qna = qnaService.addQna(request);
         Map<String, Object> response = new HashMap<>();
 
         if(qna != null){
             message = SUCCESS;
             status = HttpStatus.OK;
-            response.put("result", qna);
+            response.put("data", qna);
         }
         else{
             status = HttpStatus.NOT_FOUND;
