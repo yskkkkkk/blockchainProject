@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material"
+import Image from 'next/image';
 
 export default function Creator(props){
   const {nickname, phone, description} = props.creatorData
@@ -6,7 +7,7 @@ export default function Creator(props){
   return(
 
     <div className="flex flex-col items-center">
-      <img className="my-6" src="/welcome.png" alt="welcome" />      
+      <Image className="my-6" src="/welcome.png" alt="welcome" />      
       <div className="flex items-center my-6">
         <label htmlFor="nickname">창작자 닉네임:</label>
         <TextField 

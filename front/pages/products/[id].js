@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import Image from 'next/image';
+
 import ProductDetail from "../../components/productDetail";
 import ProductAnnouncement from "../../components/productAnnouncement";
 import ProductQNA from "../../components/productQNA";
@@ -34,6 +36,7 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   }
 }
 
+
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund}) => {
  
@@ -53,12 +56,12 @@ const Detail = ({fund}) => {
   }
 
   return (
-    <main className="flex flex-col gap-[5rem]">
+    <main className="flex flex-col gap-[4rem]">
       
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
-      <header className="flex flex-row flex-1 border-2 border-black justify-evenly">
+      <header className="flex flex-row justify-center gap-[10rem]">
         <section>
-          <img src={fund.col1} alt="thumbnail" />
+          <Image src={fund.col1} alt="thumbnail" width={300} height={300} />
         </section>
         <aside className="flex flex-col gap-[1rem] w-96">
           <h2>Ambitious funding by {fund.fullName}</h2>
@@ -80,16 +83,17 @@ const Detail = ({fund}) => {
           </div>
         </aside>
       </header>
-      <section className="flex-1 flex flex-row gap-[4rem] justify-evenly mx-[150px]">
-
+      <hr />
+      {/* 상품 상세정보의 네비게이션바  */}
+      <nav className="flex flex-row gap-[3rem] justify-center mr-[50rem]">
+        <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
+        <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
+        <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
+      </nav>
+      <section className="flex flex-row gap-[8rem] justify-center">
         {/* 펀딩 상세정보 컴포넌트 */}
-        <div className="flex-1 flex flex-col gap-[4rem]">
-          {/* 상품 상세정보의 네비게이션바  */}
-          <nav className="flex flex-row gap-[2rem] justify-evenly">
-            <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
-            <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
-            <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
-          </nav>
+        {/* 하단 section 태그에 flex-1 을 쓴 이유는, 하위 컴포넌트들의 크기를 flex 구조대로 고정시키기 위함입니다 */}
+        <section className="flex flex-col gap-[4rem] basis-[50rem]">
           {currentNav === 0 && (
             <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
@@ -99,13 +103,13 @@ const Detail = ({fund}) => {
           {currentNav === 2 && (
             <ProductQNA qnas={[1, 2, 3, 4, 5]} />
           )}
-        </div>
+        </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
-        <aside className="flex flex-col gap-[2rem] border-2 border-black">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width="250"/>
+        <aside className="flex flex-col gap-[2rem]">
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
         </aside>
       </section>
     </main>
