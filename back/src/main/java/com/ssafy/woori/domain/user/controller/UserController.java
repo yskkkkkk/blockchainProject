@@ -18,6 +18,7 @@ import com.ssafy.woori.domain.user.dto.KakaoUserInfo;
 import com.ssafy.woori.domain.user.dto.UserInfoResponse;
 import com.ssafy.woori.domain.user.dto.UserUpdateRequest;
 import com.ssafy.woori.domain.user.service.UserServiceImpl;
+import com.ssafy.woori.entity.Alarm;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -67,9 +68,9 @@ public class UserController {
     }
     
     @PostMapping("/alarm")
-    public ResponseEntity<String> createAlarm(AlarmCreateRequest request){
+    public ResponseEntity<Alarm> createAlarm(AlarmCreateRequest request){
     	
-    	return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+    	return new ResponseEntity<Alarm>(userService.createAlarm(request), HttpStatus.OK);
     }
 
     @GetMapping("/alarms")
