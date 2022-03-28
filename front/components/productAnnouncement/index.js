@@ -1,8 +1,19 @@
-import {motion} from 'framer-motion';
+import {motion, AnimatePresence} from 'framer-motion';
+import { useState } from 'react';
+import Backdrop from '../backdrop';
 
 // 상품 공지사항 컴포넌트
 const ProductAnnouncement = ({announcements}) => {
   
+  const [openAnnounceModal, setOpenAnnounceModal] = useState(false);
+
+  const toggleAnnounceModal = (e) => {
+    e.preventDefault();
+    openAnnounceModal ? close() : open();
+  }
+  const open = () => setOpenAnnounceModal(true);
+  const close = () => setOpenAnnounceModal(false);
+
   return (
     // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
     <motion.div
@@ -30,8 +41,17 @@ const ProductAnnouncement = ({announcements}) => {
               </p>
             </article>
           ))}
-        <button className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">공지작성</button>
+          
+        <button onClick={toggleAnnounceModal} className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">공지작성</button>
       </section>
+      <AnimatePresence
+        // initial animation (바로 사라져버리는것?) 비활성화시킴
+        initial={false}
+        // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
+        exitBeforeEnter={true}
+        >
+        {openAnnounceModal && <Backdrop label={"announcement"} handleClose={close} />}
+      </AnimatePresence>
     </motion.div>
   )
   

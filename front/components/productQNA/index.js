@@ -5,14 +5,14 @@ import Backdrop from '../backdrop';
 // 상품 QnA 컴포넌트
 const ProductQNA = ({qnas}) => {
   
-  const [openModal, setOpenModal] = useState(false);
+  const [openQnaModal, setOpenQnaModal] = useState(false);
 
-  const toggleModal = (e) => {
+  const toggleQnaModal = (e) => {
     e.preventDefault();
-    openModal ? close() : open();
+    openQnaModal ? close() : open();
   }
-  const open = () => setOpenModal(true);
-  const close = () => setOpenModal(false);
+  const open = () => setOpenQnaModal(true);
+  const close = () => setOpenQnaModal(false);
 
   return (
     // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
@@ -57,7 +57,7 @@ const ProductQNA = ({qnas}) => {
               </section>
             </details>
           ))}
-        <button onClick={toggleModal} className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">질문하기</button>
+        <button onClick={toggleQnaModal} className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">질문하기</button>
       </section>
 
       {/* 모달창 사라지는 애니매이션 유지시키기위해 AnimatePresence 활용 */}
@@ -67,7 +67,7 @@ const ProductQNA = ({qnas}) => {
         // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
         exitBeforeEnter={true}
         >
-        {openModal && <Backdrop handleClose={close} />}
+        {openQnaModal && <Backdrop label={"qna"} handleClose={close} />}
       </AnimatePresence>
     </motion.div>
   )

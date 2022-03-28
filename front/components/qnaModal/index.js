@@ -1,7 +1,7 @@
 import {motion} from "framer-motion";
 
 
-export default function ProductModal({handleClose}) {
+export default function QnaModal({handleClose}) {
 
   const popUp = {
     initial: {
@@ -12,15 +12,18 @@ export default function ProductModal({handleClose}) {
       y: "0",
       opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.1,
         type: "spring",
-        damping: 20,
+        damping: 25,
         stiffness: 500,
       }
     },
     exit: {
-      y: "30vh",
+      y: "-30vh",
       opacity: 0,
+      transition: {
+        duration: 0.2,
+      }
     }
   }
   const cancel = (e) => {

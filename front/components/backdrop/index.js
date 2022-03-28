@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import ProductModal from "../productModal";
+import AnnounceModal from "../announceModal";
+import QnaModal from "../qnaModal";
 
-const Backdrop = ({handleClose}) => {
+const Backdrop = ({label, handleClose}) => {
  
   return (
     <motion.div
@@ -11,7 +12,8 @@ const Backdrop = ({handleClose}) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <ProductModal handleClose={handleClose} />
+      {label === "qna" && <QnaModal handleClose={handleClose} />}
+      {label === "announcement" && <AnnounceModal handleClose={handleClose} />}
     </motion.div>
   );
 };
