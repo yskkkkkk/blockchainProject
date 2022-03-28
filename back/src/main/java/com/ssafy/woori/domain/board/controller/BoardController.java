@@ -60,7 +60,7 @@ public class BoardController {
 
         if(board != null){
             message = SUCCESS;
-            response.put("result", board);
+            response.put("data", board);
             status = HttpStatus.OK;
         }
         else{

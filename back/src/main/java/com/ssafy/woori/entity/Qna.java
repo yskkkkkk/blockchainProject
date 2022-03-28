@@ -22,6 +22,8 @@ public class Qna {
     private Integer fundingSeq;
     @Column
     private Integer userSeq;
+    @Column
+    private String qnaTitle;
     @Column(length = 1024)
     private String qnaText;
     @CreatedDate

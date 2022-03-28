@@ -26,6 +26,7 @@ public class QnaServiceImpl implements QnaService{
                 Qna.builder()
                         .fundingSeq(request.getFundingSeq())
                         .userSeq(request.getUserSeq())
+                        .qnaTitle(request.getQnaTitle())
                         .qnaText(request.getQnaText())
 //                        .isPublic(request.isPublic())
                         .secret(request.getSecret())
@@ -38,7 +39,6 @@ public class QnaServiceImpl implements QnaService{
     public boolean modifyQna(addQnaRequest request) {
         Optional<Qna> qna =qnaRepository.findById(request.getQnaSeq());
 
-        System.out.println(qna);
         if(!qna.isPresent()) return (false);
 
         qna.ifPresent(selectQna ->{
@@ -47,6 +47,7 @@ public class QnaServiceImpl implements QnaService{
                         .qnaSeq(selectQna.getQnaSeq())
                         .fundingSeq(selectQna.getFundingSeq())
                         .userSeq(selectQna.getUserSeq())
+                        .qnaTitle(request.getQnaTitle())
                         .qnaText(request.getQnaText())
                         .secret(request.getSecret())
                         .qnaCreatedDate(selectQna.getQnaCreatedDate())

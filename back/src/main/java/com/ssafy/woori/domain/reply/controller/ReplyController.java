@@ -36,7 +36,7 @@ public class ReplyController {
 
         if(reply != null){
             message = SUCCESS;
-            response.put("result", reply);
+            response.put("data", reply);
             status = HttpStatus.OK;
         }
         else{
