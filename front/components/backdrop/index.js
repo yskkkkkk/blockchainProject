@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
+import ProductModal from "../productModal";
 
-const Backdrop = ({ children, onClick }) => {
+const Backdrop = ({handleClose}) => {
  
   return (
     <motion.div
-      onClick={onClick}
+      onClick={handleClose}
       className="backdrop"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {children}
+      <ProductModal handleClose={handleClose} />
     </motion.div>
   );
 };

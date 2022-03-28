@@ -18,16 +18,20 @@ a {
 }
 
 .backdrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background: #000000e1;
-  /* Backdrop 컴포넌트의 자식 컴포넌트를 화면 중앙에 배치하기 위함 */
+  background:rgba(255, 255, 255, 0.8);
+  /* Backdrop 컴포넌트의 자식 컴포넌트인 ProductModal을 화면 중앙에 배치하기 위함 */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.modal {
+  border-radius: 12px;
 }
 
 #footer {

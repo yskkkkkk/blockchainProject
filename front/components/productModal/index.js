@@ -1,5 +1,4 @@
 import {motion} from "framer-motion";
-import Backdrop from "../backdrop";
 
 
 export default function ProductModal({handleClose}) {
@@ -24,48 +23,43 @@ export default function ProductModal({handleClose}) {
       opacity: 0,
     }
   }
+  const cancel = (e) => {
+    e.preventDefault();
+    handleClose();
+  }
 
   return (
-    
-    <Backdrop onClick={handleClose}>
-      <motion.div
-        onClick={(e) => e.stopPropagation}
-        variants={popUp}
-        initial="initial"
-        animate="visible"
-        exit="exit"
-        >
-        <main class="w-full max-w-xs">
-          <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                Username
-              </label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
-            </div>
-            <div class="mb-6">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                Password
-              </label>
-              <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************">
-              <p class="text-red-500 text-xs italic">Please choose a password.</p>
-            </div>
-            <div class="flex items-center justify-between">
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                Sign In
-              </button>
-              <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                Forgot Password?
-              </a>
-            </div>
-          </form>
-          <p class="text-center text-gray-500 text-xs">
-            &copy;2020 Acme Corp. All rights reserved.
-          </p>
-        </main>
-        
-      </motion.div>
-    </Backdrop>
-
+    <motion.div
+      onClick={(e) => e.stopPropagation()}
+      variants={popUp}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      className="modal"
+      >
+      <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
+        <h1>질문하기</h1>
+        <div className="my-4">
+          <label className="block mb-2 text-sm font-bold text-gray-700" for="title">
+            제목
+          </label>
+          <input className="w-full px-3 py-2 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="title" type="text" />
+        </div>
+        <div className="mb-6">
+          <label className="block mb-2 text-sm font-bold text-gray-700" for="content">
+            질문 내용
+          </label>
+          <textarea className="w-full px-3 py-2 mb-3 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="content" />
+        </div>
+        <div className="flex items-center justify-between">
+          <button className="px-4 py-2 font-bold text-white rounded bg-theme-color/80 hover:bg-theme-color focus:outline-none focus:shadow-outline">
+            작성
+          </button>
+          <button onClick={cancel} className="inline-block text-sm font-bold align-baseline text-theme-color hover:text-blue-800" href="#">
+            취소
+          </button>
+        </div>
+      </form>
+    </motion.div>
   )
 }
