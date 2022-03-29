@@ -13,22 +13,22 @@ import java.time.LocalDate;
 @ToString
 @Entity
 @Table(name = "tb_file")
-public class File {
+public class Files {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer fileSeq;
     @Column(nullable = false)
-    private String file_name;
-    @Column
-    private Long fileSize;
+    private String fileName;
+//    @Column
+//    private Long fileSize;
     @Column(nullable = false)
     private String filePath;
-    @Column
-    private Integer fileType;
-    @Column(nullable = false)
-    private String relationTb;
-    @Column(nullable = false)
-    private Integer relationSeq;
+//    @Column
+//    private Integer fileType;
+//    @Column(nullable = false)
+//    private String relationTb;
+//    @Column(nullable = false)
+//    private Integer relationSeq;
     @Column(columnDefinition = "boolean default true")
     private Boolean fileIsActive;
     @CreatedDate
