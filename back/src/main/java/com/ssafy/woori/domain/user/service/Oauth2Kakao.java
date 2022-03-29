@@ -24,7 +24,7 @@ public class Oauth2Kakao {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 
-    @Value("${login.value.kakaoRestAPIKey}")
+    @Value("${custom.oauth2.kakao.client-id}")
     private String kakaoRestAPIKey;
     
     private final String frontendRedirectUrl = "http://localhost:3000/test/loggedin";
