@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                     .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
                     .antMatchers("/naver").hasAuthority(NAVER.getRoleType())
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                 .and()
                     .oauth2Login()
                     .userInfoEndpoint().userService(new CustomOAuth2UserService());
