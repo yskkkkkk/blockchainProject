@@ -1,8 +1,19 @@
-import {motion} from 'framer-motion';
+import {motion, AnimatePresence} from 'framer-motion';
+import {useState} from 'react';
+import Backdrop from '../backdrop';
 
 // 상품 QnA 컴포넌트
-const ProductQNA = ({qnas}) => {
+const ProductQNA = ({sendForm, qnas}) => {
   
+  const [openQnaModal, setOpenQnaModal] = useState(false);
+
+  const toggleQnaModal = (e) => {
+    e.preventDefault();
+    openQnaModal ? close() : open();
+  }
+  const open = () => setOpenQnaModal(true);
+  const close = () => setOpenQnaModal(false);
+
   return (
     // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
     <motion.div
@@ -35,19 +46,20 @@ const ProductQNA = ({qnas}) => {
                 <span className="mt-[1rem] text-black/20 mix-blend-color-dodge">◀</span>
                 <p className="ml-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-black/20 max-w-[25rem]">wdsasss asdasds asdsassss asdasd sssssssssss ssssss asdasdad sasssow!</p>
               </section>
-              <section className="flex flex-row justify-end gap-[2rem] my-[1rem] mr-[1rem]">
-                <p className="mr-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-theme-color/80 max-w-[25rem]">wdsasss asdasds asdsassss asdsad sssssssssss ssssss asdasdads asssow!</p>
-                <span className="mt-[1rem] text-theme-color/70 mix-blend-color-dodge">▶</span>
-              </section>
-              <section className="flex flex-row gap-[2rem] ml-[1rem] my-[1rem]">
-                <img className="flex-none w-[4rem] h-[4rem] border-2 border-black rounded-full mr-[-1rem]" src="https://i.pinimg.com/736x/b8/69/5f/b8695f007aea9a08a0419479217ca6aa.jpg" alt="seller profile image" />
-                <span className="mt-[1rem] text-black/20 mix-blend-color-dodge">◀</span>
-                <p className="ml-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-black/20 max-w-[25rem]">wdsasss asdasds asdsassss asdasd sssssssssss ssssss asdasdad sasssow!</p>
-              </section>
             </details>
           ))}
-        <button className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">질문하기</button>
+        <button onClick={toggleQnaModal} className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">질문하기</button>
       </section>
+
+      {/* 모달창 사라지는 애니매이션 유지시키기위해 AnimatePresence 활용 */}
+      <AnimatePresence
+        // initial animation (바로 사라져버리는것?) 비활성화시킴
+        initial={false}
+        // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
+        exitBeforeEnter={true}
+        >
+        {openQnaModal && <Backdrop sendForm={sendForm} label={"qna"} handleClose={close} />}
+      </AnimatePresence>
     </motion.div>
   )
   

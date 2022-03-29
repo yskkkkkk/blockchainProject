@@ -1,16 +1,14 @@
 package com.ssafy.woori.domain.funding.controller;
 
-import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
-import com.ssafy.woori.domain.funding.dto.OptionListResponse;
+import com.ssafy.woori.domain.funding.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ssafy.woori.domain.funding.dto.FundingListRequest;
-import com.ssafy.woori.domain.funding.dto.FundingListResponse;
 import com.ssafy.woori.domain.funding.service.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -25,6 +23,24 @@ public class FundingController {
     @Autowired
     private FundingService fundingService;
 
+    @PostMapping
+    public ResponseEntity<String> addFunding(@RequestPart AddFundingRequest request,
+                                            @RequestPart(required = false) MultipartFile file){
+
+        logger.info("펀딩 등록하기 " + request.getUserSeq());
+        String message = FAIL;
+        HttpStatus status = null;
+
+        if(fundingService.addFunding(request, file) != null){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+
+        return (new ResponseEntity<>(message, status));
+    }
 
     @PostMapping("/lists")
     public ResponseEntity<List<FundingListResponse>> fundingList(@RequestBody FundingListRequest request){

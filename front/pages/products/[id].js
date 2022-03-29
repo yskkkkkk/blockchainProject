@@ -34,6 +34,9 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   return {
     props: {fund: data}
   }
+
+  
+
 }
 
 
@@ -53,6 +56,10 @@ const Detail = ({fund}) => {
   const showQNA = (e) => {
     e.preventDefault();
     setCurrentNav(2);
+  }
+
+  const sendForm = () => {
+    
   }
 
   return (
@@ -98,10 +105,10 @@ const Detail = ({fund}) => {
             <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {currentNav === 1 && (
-            <ProductAnnouncement announcements={[1, 2, 3, 4, 5]} />
+            <ProductAnnouncement sendForm={sendForm} announcements={[1, 2, 3, 4, 5]} />
           )}
           {currentNav === 2 && (
-            <ProductQNA qnas={[1, 2, 3, 4, 5]} />
+            <ProductQNA sendForm={sendForm} qnas={[1, 2, 3, 4, 5]} />
           )}
         </section>
         
