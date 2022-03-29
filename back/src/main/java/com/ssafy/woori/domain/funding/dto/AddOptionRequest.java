@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class addOptionRequest {
+public class AddOptionRequest {
     private String optionTitle;
     private Integer optionPrice;
     private String optionText;

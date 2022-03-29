@@ -24,6 +24,12 @@ public class Funding {
     private Integer userSeq;
     @Column(nullable = false)
     private Integer fundingCategory;
+    @Column
+    private String userNickname;
+    @Column
+    private String userPhone;
+    @Column
+    private String userIntroduce;
     @Column(nullable = false, length = 100)
     private String fundingTitle;
     @Column(nullable = true, length = 1024)

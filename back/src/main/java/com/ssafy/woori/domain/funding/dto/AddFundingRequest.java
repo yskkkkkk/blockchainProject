@@ -9,15 +9,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class addFundingRequest {
+public class AddFundingRequest {
     private Integer userSeq;
     private String userNickname;
     private String userPhone;
     private String userIntroduce;
     private String fundingTitle;
     private String fundingSimple;
-    private String fundingCategory;
+    private Integer fundingCategory;
     private String fundingText;
     private String fundingWarning;
-    //private addOptionRequest option;
+    private AddOptionRequest[] option;
 }

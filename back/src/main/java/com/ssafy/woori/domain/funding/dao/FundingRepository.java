@@ -6,15 +6,13 @@ import com.ssafy.woori.domain.funding.dto.OptionListResponse;
 import com.ssafy.woori.entity.Funding;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface FundingDao extends JpaRepository<Funding, Integer> {
+public interface FundingRepository extends JpaRepository<Funding, Integer> {
 
 //    public List<Integer> find
 //    @Query(value = "select funding_seq, funding_image, funding_title, funding_simple " +
