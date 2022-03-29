@@ -1,7 +1,7 @@
 import {motion} from "framer-motion";
 
 
-export default function QnaModal({sendForm, handleClose}) {
+export default function QnaModal({handleClose}) {
 
   const popUp = {
     initial: {
@@ -32,10 +32,6 @@ export default function QnaModal({sendForm, handleClose}) {
     handleClose();
   }
 
-  const postQuestion = () => {
-    
-  }
-
   return (
     <motion.div
       onClick={(e) => e.stopPropagation()}
@@ -60,7 +56,7 @@ export default function QnaModal({sendForm, handleClose}) {
           <textarea className="w-full px-3 py-2 mb-3 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="content" />
         </div>
         <div className="flex items-center justify-between">
-          <button onClick={postQuestion} className="px-4 py-2 font-bold text-white rounded bg-theme-color/80 hover:bg-theme-color focus:outline-none focus:shadow-outline">
+          <button className="px-4 py-2 font-bold text-white rounded bg-theme-color/80 hover:bg-theme-color focus:outline-none focus:shadow-outline">
             작성
           </button>
           <button onClick={cancel} className="inline-block text-sm font-bold align-baseline text-theme-color hover:text-blue-800" href="#">
@@ -71,5 +67,3 @@ export default function QnaModal({sendForm, handleClose}) {
     </motion.div>
   )
 }
-
-// 데이터 fetch 를 어떻게 해올지, 해당 정보들을 어떻게 관리하고 컴포넌트에 전달할지 고민중

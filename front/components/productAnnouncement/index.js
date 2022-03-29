@@ -50,7 +50,7 @@ const ProductAnnouncement = ({announcements}) => {
         // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
         exitBeforeEnter={true}
         >
-        {openAnnounceModal && <Backdrop label={"announcement"} handleClose={close} />}
+        {openAnnounceModal && <Backdrop label="announcement" handleClose={close} />}
       </AnimatePresence>
     </motion.div>
   )
