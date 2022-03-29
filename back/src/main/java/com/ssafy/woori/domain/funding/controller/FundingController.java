@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -25,7 +26,7 @@ public class FundingController {
 
     @PostMapping
     public ResponseEntity<String> addFunding(@RequestPart AddFundingRequest request,
-                                            @RequestPart(required = false) MultipartFile file){
+                                            @RequestPart(required = false) MultipartFile[] file) throws IOException {
 
         logger.info("펀딩 등록하기 " + request.getUserSeq());
         String message = FAIL;

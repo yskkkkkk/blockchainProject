@@ -27,8 +27,8 @@ public class Option {
     private String optionText;
     @Column
     private Integer optionMaxamount;
-    @Column(unique = true)
-    private String optionContract;
+//    @Column(unique = true)
+//    private String optionContract;
     @Column(columnDefinition = "boolean default false")
     private Boolean optionIsmain;
 }

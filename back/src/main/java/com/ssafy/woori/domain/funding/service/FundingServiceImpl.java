@@ -1,5 +1,6 @@
 package com.ssafy.woori.domain.funding.service;
 
+import com.ssafy.woori.domain.file.service.FileService;
 import com.ssafy.woori.domain.funding.dao.FundingRepository;
 import com.ssafy.woori.domain.funding.dao.OptionRepository;
 import com.ssafy.woori.domain.funding.dto.AddFundingRequest;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class FundingServiceImpl implements FundingService{
 
     @Autowired
     OptionRepository optionRepository;
+
+    @Autowired
+    FileService fileService;
 
     @Override
     public List<FundingListResponse> fundingHot() {
@@ -56,9 +61,11 @@ public class FundingServiceImpl implements FundingService{
 
     @Override
     //@Transactional
-    public Funding addFunding(AddFundingRequest request, MultipartFile file) {
+    public Funding addFunding(AddFundingRequest request, MultipartFile[] file) throws IOException {
         // 파일 추가하는것도 존재해야함
-        String imgPath = "null";
+        String imgPath = fileService.uploadFile(file).get(0);
+
+        if(imgPath == null) imgPath="";
 
         Funding funding = fundingRepository.save(
                 Funding.builder()
@@ -73,12 +80,19 @@ public class FundingServiceImpl implements FundingService{
                         .fundingWarning(request.getFundingWarning())
                         .build()
         );
-        System.out.println(funding.getFundingSeq());
-//        Option option = optionRepository.save(
-//                Option.builder()
-//                        .fundingSeq(funding.getFundingSeq())
-//                        .build()
-//        );
+
+        for(int i = 0; i < request.getOption().length; i++){
+            optionRepository.save(
+                    Option.builder()
+                            .fundingSeq(funding.getFundingSeq())
+                            .optionTitle(request.getOption()[i].getOptionTitle())
+                            .optionPrice(request.getOption()[i].getOptionPrice())
+                            .optionText(request.getOption()[i].getOptionText())
+                            .optionMaxamount(request.getOption()[i].getOptionMaxamount())
+                            .optionOrder(1)
+                            .build()
+            );
+        }
 
         return (funding);
     }
