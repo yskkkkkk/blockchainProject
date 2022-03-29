@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +16,8 @@ import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+import com.ssafy.woori.domain.user.dao.UserRepository;
 import com.ssafy.woori.domain.user.service.CustomOAuth2UserService;
 
 import static com.ssafy.woori.domain.user.config.SocialType.*;
@@ -25,20 +26,25 @@ import static com.ssafy.woori.domain.user.config.SocialType.*;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private UserRepository UserRepository;
+	
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
     	httpSecurity.csrf().disable();
     	httpSecurity.authorizeRequests()
                     .antMatchers("/", "/oauth2/**", "/login/**", "/css/**",
-                            "/images/**", "/js/**", "/console/**", "/favicon.ico/**")
+                            "/images/**", "/js/**", "/console/**", "/favicon.ico/**"
+                            ,"/v3/api-docs"
+                            ,"/swagger*/**")
                     .permitAll()
                     .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                     .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
-                    .antMatchers("/naver").hasAuthority(NAVER.getRoleType())
-                    .anyRequest().permitAll()
+                     .antMatchers("/naver").hasAuthority(NAVER.getRoleType())
+                    .anyRequest().authenticated()
                 .and()
                     .oauth2Login()
-                    .userInfoEndpoint().userService(new CustomOAuth2UserService());
+                    .userInfoEndpoint().userService(new CustomOAuth2UserService(UserRepository));
     }
 
     @Bean

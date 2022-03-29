@@ -23,7 +23,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
+import com.ssafy.woori.domain.user.dao.UserRepository;
 import com.ssafy.woori.domain.user.dto.OauthUser;
+import com.ssafy.woori.entity.User;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +49,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private RestOperations restOperations;
 
-    public CustomOAuth2UserService() {
+    private UserRepository userRepository;
+    
+    public CustomOAuth2UserService(UserRepository userRepository) {
+    	this.userRepository = userRepository;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
         this.restOperations = restTemplate;
@@ -103,8 +108,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
         }
 
-   //    log.info(userRequest.getAccessToken().toString());
-
         Map<String, Object> userAttributes = getUserAttributes(response);
         
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
@@ -115,37 +118,49 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
         
         OauthUser user = makeUserForSave(response, userRequest.getClientRegistration().getRegistrationId().toString());
+        log.info(user.toString());
+        if (!userRepository.existsByUserKeyAndUserPlatform(user.getUserKey(), user.getUserPlatform())) {
+        	log.warn("기존 가입 정보가 없습니다. 회원등록을 진행합니다.");
+        	userRepository.save(User.builder()
+        			.userNickname(user.getUserNickname())
+        			.userPlatform(user.getUserPlatform())
+        			.userKey(user.getUserKey())
+        			.userEmail(user.getUserEmail())
+        			.build());
+        };
         
         return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
     }
 
     
     private OauthUser makeUserForSave(ResponseEntity<Map<String, Object>> response, String platform) {
-        Map<String, Object> userAttributes = response.getBody();
         OauthUser user = null;
         switch (platform) {
 		case "google":
 			user = OauthUser.builder()
-			.platform(platform)
-			.key(response.getBody().get("sub").toString())
-			.name(response.getBody().get("name").toString())
-			.email(response.getBody().get("email").toString())
+			.userPlatform(platform)
+			.userKey(response.getBody().get("sub").toString())
+			.userNickname(response.getBody().get("name").toString())
+			.userEmail(response.getBody().get("email").toString())
 			.build();
 			break;
 		case "kakao":
+			Map<String, Object> properties = (Map<String, Object>) response.getBody().get("properties");
+			Map<String, Object> account = (Map<String, Object>) response.getBody().get("kakao_account");
+	
 			user = OauthUser.builder()
-			.platform(platform)
-			.key(response.getBody().get("id").toString())
-			.name(response.getBody().get("properties").toString())
-			.email(response.getBody().get("kakao_account").toString())
+			.userPlatform(platform)
+			.userKey(response.getBody().get("id").toString())
+			.userNickname(String.valueOf(properties.get("nickname")))
+			.userEmail(String.valueOf(account.get("email")))
 			.build();
 			break;
 		case "naver":
 			user = OauthUser.builder()
-			.platform(platform)
-			.key(response.getBody().get("id").toString())
-			.name(response.getBody().get("name").toString())
-			.email(response.getBody().get("email").toString())
+			.userPlatform(platform)
+			.userKey(response.getBody().get("id").toString())
+			.userNickname(response.getBody().get("name").toString())
+			.userEmail(response.getBody().get("email").toString())
 			.build();
 			break;
 		}
