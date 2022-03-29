@@ -23,7 +23,7 @@ public class FundingController {
     @Autowired
     private FundingService fundingService;
 
-    @PostMapping(consumes = {"multipart/form-data"})
+    @PostMapping
     public ResponseEntity<String> addFunding(@RequestPart AddFundingRequest request,
                                             @RequestPart(required = false) MultipartFile file){
 
