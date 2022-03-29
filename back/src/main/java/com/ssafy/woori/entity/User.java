@@ -43,4 +43,6 @@ public class User {
     private String userIntroduce;
     @Column(length = 20)
     private String userCompany;
+    @Column
+    private String userKey;
 }
