@@ -73,12 +73,19 @@ public class FundingServiceImpl implements FundingService{
                         .fundingWarning(request.getFundingWarning())
                         .build()
         );
-        System.out.println(funding.getFundingSeq());
-//        Option option = optionRepository.save(
-//                Option.builder()
-//                        .fundingSeq(funding.getFundingSeq())
-//                        .build()
-//        );
+
+        for(int i = 0; i < request.getOption().length; i++){
+            optionRepository.save(
+                    Option.builder()
+                            .fundingSeq(funding.getFundingSeq())
+                            .optionTitle(request.getOption()[i].getOptionTitle())
+                            .optionPrice(request.getOption()[i].getOptionPrice())
+                            .optionText(request.getOption()[i].getOptionText())
+                            .optionMaxamount(request.getOption()[i].getOptionMaxamount())
+                            .optionOrder(1)
+                            .build()
+            );
+        }
 
         return (funding);
     }
