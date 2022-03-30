@@ -89,7 +89,7 @@ public class FundingServiceImpl implements FundingService{
                             .optionPrice(request.getOption()[i].getOptionPrice())
                             .optionText(request.getOption()[i].getOptionText())
                             .optionMaxamount(request.getOption()[i].getOptionMaxamount())
-                            .optionOrder(1)
+                            .optionOrder(i)
                             .build()
             );
         }
