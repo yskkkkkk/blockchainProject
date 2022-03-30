@@ -72,7 +72,7 @@ export default function QnaModal({addQna, handleClose}) {
         <header className="flex flex-row gap-[8rem]">
           <h1>질문하기</h1>
           <div className="form-check">
-            <input checked={isSecret} onClick={(e) => setIsSecret(!isSecret)} className="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none" type="checkbox" value="" id="secretBox" />
+            <input checked={isSecret} onClick={(e) => setIsSecret(!isSecret)} className="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer form-check-input checked:bg-theme-color/70 checked:border-theme-color focus:outline-none" type="checkbox" value="" id="secretBox" />
             <label className="inline-block text-gray-800 form-check-label" htmlFor="secretBox">
               비밀
             </label>
