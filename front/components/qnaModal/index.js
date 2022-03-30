@@ -6,6 +6,7 @@ export default function QnaModal({addQna, handleClose}) {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [isSecret, setIsSecret] = useState(false);
 
   const popUp = {
     initial: {
@@ -43,7 +44,7 @@ export default function QnaModal({addQna, handleClose}) {
       "userSeq": 2,
       "qnaTitle": title,
       "qnaText": content,
-      "isPublic": true,
+      "secret": isSecret,
     }
     // qna 제출 시 DB에 post 요청 보내고
     Send.post('/funding/qna', data)
@@ -68,7 +69,15 @@ export default function QnaModal({addQna, handleClose}) {
       className="modal"
       >
       <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
-        <h1>질문하기</h1>
+        <header className="flex flex-row gap-[8rem]">
+          <h1>질문하기</h1>
+          <div className="form-check">
+            <input checked={isSecret} onClick={(e) => setIsSecret(!isSecret)} className="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none" type="checkbox" value="" id="secretBox" />
+            <label className="inline-block text-gray-800 form-check-label" htmlFor="secretBox">
+              비밀
+            </label>
+          </div>
+        </header>
         <div className="my-4">
           <label className="block mb-2 text-sm font-bold text-gray-700" for="title">
             제목
