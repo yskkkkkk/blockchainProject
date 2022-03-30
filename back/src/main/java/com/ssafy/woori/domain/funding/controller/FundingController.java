@@ -113,4 +113,42 @@ public class FundingController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @DeleteMapping("/{fundingSeq}")
+    public ResponseEntity<String> deleteFunding(@PathVariable int fundingSeq){
+        logger.info("펀딩 삭제하기 " + fundingSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        if(fundingService.deleteFunding(fundingSeq)){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else status = HttpStatus.NOT_FOUND;
+
+
+        return (new ResponseEntity<>(message, status));
+    }
+
+    @GetMapping("/{fundingSeq}")
+    public ResponseEntity<Map<String,Object>> getFunding(@PathVariable int fundingSeq){
+        logger.info("펀딩 상단정보 가져오기 " + fundingSeq);
+        String message = FAIL;
+        HttpStatus status = HttpStatus.OK;
+
+        Map<String, Object> response = new HashMap<>();
+        FundingTopResponse dto = fundingService.getFunding(fundingSeq);
+
+        if(dto != null){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+            response.put("data", dto);
+        }
+        else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+
+
+        return (new ResponseEntity<>(response, status));
+    }
 }
