@@ -36,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/oauth2/**", "/login/**", "/css/**",
                             "/images/**", "/js/**", "/console/**", "/favicon.ico/**"
                             ,"/v3/api-docs"
-                            ,"/swagger*/**")
+                            ,"/swagger*/**"
+                            ,"/funding/**")
                     .permitAll()
                     .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                     .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
