@@ -2,7 +2,7 @@ import {motion} from "framer-motion";
 import Send from "../../lib/Send.js";
 import {useState} from 'react';
 
-export default function AnnounceModal({handleClose}) {
+export default function AnnounceModal({addAnnouncement, handleClose}) {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -47,8 +47,7 @@ export default function AnnounceModal({handleClose}) {
     Send.post('/user/login', data)
       .then((data) =>{
         console.log(data);
-        // nextjs의 신기술인 on-demand ISR 활용하여 새롭게 DB에 추가된 컨텐츠 보여줌
-        fetch('/pages/api/revalidateProductDetail');
+        addAnnouncement();  // 공지사항 새롭게 요청해서 화면에 표시
       })
       .catch((e) => {
         console.log(e);
@@ -57,7 +56,7 @@ export default function AnnounceModal({handleClose}) {
 
   return (
     <motion.div
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}  // 부모 컴포넌트로 이벤트 전달을 막아줌 : 모달컴포넌트는 클릭해도 화며에 유지해줌
       variants={popUp}
       initial="initial"
       animate="visible"

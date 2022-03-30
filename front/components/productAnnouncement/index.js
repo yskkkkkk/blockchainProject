@@ -1,11 +1,13 @@
 import {motion, AnimatePresence} from 'framer-motion';
 import { useState } from 'react';
 import Backdrop from '../backdrop';
+import Send from "../../lib/Send.js";
 
 // 상품 공지사항 컴포넌트
 const ProductAnnouncement = ({announcements}) => {
   
   const [openAnnounceModal, setOpenAnnounceModal] = useState(false);
+  const [announcementList, setAnnouncementList] = useState(announcements);
 
   const toggleAnnounceModal = (e) => {
     e.preventDefault();
@@ -13,6 +15,19 @@ const ProductAnnouncement = ({announcements}) => {
   }
   const open = () => setOpenAnnounceModal(true);
   const close = () => setOpenAnnounceModal(false);
+
+  const addAnnouncement = () => {
+    // get 요청보낼때 해당 펀드상품의 pk값 필요
+    let data = {"fundingSeq": 1}
+    Send.get("/funding/board", data)
+      .then((data) =>{
+        console.log(data);
+        setAnnouncementList(data);
+      })
+      .catch((e) =>{
+        console.log(e);
+      })
+  }
 
   return (
     // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
@@ -29,7 +44,7 @@ const ProductAnnouncement = ({announcements}) => {
       }}>
       <section className="grid grid-cols-1 gap-[4rem]">
         {/* 상품 공지사항 들어갈 위치 */}
-        {announcements.map(announcement => (
+        {announcementList.map(announcement => (
             <article key={announcement} className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border border-black">
               <header className="flex flex-row justify-between mx-[2rem]">
                 <h2 className="text-3xl">announcement {announcement}</h2>
@@ -50,7 +65,7 @@ const ProductAnnouncement = ({announcements}) => {
         // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
         exitBeforeEnter={true}
         >
-        {openAnnounceModal && <Backdrop label="announcement" handleClose={close} />}
+        {openAnnounceModal && <Backdrop label="announcement" addAnnouncement={addAnnouncement} handleClose={close} />}
       </AnimatePresence>
     </motion.div>
   )
