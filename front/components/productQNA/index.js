@@ -1,11 +1,15 @@
+import { set } from 'date-fns';
 import {motion, AnimatePresence} from 'framer-motion';
 import {useState} from 'react';
 import Backdrop from '../backdrop';
 
 // 상품 QnA 컴포넌트
-const ProductQNA = ({sendForm, qnas}) => {
+// ISR 활용하여 처음에는 페이지 SSG 로 렌더 => qna 수정되면 일단 CSR로 사용자에게 일시적으로 보여줌
+// 현재 방법은 sustainable 하지 않음, 고로 추후 on-demand ISR로 수정필요
+const ProductQNA = ({qnas}) => {
   
   const [openQnaModal, setOpenQnaModal] = useState(false);
+  const [qnaList, setQnaList] = useState(qnas);
 
   const toggleQnaModal = (e) => {
     e.preventDefault();
@@ -13,6 +17,19 @@ const ProductQNA = ({sendForm, qnas}) => {
   }
   const open = () => setOpenQnaModal(true);
   const close = () => setOpenQnaModal(false);
+
+  const addQna = () => {
+    // get 요청보낼때 해당 펀드상품의 pk값 필요
+    let data = {"fundingSeq": 1}
+    Send.get("/funding/qna", data)
+      .then((data) =>{
+        console.log(data);
+        setQnaList(data);
+      })
+      .catch((e) =>{
+        console.log(e);
+      })
+  }
 
   return (
     // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
@@ -29,7 +46,7 @@ const ProductQNA = ({sendForm, qnas}) => {
       }}>
       <section className="grid grid-cols-1 gap-[4rem]">
         {/* 상품 QnA가 들어갈 위치 */}
-        {qnas.map(qna => (
+        {qnaList.map(qna => (
             // 스압방지를 위해서 + 질문 제목 빠르게 파악할 수 있게 하기 위해 질문 단위로 접었다 폇다 가능하게 구현
             <details className="border border-black py-[1rem]" key={qna}>
               <summary className="font-sans text-xl antialiased list-none pl-[1rem]">Q. {qna} 제목</summary>
@@ -58,7 +75,7 @@ const ProductQNA = ({sendForm, qnas}) => {
         // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
         exitBeforeEnter={true}
         >
-        {openQnaModal && <Backdrop label="qna" handleClose={close} />}
+        {openQnaModal && <Backdrop addQna={addQna}  label="qna" handleClose={close} />}
       </AnimatePresence>
     </motion.div>
   )
