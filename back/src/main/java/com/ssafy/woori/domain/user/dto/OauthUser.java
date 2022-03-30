@@ -11,9 +11,9 @@ import lombok.ToString;
 @ToString
 public class OauthUser{
 
-	private String platform;
-	private String key;
-	private String name;
-	private String email;
+	private String userPlatform;
+	private String userKey;
+	private String userNickname;
+	private String userEmail;
 	
 }
