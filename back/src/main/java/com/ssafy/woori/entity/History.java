@@ -22,7 +22,7 @@ public class History {
     private Integer fundingSeq;
     @Column
     private Integer optionSeq;
-    @Column
+    @Column(columnDefinition = "int default 1")
     private Integer optionNum;
     @Column
     private Boolean done;
