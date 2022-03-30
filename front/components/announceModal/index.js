@@ -36,18 +36,20 @@ export default function AnnounceModal({addAnnouncement, handleClose}) {
     handleClose();
   }
 
-  const submitQna = () => {
+  const submitAnnouncement = (e) => {
     e.preventDefault();
     let data = {
       "fundingSeq": 1,
       "boardTitle": title,
       "boardContent": content,
     }
-    // qna 제출 시 DB에 post 요청 보내고
-    Send.post('/user/login', data)
+    // 공지사항 제출 시 DB에 post 요청 보내고
+    Send.post('funding/board', data)
       .then((data) =>{
         console.log(data);
-        addAnnouncement();  // 공지사항 새롭게 요청해서 화면에 표시
+        addAnnouncement();  // 공지사항 새롭게 요청해서 화면에 표시 (annoucement 컴포넌트에서 실행됨)
+        setTitle('');
+        setContent('');
       })
       .catch((e) => {
         console.log(e);
@@ -78,7 +80,7 @@ export default function AnnounceModal({addAnnouncement, handleClose}) {
           <textarea onChange={(e) => setContent(e.target.value)} className="w-full px-3 py-2 mb-3 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="content" />
         </div>
         <div className="flex items-center justify-between">
-          <button onClick={submitQna} className="px-4 py-2 font-bold text-white rounded bg-theme-color/80 hover:bg-theme-color focus:outline-none focus:shadow-outline">
+          <button onClick={submitAnnouncement} className="px-4 py-2 font-bold text-white rounded bg-theme-color/80 hover:bg-theme-color focus:outline-none focus:shadow-outline">
             작성
           </button>
           <button onClick={cancel} className="inline-block text-sm font-bold align-baseline text-theme-color hover:text-blue-800" href="#">

@@ -3,9 +3,10 @@ import {useState} from 'react';
 import Backdrop from '../backdrop';
 
 // 상품 QnA 컴포넌트
-const ProductQNA = ({sendForm, qnas}) => {
+const ProductQNA = ({qnas}) => {
   
   const [openQnaModal, setOpenQnaModal] = useState(false);
+  const [qnaList, setQnaList] = useState(qnas);
 
   const toggleQnaModal = (e) => {
     e.preventDefault();
@@ -13,6 +14,19 @@ const ProductQNA = ({sendForm, qnas}) => {
   }
   const open = () => setOpenQnaModal(true);
   const close = () => setOpenQnaModal(false);
+
+  const addQna = () => {
+    // get 요청보낼때 해당 펀드상품의 pk값 필요
+    let data = {"fundingSeq": 1}
+    Send.get("/funding/board", data)
+      .then((data) =>{
+        console.log(data);
+        setQnaList(data);
+      })
+      .catch((e) =>{
+        console.log(e);
+      })
+  }
 
   return (
     // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
@@ -58,7 +72,7 @@ const ProductQNA = ({sendForm, qnas}) => {
         // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
         exitBeforeEnter={true}
         >
-        {openQnaModal && <Backdrop label="qna" handleClose={close} />}
+        {openQnaModal && <Backdrop addQna={addQna}  label="qna" handleClose={close} />}
       </AnimatePresence>
     </motion.div>
   )
