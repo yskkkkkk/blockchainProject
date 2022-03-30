@@ -3,10 +3,7 @@ package com.ssafy.woori.domain.funding.service;
 import com.ssafy.woori.domain.file.service.FileService;
 import com.ssafy.woori.domain.funding.dao.FundingRepository;
 import com.ssafy.woori.domain.funding.dao.OptionRepository;
-import com.ssafy.woori.domain.funding.dto.AddFundingRequest;
-import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
-import com.ssafy.woori.domain.funding.dto.FundingListResponse;
-import com.ssafy.woori.domain.funding.dto.OptionListResponse;
+import com.ssafy.woori.domain.funding.dto.*;
 import com.ssafy.woori.entity.Funding;
 import com.ssafy.woori.entity.Option;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,5 +101,25 @@ public class FundingServiceImpl implements FundingService{
             return (true);
         }
         return false;
+    }
+
+    @Override
+    public FundingTopResponse getFunding(int fundingSeq) {
+
+        Optional<GetTopValues> dto = fundingRepository.findTopValues(fundingSeq);
+        Optional<List<GetOptionList>> options = optionRepository.getOptionsList(fundingSeq);
+
+        if(dto.isPresent() && options.isPresent()){
+            FundingTopResponse response = new FundingTopResponse(
+                    dto.get().getFundingTitle(),
+                    dto.get().getFundingImage(),
+                    dto.get().getFundingSimple(),
+                    dto.get().getUserNickname(),
+                    options.get()
+            );
+            return (response);
+        }
+
+        return null;
     }
 }
