@@ -113,4 +113,20 @@ public class FundingController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @DeleteMapping("/{fundingSeq}")
+    public ResponseEntity<String> deleteFunding(@PathVariable int fundingSeq){
+        logger.info("펀딩 삭제하기 " + fundingSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        if(fundingService.deleteFunding(fundingSeq)){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else status = HttpStatus.NOT_FOUND;
+
+
+        return (new ResponseEntity<>(message, status));
+    }
+
 }

@@ -16,4 +16,5 @@ public interface FundingService {
     Optional<FundingInfoResponse> fundingInfo(int fundingSeq);
     Optional<List<OptionListResponse>> getOptions(int fundingSeq);
     Funding addFunding(AddFundingRequest request, MultipartFile[] file) throws IOException;
+    boolean deleteFunding(int fundingSeq);
 }

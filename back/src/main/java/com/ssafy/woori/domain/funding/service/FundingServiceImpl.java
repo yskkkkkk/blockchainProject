@@ -96,4 +96,13 @@ public class FundingServiceImpl implements FundingService{
 
         return (funding);
     }
+
+    @Override
+    public boolean deleteFunding(int fundingSeq) {
+        if(fundingRepository.findById(fundingSeq).isPresent()){
+            fundingRepository.deleteById(fundingSeq);
+            return (true);
+        }
+        return false;
+    }
 }
