@@ -58,7 +58,7 @@ const ProductQNA = ({sendForm, qnas}) => {
         // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
         exitBeforeEnter={true}
         >
-        {openQnaModal && <Backdrop sendForm={sendForm} label={"qna"} handleClose={close} />}
+        {openQnaModal && <Backdrop label="qna" handleClose={close} />}
       </AnimatePresence>
     </motion.div>
   )
