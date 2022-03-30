@@ -53,6 +53,7 @@ export default function QnaModal({addQna, handleClose}) {
         addQna();  // qna 새롭게 요청해서 화면에 표시 (QnA 컴포넌트에서 실행됨)
         setTitle('');
         setContent('');
+        setIsSecret(false);
       })
       .catch((e) => {
         console.log(e);
