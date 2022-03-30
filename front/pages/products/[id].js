@@ -82,7 +82,7 @@ const Detail = ({fund}) => {
               <button>블루샹하이</button>
             </p>
             <div className="flex flex-row justify-end gap-[1rem] basis-1/2">
-              <button className="w-[4.5rem] py-[1px] antialiased bg-gray-200 border-2 justify-self-center rounded-lg">팔로우</button>
+              <button onClick={toggleFollow} className="w-[4.5rem] py-[1px] antialiased bg-gray-200 border-2 justify-self-center rounded-lg">팔로우</button>
               <button className="w-[5rem] py-[1px] antialiased text-white bg-theme-color justify-self-center rounded-lg">알림받기</button>
             </div>
           </div>
@@ -97,7 +97,6 @@ const Detail = ({fund}) => {
       </nav>
       <section className="flex flex-row gap-[8rem] justify-center">
         {/* 펀딩 상세정보 컴포넌트 */}
-        {/* 하단 section 태그에 flex-1 을 쓴 이유는, 하위 컴포넌트들의 크기를 flex 구조대로 고정시키기 위함입니다 */}
         <section className="flex flex-col gap-[4rem] basis-[50rem]">
           {currentNav === 0 && (
             <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>

@@ -68,13 +68,13 @@ export default function AnnounceModal({addAnnouncement, handleClose}) {
       <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
         <h1>공지하기</h1>
         <section className="my-4">
-          <label className="block mb-2 text-sm font-bold text-gray-700" for="title">
+          <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="title">
             제목
           </label>
           <input onChange={(e) => setTitle(e.target.value)} className="w-full px-3 py-2 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="title" type="text" />
         </section>
         <section className="mb-6">
-          <label className="block mb-2 text-sm font-bold text-gray-700" for="content">
+          <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="content">
             공지 내용
           </label>
           <textarea onChange={(e) => setContent(e.target.value)} className="w-full px-3 py-2 mb-3 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="content" />
