@@ -82,7 +82,7 @@ const Detail = ({fund}) => {
               <button>블루샹하이</button>
             </p>
             <div className="flex flex-row justify-end gap-[1rem] basis-1/2">
-              <button onClick={toggleFollow} className="w-[4.5rem] py-[1px] antialiased bg-gray-200 border-2 justify-self-center rounded-lg">팔로우</button>
+              {/* <button onClick={toggleFollow} className="w-[4.5rem] py-[1px] antialiased bg-gray-200 border-2 justify-self-center rounded-lg">팔로우</button> */}
               <button className="w-[5rem] py-[1px] antialiased text-white bg-theme-color justify-self-center rounded-lg">알림받기</button>
             </div>
           </div>
