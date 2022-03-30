@@ -9,12 +9,14 @@ import ProductQNA from "../../components/productQNA";
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
   
-  const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
+  // const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
+  const res = await fetch('/funding/lists', {"sort": 1});    // 펀딩 리스트 get 요청
   const data = await res.json();
 
   const paths = data.map(fund => {
     return {
-      params: {id: fund.id.toString()}  // 라우트팅에 활용할 id값 return ([id].js 과 key 값의 이름이 동일해야함)
+      // params: {id: fund.id.toString()}  // 라우트팅에 활용할 id값 return ([id].js 과 key 값의 이름이 동일해야함)
+      params: {id: fund.fundingSeq.toString()}
     }
   })
 
@@ -29,7 +31,8 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {  // context == getStaticPaths의 return 값 paths
   
   const id = context.params.id;
-  const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
+  // const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
+  const res = await fetch('/funding/top', {"fundingSeq": id});
   const data = await res.json();
 
   return {
@@ -61,7 +64,8 @@ const Detail = ({fund}) => {
       
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
       {/* 소스 링크 같은 경우는 prop 이름이 src 여야한다는 슬픈 사실.. */}
-      <ProductBasics src={fund.col1} />
+      {/* <ProductBasics src={fund.col1} fundInfo={fund} /> */}
+      <ProductBasics src={fund.fundingImage} fundInfo={fund} />
       <hr />
       {/* 상품 상세정보의 네비게이션바  */}
       <nav className="flex flex-row gap-[3rem] justify-center mr-[50rem]">

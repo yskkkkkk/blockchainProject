@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-const ProductBasics = ({src}) => {
+const ProductBasics = ({src, fundInfo}) => {
 
   return (
     <header className="flex flex-row justify-center gap-[10rem]">
