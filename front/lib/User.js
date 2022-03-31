@@ -1,25 +1,11 @@
-import Router from "next/router";
+import  Send  from './Send';
 
-export const isUser = () => {
-  
-  const token = localStorage.getItem("token");
-    if (token) {
-      const base64Payload = token.split(".")[1];
-      const payload = Buffer.from(base64Payload, "base64");
-      const result = JSON.parse(payload.toString());
-      // 유저가 valid한지 검증 필요
-      return true
-    } else {
-      console.log("로그인 필요");
-      return false
-    }
-}
 
 export const getFollowing = (userSeq) => {
   let data = {
-    "userSeq": userSeq,
+    "user_seq": userSeq,
   }
-  // 공지사항 제출 시 DB에 post 요청 보내고
+
   Send.post('follow/followings', data)
     .then((data) =>{
       console.log(data);
@@ -27,17 +13,41 @@ export const getFollowing = (userSeq) => {
     })
     .catch((e) => {
       console.log(e);
+      return false
     });
 }
 
-export const getUser = () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    const base64Payload = token.split(".")[1];
-    const payload = Buffer.from(base64Payload, "base64");
-    const result = JSON.parse(payload.toString());
-    return result
-  } else {
-    return false
+
+export const follow = (userSeq, seller) => {
+  let data = {
+    "user_seq": userSeq,
+    "seller": seller,
   }
+
+  Send.post('follow', data)
+    .then((data) =>{
+      console.log(data);
+      return true
+    })
+    .catch((e) => {
+      console.log(e);
+      return false
+    });
+}
+
+export const unfollow = (userSeq, seller) => {
+  let data = {
+    "user_seq": userSeq,
+    "seller": seller,
+  }
+
+  Send.post('follow', data)
+    .then((data) =>{
+      console.log(data);
+      return true
+    })
+    .catch((e) => {
+      console.log(e);
+      return false
+    });
 }

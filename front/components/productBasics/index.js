@@ -1,34 +1,35 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Router from "next/router";
 
 import {useEffect, useContext} from 'react';
-import {isUser, getFollowing} from '../../lib/User.js';
+import {getFollowing, follow, unfollow} from '../../lib/User.js';
 
 import {UserContext} from "../../lib/UserContext";
 
 const ProductBasics = ({src, fundInfo}) => {
 
-  const {userSeq, setUserSeq} = useContext(UserContext);
+  const {userSeq, setUserSeq} = useContext(UserContext);  // 현 유저의 userSeq 값
+  const [following, setFollowing] = useState([]);   // 현 유저가 팔로우하는 유저 리스트
 
   const toggleFollow = (e) => {
+    const seller = fundingInfo.userNickname;
     e.preventDefault();
-    let data = {
-      "userSeq": 1,
-      "seller": title,
-      "boardContent": content,
+    if (following.includes(seller)) {
+      unfollow(userSeq, seller);  // lib 파일에 위치한 함수
     }
-    // 공지사항 제출 시 DB에 post 요청 보내고
-    Send.post('follow', data)
-      .then((data) =>{
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    else {
+      follow(userSeq, seller);    // lib 파일에 위치한 함수
+    }
+  }
+  const toLoginPage = (e) => {
+    e.preventDefault();
+    Router.push("/");   // 회원가입 페이지로 라우트
   }
 
-  useEffect(() => {
-    getFollowing();
+
+  useEffect(() => {     // 랜더시 팔로잉 리스트 상태값에 저장.   팔로워 로직을 루트에서 한번만 가져와서 저장하고 매번 쓰고싶지만 고민중입니다.
+    setFollowing(getFollowing(userSeq));  // lib 파일에 위치한 함수
   })
 
   return (
@@ -59,8 +60,9 @@ const ProductBasics = ({src, fundInfo}) => {
             {/* <button>블루샹하이</button> */}
             <button>{fundingInfo.userNickname}</button>
           </p>
-          <div className="flex flex-row justify-end gap-[1rem] basis-1/2">   
-            <button className="w-[4.5rem] py-[1px] antialiased bg-gray-200 border-2 justify-self-center rounded-lg">팔로우</button>
+          <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
+            {/* 아직 상태값에 따른 버튼 토클 애니메이션 로직은 미작성 상태입니다  */}
+            <button onClick={userSeq ? toggleFollow : toLoginPage} className="w-[4.5rem] py-[1px] antialiased bg-gray-200 border-2 justify-self-center rounded-lg">팔로우</button>
             <button className="w-[5rem] py-[1px] antialiased text-white bg-theme-color justify-self-center rounded-lg">알림받기</button>
           </div>
         </div>
