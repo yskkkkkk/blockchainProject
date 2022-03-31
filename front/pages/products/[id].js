@@ -35,14 +35,20 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   const res = await fetch('/funding/top', {"fundingSeq": id});
   const data = await res.json();
 
+  // return {
+  //   props: {fund: data}
+  // }
   return {
-    props: {fund: data}
+    props: {
+      fund: data,
+      fundingSeq: id,
+    }
   }
 }
 
 
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
-const Detail = ({fund}) => {
+const Detail = ({fund, fundingSeq}) => {
  
   const [currentNav, setCurrentNav] = useState(0);
 
@@ -77,13 +83,13 @@ const Detail = ({fund}) => {
         {/* 펀딩 상세정보 컴포넌트 */}
         <section className="flex flex-col gap-[4rem] basis-[50rem]">
           {currentNav === 0 && (
-            <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
+            <ProductDetail fundingSeq={fundingSeq} picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {currentNav === 1 && (
-            <ProductAnnouncement announcements={[1, 2, 3, 4, 5]} />
+            <ProductAnnouncement fundingSeq={fundingSeq} announcements={[1, 2, 3, 4, 5]} />
           )}
           {currentNav === 2 && (
-            <ProductQNA qnas={[1, 2, 3, 4, 5]} />
+            <ProductQNA fundingSeq={fundingSeq} qnas={[1, 2, 3, 4, 5]} />
           )}
         </section>
         
