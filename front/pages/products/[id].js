@@ -1,10 +1,11 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import Image from 'next/image';
 
 import ProductBasics from "../../components/productBasics";
 import ProductDetail from "../../components/productDetail";
 import ProductAnnouncement from "../../components/productAnnouncement";
 import ProductQNA from "../../components/productQNA";
+
 
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
@@ -34,7 +35,6 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   // const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
   const res = await fetch('/funding/top', {"fundingSeq": id});
   const data = await res.json();
-
   // return {
   //   props: {fund: data}
   // }
@@ -49,7 +49,7 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund, fundingSeq}) => {
- 
+
   const [currentNav, setCurrentNav] = useState(0);
 
   const showProductDetail = (e) => {
