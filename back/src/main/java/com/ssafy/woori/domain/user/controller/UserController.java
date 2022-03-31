@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.woori.domain.user.dto.AlarmCreateRequest;
 import com.ssafy.woori.domain.user.dto.AlarmInfoResponse;
 import com.ssafy.woori.domain.user.dto.KakaoUserInfo;
 import com.ssafy.woori.domain.user.dto.UserInfoResponse;
+import com.ssafy.woori.domain.user.dto.UserProfileRequest;
 import com.ssafy.woori.domain.user.dto.UserUpdateRequest;
 import com.ssafy.woori.domain.user.service.UserServiceImpl;
 import com.ssafy.woori.entity.Alarm;
+import com.ssafy.woori.entity.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,33 +36,44 @@ public class UserController {
     private final String SUCCESS = "success";
     private final String FAIL = "error";
     
-    @GetMapping("/kakao")
-    public ResponseEntity<String> oauth2AuthorizationKakao(@RequestParam String code) {
-    	KakaoUserInfo user = userService.oauth2AuthorizationKakao(code);
-    	log.info("userInfo"+user.getKakao_account().toString());
-    	
-    	return new ResponseEntity<String>(user.getId(), HttpStatus.OK);
-    }
+//    @GetMapping("/kakao")
+//    public ResponseEntity<String> oauth2AuthorizationKakao(@RequestParam String code) {
+//    	KakaoUserInfo user = userService.oauth2AuthorizationKakao(code);
+//    	log.info("userInfo"+user.getKakao_account().toString());
+//    	
+//    	return new ResponseEntity<String>(user.getId(), HttpStatus.OK);
+//    }
 
     @GetMapping
     public ResponseEntity<UserInfoResponse> userInfo(int userSeq){
-    	UserInfoResponse response = new UserInfoResponse();
+    	UserInfoResponse response = userService.getUser(userSeq);
     	
     	return new ResponseEntity<UserInfoResponse>(response, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<String> updateUser(UserUpdateRequest request){
-    	// 추가정보 입력 + 기존 정보 수정
+    public ResponseEntity<User> updateUser(UserUpdateRequest request){
     	
-    	return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+    	return new ResponseEntity<User>(userService.updateUser(request), HttpStatus.OK);
     }
     
     @PutMapping("/profileImage")
-    public ResponseEntity<String> updateUserProfileImage(UserUpdateRequest request){
+    public ResponseEntity<String> updateUserProfileImage(
+    		@RequestPart(value="file", required = false) MultipartFile[] file,
+			   @RequestPart(value="userSeq") int userSeq){
     	// 파일입력받아서 수정
+    	UserProfileRequest request = UserProfileRequest.builder()
+    			.userSeq(userSeq)
+    			.myfile(file)
+    			.build();
     	
-    	return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+    	String result = "";
+    	if (userService.updateUserProfileImage(request)) {
+    		result = SUCCESS;
+    	}else{
+    		result = FAIL;
+    	}
+    	return new ResponseEntity<String>(result, HttpStatus.OK);
     }
     
     @DeleteMapping
