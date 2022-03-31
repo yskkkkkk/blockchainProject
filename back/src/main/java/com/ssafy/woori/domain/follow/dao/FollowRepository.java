@@ -16,8 +16,11 @@ public interface FollowRepository extends JpaRepository<Follow, Integer> {
             "where f.userSeq = :userSeq and f.seller = u.userSeq")
     Optional<List<GetFollowingList>> findAllByUserSeq(int userSeq);
     boolean existsByUserSeq(int userSeq);
-    @Query(value = "select u.userNickname as userNickname, f.userSeq as userSeq from User u, Follow f " +
-            "where f.seller = :seller and u.userSeq = f.seller")
+//    @Query(value = "select distinct u.userNickname as userNickname, f.userSeq as userSeq from User u, Follow f " +
+//            "where f.seller = :seller and u.userSeq not in :seller")
+    @Query(value = "select (select u.userNickname  from User u where u.userSeq = f.userSeq) as userNickname, f.userSeq as userSeq " +
+            "from Follow f " +
+            "where f.seller = :seller")
     Optional<List<GetFollowerList>> findAllBySeller(int seller);
     boolean existsBySeller(int seller);
     boolean existsByUserSeqAndSeller(int userSeq, int seller);
