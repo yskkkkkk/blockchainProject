@@ -129,7 +129,7 @@ public class FundingController {
         return (new ResponseEntity<>(message, status));
     }
 
-    @GetMapping("/{fundingSeq}")
+    @GetMapping("/top/{fundingSeq}")
     public ResponseEntity<Map<String,Object>> getFunding(@PathVariable int fundingSeq){
         logger.info("펀딩 상단정보 가져오기 " + fundingSeq);
         String message = FAIL;
