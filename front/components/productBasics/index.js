@@ -13,6 +13,7 @@ const ProductBasics = ({src, fundInfo}) => {
 
   const [following, setFollowing] = useState([]);   // 현 유저가 팔로우하는 유저 리스트
   const [getAlarm, setGetAlarm] = useState(false);        // 보여주기용 알람 버튼 토글 상태값
+  const [like, setLike] = useState(false);
 
   const toggleFollow = (e) => {
     const seller = fundingInfo.userNickname;
@@ -26,10 +27,13 @@ const ProductBasics = ({src, fundInfo}) => {
       setFollowing(...following, seller);
     }
   }
-
   const toggleAlarm = (e) => {
     e.preventDefault();
     setGetAlarm(!getAlarm);
+  }
+  const toggleLike = (e) => {
+    e.preventDefault();
+    setLike(!like);
   }
 
   const toLoginPage = (e) => {
@@ -61,7 +65,7 @@ const ProductBasics = ({src, fundInfo}) => {
           <Link href={'/order/'} passHref>
             <button className="w-48 py-[0.5rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">펀딩하기</button>
           </Link>
-          <button className="w-48 py-[0.5rem] border-2 text-gray-600 font-black antialiased text-xl justify-self-center "><span className="text-gray-400">♡ </span>찜하기</button>
+          <button onClick={toggleLike} className="w-48 py-[0.5rem] border-2 text-gray-600 font-black antialiased text-xl justify-self-center "><span className={like ? "text-theme-color/70" : "text-gray-400"}>♡ </span>찜하기</button>
 
         </div>
         <div className="flex flex-row justify-evenly">
