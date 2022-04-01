@@ -22,15 +22,15 @@ const ProductBasics = ({src, fundInfo}) => {
       follow(userSeq, seller);    // lib 파일에 위치한 함수
     }
   }
+
   const toLoginPage = (e) => {
     e.preventDefault();
     Router.push("/");   // 회원가입 페이지로 라우트
   }
 
-
   useEffect(() => {     // 랜더시 팔로잉 리스트 상태값에 저장.   팔로워 로직을 루트에서 한번만 가져와서 저장하고 매번 쓰고싶지만 고민중입니다.
     setFollowing(getFollowing(userSeq));  // lib 파일에 위치한 함수
-  })
+  }, [])
 
   return (
     <header className="flex flex-row justify-center gap-[10rem]">
@@ -62,7 +62,7 @@ const ProductBasics = ({src, fundInfo}) => {
           </p>
           <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
             {/* 아직 상태값에 따른 버튼 토클 애니메이션 로직은 미작성 상태입니다  */}
-            <button onClick={userSeq ? toggleFollow : toLoginPage} className="w-[4.5rem] py-[1px] antialiased bg-gray-200 border-2 justify-self-center rounded-lg">팔로우</button>
+            <button onClick={userSeq ? toggleFollow : toLoginPage} className={`w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color ${following.includes(seller) ? "bg-theme-color text-white" : "bg-gray-200"}`}>팔로우</button>
             <button className="w-[5rem] py-[1px] antialiased text-white bg-theme-color justify-self-center rounded-lg">알림받기</button>
           </div>
         </div>
