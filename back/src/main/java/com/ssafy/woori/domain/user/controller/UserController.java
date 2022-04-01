@@ -4,19 +4,19 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.woori.domain.user.dto.AlarmCreateRequest;
 import com.ssafy.woori.domain.user.dto.AlarmInfoResponse;
-import com.ssafy.woori.domain.user.dto.KakaoUserInfo;
 import com.ssafy.woori.domain.user.dto.UserInfoResponse;
 import com.ssafy.woori.domain.user.dto.UserProfileRequest;
 import com.ssafy.woori.domain.user.dto.UserUpdateRequest;
@@ -36,14 +36,13 @@ public class UserController {
     private final String SUCCESS = "success";
     private final String FAIL = "error";
     
-//    @GetMapping("/kakao")
-//    public ResponseEntity<String> oauth2AuthorizationKakao(@RequestParam String code) {
-//    	KakaoUserInfo user = userService.oauth2AuthorizationKakao(code);
-//    	log.info("userInfo"+user.getKakao_account().toString());
-//    	
-//    	return new ResponseEntity<String>(user.getId(), HttpStatus.OK);
-//    }
+	@GetMapping("/login")
+	public ResponseEntity<UserInfoResponse> postLoginProcessing() {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+    	return new ResponseEntity<UserInfoResponse>(userService.getUserByUserKey(authentication.getName()), HttpStatus.OK);
+	}
     @GetMapping
     public ResponseEntity<UserInfoResponse> userInfo(int userSeq){
     	UserInfoResponse response = userService.getUser(userSeq);

@@ -29,6 +29,7 @@ import com.ssafy.woori.entity.User;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -126,6 +127,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         			.userPlatform(user.getUserPlatform())
         			.userKey(user.getUserKey())
         			.userEmail(user.getUserEmail())
+        			.userCreatedDate(LocalDate.now())
         			.build());
         };
         

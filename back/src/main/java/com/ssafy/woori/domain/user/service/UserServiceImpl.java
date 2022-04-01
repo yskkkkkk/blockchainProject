@@ -65,6 +65,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public UserInfoResponse getUserByUserKey(String userkey) {
+		return userRepository.getByUserKey(userkey).orElse(null);
+	}
+
+	@Override
 	public User updateUser(UserUpdateRequest request) {
 		return userRepository.save(User.builder()
 				.userSeq(request.getUserSeq())
