@@ -10,17 +10,26 @@ import {UserContext} from "../../lib/UserContext";
 const ProductBasics = ({src, fundInfo}) => {
 
   const {userSeq, setUserSeq} = useContext(UserContext);  // 현 유저의 userSeq 값
+
   const [following, setFollowing] = useState([]);   // 현 유저가 팔로우하는 유저 리스트
+  const [getAlarm, setGetAlarm] = useState(false);        // 보여주기용 알람 버튼 토글 상태값
 
   const toggleFollow = (e) => {
     const seller = fundingInfo.userNickname;
     e.preventDefault();
     if (following.includes(seller)) {
       unfollow(userSeq, seller);  // lib 파일에 위치한 함수
+      setFollowing(following.filter(f => f !== seller));
     }
     else {
       follow(userSeq, seller);    // lib 파일에 위치한 함수
+      setFollowing(...following, seller);
     }
+  }
+
+  const toggleAlarm = (e) => {
+    e.preventDefault();
+    setGetAlarm(!getAlarm);
   }
 
   const toLoginPage = (e) => {
@@ -63,7 +72,7 @@ const ProductBasics = ({src, fundInfo}) => {
           <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
             {/* 아직 상태값에 따른 버튼 토클 애니메이션 로직은 미작성 상태입니다  */}
             <button onClick={userSeq ? toggleFollow : toLoginPage} className={`w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color ${following.includes(seller) ? "bg-theme-color text-white" : "bg-gray-200"}`}>팔로우</button>
-            <button className="w-[5rem] py-[1px] antialiased text-white bg-theme-color justify-self-center rounded-lg">알림받기</button>
+            {following.includes(seller) && (<button onClick={toggleAlarm} className={`w-[5rem] py-[1px] antialiased justify-self-center rounded-lg ${getAlarm ? "text-white bg-theme-color" : "bg-gray-200"}`}>알림받기</button>)}
           </div>
         </div>
       </aside>
