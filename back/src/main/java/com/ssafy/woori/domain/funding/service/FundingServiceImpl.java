@@ -123,6 +123,7 @@ public class FundingServiceImpl implements FundingService{
         if(dto.isPresent() && options.isPresent()){
             FundingTopResponse response = new FundingTopResponse(
                     dto.get().getFundingTitle(),
+                    dto.get().getUserSeq(),
                     dto.get().getFundingImage(),
                     dto.get().getFundingSimple(),
                     dto.get().getUserNickname(),
@@ -133,4 +134,5 @@ public class FundingServiceImpl implements FundingService{
 
         return null;
     }
+
 }
