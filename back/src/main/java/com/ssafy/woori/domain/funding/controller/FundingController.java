@@ -90,6 +90,28 @@ public class FundingController {
         return (new ResponseEntity<>(response, status));
     }
 
+    @GetMapping("/lists/sell")
+    public ResponseEntity<Map<String, Object>> userSellList(@RequestParam int userSeq){
+        logger.info("판매 리스트 가져오기 " + userSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        Map<String, Object> response = new HashMap<>();
+        List<FundingTopResponse> dto = fundingService.getSellList(userSeq);
+
+        if(!dto.isEmpty()){
+            response.put("data", dto);
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+
+        return (new ResponseEntity<>(response, status));
+    }
+
     @GetMapping("/introduce")
     public ResponseEntity<Map<String,Object>>fundingInfo(@RequestParam int fundingSeq){
         logger.info("상품소개 가져오기 " + fundingSeq);

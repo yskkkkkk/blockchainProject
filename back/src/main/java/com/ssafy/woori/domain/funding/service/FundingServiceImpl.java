@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -131,8 +132,28 @@ public class FundingServiceImpl implements FundingService{
             );
             return (response);
         }
-
         return null;
     }
 
+    @Override
+    public List<FundingTopResponse> getSellList(int userSeq) {
+
+        Optional<List<GetSellList>> dto = fundingRepository.findAllByUserSeq(userSeq);
+
+        List<FundingTopResponse> lists = new ArrayList<>();
+        if(dto.isPresent()){
+            for(GetSellList tmp : dto.get()){
+                lists.add(
+                        FundingTopResponse
+                                .builder()
+                                .fundingTitle(tmp.getFundingTitle())
+                                .fundingImage(tmp.getFundingImage())
+                                .option(optionRepository.getOptionsList(tmp.getFundingSeq()).get())
+                                .build()
+                );
+            }
+        }
+
+        return (lists);
+    }
 }

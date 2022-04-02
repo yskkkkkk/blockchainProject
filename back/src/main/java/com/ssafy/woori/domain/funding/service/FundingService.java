@@ -15,4 +15,5 @@ public interface FundingService {
     Funding addFunding(AddFundingRequest request, MultipartFile[] file) throws IOException;
     boolean deleteFunding(int fundingSeq);
     FundingTopResponse getFunding(int fundingSeq);
+    List<FundingTopResponse> getSellList(int userSeq);
 }
