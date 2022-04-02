@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +29,20 @@ public class FundingServiceImpl implements FundingService{
     FileService fileService;
 
     @Override
-    public List<FundingListResponse> fundingHot() {
+    public Optional<List<FundingListResponse>> fundingList(int sort) {
 
-        return (fundingRepository.findByEmailAdd());
+        if(sort == 1){
+            return (fundingRepository.findBaseList());
+        }
+        else if(sort == 2){
+            return (fundingRepository.findNewList());
+        }
+        else if(sort == 3){
+            return (fundingRepository.findLikeList());
+        }
+        else{
+            return (Optional.empty());
+        }
     }
 
     @Override
@@ -112,6 +124,7 @@ public class FundingServiceImpl implements FundingService{
         if(dto.isPresent() && options.isPresent()){
             FundingTopResponse response = new FundingTopResponse(
                     dto.get().getFundingTitle(),
+                    dto.get().getUserSeq(),
                     dto.get().getFundingImage(),
                     dto.get().getFundingSimple(),
                     dto.get().getUserNickname(),
@@ -119,7 +132,28 @@ public class FundingServiceImpl implements FundingService{
             );
             return (response);
         }
-
         return null;
+    }
+
+    @Override
+    public List<FundingTopResponse> getSellList(int userSeq) {
+
+        Optional<List<GetSellList>> dto = fundingRepository.findAllByUserSeq(userSeq);
+
+        List<FundingTopResponse> lists = new ArrayList<>();
+        if(dto.isPresent()){
+            for(GetSellList tmp : dto.get()){
+                lists.add(
+                        FundingTopResponse
+                                .builder()
+                                .fundingTitle(tmp.getFundingTitle())
+                                .fundingImage(tmp.getFundingImage())
+                                .option(optionRepository.getOptionsList(tmp.getFundingSeq()).get())
+                                .build()
+                );
+            }
+        }
+
+        return (lists);
     }
 }

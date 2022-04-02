@@ -11,6 +11,7 @@ import java.util.List;
 @ToString
 public class FundingTopResponse {
     private String fundingTitle;
+    private Integer userSeq;
     private String fundingImage;
     private String fundingSimple;
     private String userNickname;

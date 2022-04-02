@@ -47,31 +47,26 @@ public class FundingController {
         return (new ResponseEntity<>(message, status));
     }
 
-    @PostMapping("/lists")
-    public ResponseEntity<List<FundingListResponse>> fundingList(@RequestBody FundingListRequest request){
-        logger.info("펀딩 리스트 조회" + request.getSort());
-        String message = SUCCESS;
-        HttpStatus status = null;
+    @GetMapping("/lists/{sort}")
+    public ResponseEntity<Map<String, Object>> fundingList(@PathVariable int sort){
+        logger.info("펀딩 리스트 조회" + sort);
+        String message = FAIL;
+        HttpStatus status;
 
-        List<FundingListResponse> output = new ArrayList<>();
+        Map<String,Object> response = new HashMap<>();
+        Optional<List<FundingListResponse>> dto = fundingService.fundingList(sort);
 
-        if(request.getSort() == 1){
-            //output = fundingService.fundingHot();
-            System.out.println(fundingService.fundingHot());
+        if(dto.isPresent()){
+            message = SUCCESS;
+            response.put("data", dto);
             status = HttpStatus.OK;
-            return (new ResponseEntity<>(fundingService.fundingHot(),status));
-        }
-        else if(request.getSort() == 2){
-
-        }
-        else if(request.getSort() == 3){
-
         }
         else{
-
+            status = HttpStatus.NOT_FOUND;
         }
+        response.put("message", message);
 
-        return (new ResponseEntity<>(output, status));
+        return (new ResponseEntity<>(response, status));
     }
 
     @GetMapping("/lists/buy")
@@ -92,6 +87,28 @@ public class FundingController {
             status = HttpStatus.NOT_FOUND;
         }
         response.put("message", message);
+        return (new ResponseEntity<>(response, status));
+    }
+
+    @GetMapping("/lists/sell")
+    public ResponseEntity<Map<String, Object>> userSellList(@RequestParam int userSeq){
+        logger.info("판매 리스트 가져오기 " + userSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        Map<String, Object> response = new HashMap<>();
+        List<FundingTopResponse> dto = fundingService.getSellList(userSeq);
+
+        if(!dto.isEmpty()){
+            response.put("data", dto);
+            message = SUCCESS;
+            status = HttpStatus.OK;
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+
         return (new ResponseEntity<>(response, status));
     }
 
