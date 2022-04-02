@@ -28,9 +28,20 @@ public class FundingServiceImpl implements FundingService{
     FileService fileService;
 
     @Override
-    public List<FundingListResponse> fundingHot() {
+    public Optional<List<FundingListResponse>> fundingList(int sort) {
 
-        return (fundingRepository.findByEmailAdd());
+        if(sort == 1){
+            return (fundingRepository.findBaseList());
+        }
+        else if(sort == 2){
+            return (fundingRepository.findNewList());
+        }
+        else if(sort == 3){
+            return (fundingRepository.findLikeList());
+        }
+        else{
+            return (Optional.empty());
+        }
     }
 
     @Override

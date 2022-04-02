@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FundingService {
-    List<FundingListResponse> fundingHot();
+    Optional<List<FundingListResponse>> fundingList(int sort);
     Optional<FundingInfoResponse> fundingInfo(int fundingSeq);
     Optional<List<OptionListResponse>> getOptions(int fundingSeq);
     Funding addFunding(AddFundingRequest request, MultipartFile[] file) throws IOException;

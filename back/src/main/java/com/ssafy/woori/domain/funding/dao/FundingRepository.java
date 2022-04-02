@@ -12,9 +12,18 @@ import java.util.Optional;
 @Repository
 public interface FundingRepository extends JpaRepository<Funding, Integer> {
 
-    @Query(value = "select fundingSeq, fundingImage, fundingTitle, fundingSimple " +
-            "from Funding")
-    List<FundingListResponse> findByEmailAdd();
+    @Query(value = "select fundingSeq as fundingSeq, fundingImage as fundingImage, fundingTitle as fundingTitle, fundingSimple as fundingSimple " +
+            "from Funding where fundingStatus not in (3, 4)")
+    Optional<List<FundingListResponse>> findBaseList();
+
+    @Query(value = "select fundingSeq as fundingSeq, fundingImage as fundingImage, fundingTitle as fundingTitle, fundingSimple as fundingSimple " +
+            "from Funding where fundingStatus not in (3, 4)" +
+            "order by fundingCreateDate desc ")
+    Optional<List<FundingListResponse>> findNewList();
+
+    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingImage as fundingImage, f.fundingTitle as fundingTitle, f.fundingSimple as fundingSimple from Like l, Funding f " +
+            "where l.fundingSeq = f.fundingSeq and f.fundingStatus not in (3,4) group by fundingSeq order by count(f.fundingSeq) desc")
+    Optional<List<FundingListResponse>> findLikeList();
 
     Optional<FundingInfoResponse> findByFundingSeq(int fundingSeq);
 

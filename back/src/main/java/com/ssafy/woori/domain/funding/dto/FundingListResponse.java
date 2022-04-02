@@ -5,13 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class FundingListResponse {
-    private Integer fundingSeq;
-    private String fundingImage;
-    private String fundingTitle;
-    private String fundingSimple;
+//@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@ToString
+//public class FundingListResponse {
+//    private Integer fundingSeq;
+//    private String fundingImage;
+//    private String fundingTitle;
+//    private String fundingSimple;
+//}
+public interface FundingListResponse {
+    Integer getFundingSeq();
+    String getFundingImage();
+    String getFundingTitle();
+    String getFundingSimple();
 }
