@@ -19,11 +19,13 @@ public class History {
     @Column
     private Integer userSeq;
     @Column
+    private Integer seller;
+    @Column
     private Integer fundingSeq;
     @Column
     private Integer optionSeq;
     @Column(columnDefinition = "int default 1")
     private Integer optionNum;
     @Column
-    private Boolean done;
+    private Integer state;
 }

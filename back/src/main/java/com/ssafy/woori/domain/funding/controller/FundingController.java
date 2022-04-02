@@ -1,6 +1,7 @@
 package com.ssafy.woori.domain.funding.controller;
 
 import com.ssafy.woori.domain.funding.dto.*;
+import com.ssafy.woori.domain.history.service.HistoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ssafy.woori.domain.funding.service.FundingService;
@@ -23,6 +24,9 @@ public class FundingController {
 
     @Autowired
     private FundingService fundingService;
+
+    @Autowired
+    private HistoryService historyService;
 
     @PostMapping
     public ResponseEntity<String> addFunding(@RequestPart AddFundingRequest request,
@@ -68,6 +72,27 @@ public class FundingController {
         }
 
         return (new ResponseEntity<>(output, status));
+    }
+
+    @GetMapping("/lists/buy")
+    public ResponseEntity<Map<String,Object>>userBuyList(@RequestParam int userSeq){
+        logger.info("구매목록 리스트 가져오기 " + userSeq);
+        String message = FAIL;
+        HttpStatus status;
+
+        Map<String, Object> response = new HashMap<>();
+        Optional<List<UserBuyListResponse>> dto = historyService.userBuyList(userSeq);
+
+        if(dto.isPresent() && dto.get().size() != 0){
+            status = HttpStatus.OK;
+            message = SUCCESS;
+            response.put("data", dto);
+        }
+        else{
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+        return (new ResponseEntity<>(response, status));
     }
 
     @GetMapping("/introduce")

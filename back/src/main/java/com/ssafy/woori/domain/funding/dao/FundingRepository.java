@@ -1,9 +1,6 @@
 package com.ssafy.woori.domain.funding.dao;
 
-import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
-import com.ssafy.woori.domain.funding.dto.FundingListResponse;
-import com.ssafy.woori.domain.funding.dto.GetTopValues;
-import com.ssafy.woori.domain.funding.dto.OptionListResponse;
+import com.ssafy.woori.domain.funding.dto.*;
 import com.ssafy.woori.entity.Funding;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,4 +25,5 @@ public interface FundingRepository extends JpaRepository<Funding, Integer> {
     @Query(value = "select f.fundingTitle as fundingTitle, f.fundingImage as fundingImage, " +
             "f.fundingSimple as fundingSimple, f.userNickname as userNickname from Funding f where f.fundingSeq = :fundingSeq")
     Optional<GetTopValues> findTopValues(int fundingSeq);
+
 }
