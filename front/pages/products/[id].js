@@ -84,6 +84,7 @@ const Detail = ({fund, fundingSeq}) => {
         {/* 펀딩 상세정보 컴포넌트 */}
         <section className="flex flex-col gap-[4rem] basis-[50rem]">
           {currentNav === 0 && (
+            // 상세정보 api 요청 후 데이터 어떻게 들어오는지 확인 필요
             <ProductDetail fundingSeq={fundingSeq} picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {currentNav === 1 && (
