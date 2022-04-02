@@ -11,9 +11,9 @@ const ProductBasics = ({src, fundInfo}) => {
 
   const {userSeq, setUserSeq} = useContext(UserContext);  // 현 유저의 userSeq 값
 
-  const [following, setFollowing] = useState([]);   // 현 유저가 팔로우하는 유저 리스트
+  const [following, setFollowing] = useState([]);         // 현 유저가 팔로우하는 유저 리스트
   const [getAlarm, setGetAlarm] = useState(false);        // 보여주기용 알람 버튼 토글 상태값
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(false);                // 찜 버튼 토글 상태 값
 
   const toggleFollow = (e) => {
     const seller = fundingInfo.userNickname;
@@ -48,7 +48,7 @@ const ProductBasics = ({src, fundInfo}) => {
   return (
     <header className="flex flex-row justify-center gap-[10rem]">
       <section>
-        <Image src={src} alt="thumbnail" width={300} height={300} />
+        <Image src={`http://j6a305.p.ssafy.io:9999${src}`} alt="thumbnail" width={300} height={300} />
       </section>
       <aside className="flex flex-col gap-[2rem] w-96">
         {/* <h2 className="text-center">유명 음식점에서 맛보던 멘보샤를 집에서!</h2> */}
@@ -60,7 +60,7 @@ const ProductBasics = ({src, fundInfo}) => {
           <p>45% 달성 (100,000원)</p>
         </div>
         {/* <p>겉바속촉의 정석! 유명 식당에서 눈치 봐가며 시키던 멘보샤를 집에서도 푸짐하게 즐기세요! 홈메이드 칠리소스도 함께 드립니다:)</p> */}
-        <p>{fundInfo.fundingSimple}</p>
+        <p>매우 간편한 설명! : {fundInfo.fundingSimple}</p>
         <div className="flex flex-row justify-evenly gap-[3rem]">
           <Link href={'/order/'} passHref>
             <button className="w-48 py-[0.5rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">펀딩하기</button>
