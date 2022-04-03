@@ -86,16 +86,16 @@ const Detail = ({fund, fundingSeq}) => {
             <ProductDetail fundingSeq={fundingSeq} picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {currentNav === 1 && (
-            <ProductAnnouncement fundingSeq={fundingSeq} announcements={[1, 2, 3, 4, 5]} />
+            <ProductAnnouncement fundingSeq={fundingSeq} />
           )}
           {currentNav === 2 && (
-            <ProductQNA fundingSeq={fundingSeq} qnas={[1, 2, 3, 4, 5]} />
+            <ProductQNA fundingSeq={fundingSeq} />
           )}
         </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
         <aside className="flex flex-col gap-[2rem]">
-          <ProductOptions  options={fundingSeq.option} />
+          <ProductOptions  options={fund.option} />
         </aside>
       </section>
     </main>

@@ -7,7 +7,7 @@ import Send from "../../lib/Send.js";
 const ProductAnnouncement = ({fundingSeq}) => {
   
   const [openAnnounceModal, setOpenAnnounceModal] = useState(false);
-  const [announcementList, setAnnouncementList] = useState('');
+  const [announcementList, setAnnouncementList] = useState([]);
 
   const toggleAnnounceModal = (e) => {
     e.preventDefault();

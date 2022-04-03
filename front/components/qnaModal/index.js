@@ -1,11 +1,42 @@
 import {motion} from "framer-motion";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import {UserContext} from "../../lib/UserContext";
 
-export default function QnaModal({addQna, handleClose}) {
+
+export default function QnaModal({fundingSeq, addQna, handleClose}) {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [isSecret, setIsSecret] = useState(false);
+  const {userSeq, setUserSeq} = useContext(UserContext);
+
+  const cancel = (e) => {
+    e.preventDefault();
+    handleClose();
+  }
+
+  const submitQna = (e) => {
+    e.preventDefault();
+    let data = {
+      "fundingSeq": fundingSeq,
+      "userSeq": userSeq,
+      "qnaTitle": title,
+      "qnaText": content,
+      "secret": isSecret,
+    }
+    // qna 제출 시 DB에 post 요청 보내고
+    Send.post('http://j6a305.p.ssafy.io:9999/funding/qna', data)
+      .then((data) =>{
+        console.log(data);
+        addQna();  // qna 새롭게 요청해서 화면에 표시 (QnA 컴포넌트에서 실행됨)
+        setTitle('');
+        setContent('');
+        setIsSecret(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
   const popUp = {
     initial: {
@@ -29,34 +60,6 @@ export default function QnaModal({addQna, handleClose}) {
         duration: 0.2,
       }
     }
-  }
-  
-  const cancel = (e) => {
-    e.preventDefault();
-    handleClose();
-  }
-
-  const submitQna = (e) => {
-    e.preventDefault();
-    let data = {
-      "fundingSeq": 1,
-      "userSeq": 2,
-      "qnaTitle": title,
-      "qnaText": content,
-      "secret": isSecret,
-    }
-    // qna 제출 시 DB에 post 요청 보내고
-    Send.post('/funding/qna', data)
-      .then((data) =>{
-        console.log(data);
-        addQna();  // qna 새롭게 요청해서 화면에 표시 (QnA 컴포넌트에서 실행됨)
-        setTitle('');
-        setContent('');
-        setIsSecret(false);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   }
 
   return (
