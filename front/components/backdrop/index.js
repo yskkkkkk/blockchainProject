@@ -12,8 +12,8 @@ const Backdrop = ({label, handleClose}) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {label === "qna" && <QnaModal handleClose={handleClose} />}
-      {label === "announcement" && <AnnounceModal handleClose={handleClose} />}
+      {label === "qna" && <QnaModal fundingSeq={fundingSeq} handleClose={handleClose} />}
+      {label === "announcement" && <AnnounceModal fundingSeq={fundingSeq} handleClose={handleClose} />}
     </motion.div>
   );
 };

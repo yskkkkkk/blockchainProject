@@ -1,21 +1,19 @@
-import {useState, useContext} from 'react';
-import Image from 'next/image';
-
 import ProductBasics from "../../components/productBasics";
 import ProductDetail from "../../components/productDetail";
 import ProductAnnouncement from "../../components/productAnnouncement";
 import ProductQNA from "../../components/productQNA";
 import ProductOptions from '../../components/productOptions';
 
+import { useState } from "react";
 
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
   
   // const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
-  const res = await fetch('/funding/lists', {"sort": 1});    // 펀딩 리스트 get 요청
+  const res = await fetch('http://j6a305.p.ssafy.io:9999/funding/lists/1', {"sort": 1});    // 펀딩 리스트 get 요청
   const data = await res.json();
 
-  const paths = data.map(fund => {
+  const paths = data.data.map(fund => {
     return {
       // params: {id: fund.id.toString()}  // 라우트팅에 활용할 id값 return ([id].js 과 key 값의 이름이 동일해야함)
       params: {id: fund.fundingSeq.toString()}
@@ -34,14 +32,14 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   
   const id = context.params.id;
   // const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
-  const res = await fetch('/funding/top', {"fundingSeq": id});
+  const res = await fetch(`http://j6a305.p.ssafy.io:9999/funding/top/${id}`, {"fundingSeq": id});
   const data = await res.json();
   // return {
   //   props: {fund: data}
   // }
   return {
     props: {
-      fund: data,
+      fund: data.data,
       fundingSeq: id,
     }
   }

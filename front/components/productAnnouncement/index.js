@@ -1,13 +1,13 @@
 import {motion, AnimatePresence} from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Backdrop from '../backdrop';
 import Send from "../../lib/Send.js";
 
 // 상품 공지사항 컴포넌트
-const ProductAnnouncement = ({announcements}) => {
+const ProductAnnouncement = ({fundingSeq}) => {
   
   const [openAnnounceModal, setOpenAnnounceModal] = useState(false);
-  const [announcementList, setAnnouncementList] = useState(announcements);
+  const [announcementList, setAnnouncementList] = useState('');
 
   const toggleAnnounceModal = (e) => {
     e.preventDefault();
@@ -18,16 +18,19 @@ const ProductAnnouncement = ({announcements}) => {
 
   const addAnnouncement = () => {
     // get 요청보낼때 해당 펀드상품의 pk값 필요
-    let data = {"fundingSeq": 1}
-    Send.get("/funding/board", data)
+    Send.get(`http://j6a305.p.ssafy.io:9999/funding/board?fundingSeq=${fundingSeq}`)
       .then((data) =>{
-        console.log(data);
-        setAnnouncementList(data);
+        console.log(data.message);
+        setAnnouncementList(data.data);
       })
       .catch((e) =>{
         console.log(e);
       })
   }
+
+  useEffect(() => {
+    addAnnouncement();
+  }, [])
 
   return (
     // framer-motion 라이브러리를 활용, 해당 컴포넌트가 보여질때 마다 transition effect를 발생시킵니다
@@ -44,7 +47,7 @@ const ProductAnnouncement = ({announcements}) => {
       }}>
       <section className="grid grid-cols-1 gap-[4rem]">
         {/* 상품 공지사항 들어갈 위치 */}
-        {announcementList.map(announcement => (
+        {announcementList ? (announcementList.map(announcement => (
             <article key={announcement} className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border border-black">
               <header className="flex flex-row justify-between mx-[2rem]">
                 <h2 className="text-3xl">announcement {announcement}</h2>
@@ -55,7 +58,7 @@ const ProductAnnouncement = ({announcements}) => {
                 감사합니다 {announcement}번째 공지입니다.
               </p>
             </article>
-          ))}
+          ))) : (<h1>공지사항이 없습니다.</h1>)}
           
         <button onClick={toggleAnnounceModal} className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">공지작성</button>
       </section>
@@ -65,7 +68,7 @@ const ProductAnnouncement = ({announcements}) => {
         // animation이 다 끝나야만 화면에서 컴포넌트가 사라지게함
         exitBeforeEnter={true}
         >
-        {openAnnounceModal && <Backdrop label="announcement" addAnnouncement={addAnnouncement} handleClose={close} />}
+        {openAnnounceModal && <Backdrop fundingSeq={fundingSeq}  label="announcement" addAnnouncement={addAnnouncement} handleClose={close} />}
       </AnimatePresence>
     </motion.div>
   )
