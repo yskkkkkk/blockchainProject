@@ -2,14 +2,10 @@ import  Send  from './Send';
 
 
 export const getFollowing = (userSeq) => {
-  let data = {
-    "user_seq": userSeq,
-  }
-
-  Send.post('follow/followings', data)
+  Send.get(`http://j6a305.p.ssafy.io:9999/follow/followings?userSeq=${userSeq}`)
     .then((data) =>{
       console.log(data);
-      return data
+      return data.data
     })
     .catch((e) => {
       console.log(e);
@@ -20,11 +16,10 @@ export const getFollowing = (userSeq) => {
 
 export const follow = (userSeq, seller) => {
   let data = {
-    "user_seq": userSeq,
+    "userSeq": userSeq,
     "seller": seller,
   }
-
-  Send.post('follow', data)
+  Send.post('http://j6a305.p.ssafy.io:9999/follow/', data)
     .then((data) =>{
       console.log(data);
       return true
@@ -37,11 +32,10 @@ export const follow = (userSeq, seller) => {
 
 export const unfollow = (userSeq, seller) => {
   let data = {
-    "user_seq": userSeq,
+    "userSeq": userSeq,
     "seller": seller,
   }
-
-  Send.post('follow', data)
+  Send.delete('http://j6a305.p.ssafy.io:9999/follow/', data)
     .then((data) =>{
       console.log(data);
       return true

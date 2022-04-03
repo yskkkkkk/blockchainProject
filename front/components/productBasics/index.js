@@ -4,6 +4,7 @@ import Router from "next/router";
 
 import {useEffect, useContext, useState} from 'react';
 import {getFollowing, follow, unfollow} from '../../lib/User.js';
+import CustomButton from '../ui/button.js';
 
 import {UserContext} from "../../lib/UserContext";
 
@@ -14,11 +15,11 @@ const ProductBasics = ({src, fundInfo}) => {
   const [following, setFollowing] = useState([]);         // 현 유저가 팔로우하는 유저 리스트
   const [getAlarm, setGetAlarm] = useState(false);        // 보여주기용 알람 버튼 토글 상태값
   const [like, setLike] = useState(false);                // 찜 버튼 토글 상태 값
-  const [seller, setSeller] = useState(fundInfo.userNickname);
+  const [seller, setSeller] = useState(fundInfo.userSeq);
 
   const toggleFollow = (e) => {
     e.preventDefault();
-    if (following.includes(seller)) {
+    if (following && following.includes(seller)) {
       unfollow(userSeq, seller);  // lib 파일에 위치한 함수
       setFollowing(following.filter(f => f !== seller));
     }
@@ -36,9 +37,14 @@ const ProductBasics = ({src, fundInfo}) => {
     setLike(!like);
   }
 
+  const checkOut = (e) => {
+    e.preventDefault();
+    Router.push("/order");
+  }
+
   const toLoginPage = (e) => {
     e.preventDefault();
-    Router.push("/");   // 회원가입 페이지로 라우트
+    Router.push("/login");   // 회원가입 페이지로 라우트
   }
 
   useEffect(() => {     // 랜더시 팔로잉 리스트 상태값에 저장.   팔로워 로직을 루트에서 한번만 가져와서 저장하고 매번 쓰고싶지만 고민중입니다.
@@ -63,7 +69,7 @@ const ProductBasics = ({src, fundInfo}) => {
         <p>매우 간편한 설명! : {fundInfo.fundingSimple}</p>
         <div className="flex flex-row justify-evenly gap-[3rem]">
           <Link href={'/order/'} passHref>
-            <button className="w-48 py-[0.5rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">펀딩하기</button>
+            <CustomButton func={checkOut} text="펀딩하기" classNameProp="w-48 py-[0.5rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center" />
           </Link>
           <button onClick={toggleLike} className="w-48 py-[0.5rem] border-2 text-gray-600 font-black antialiased text-xl justify-self-center "><span className={like ? "text-theme-color/70" : "text-gray-400"}>♡ </span>찜하기</button>
 
@@ -75,8 +81,8 @@ const ProductBasics = ({src, fundInfo}) => {
           </p>
           <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
             {/* 아직 상태값에 따른 버튼 토클 애니메이션 로직은 미작성 상태입니다  */}
-            <button onClick={userSeq ? toggleFollow : toLoginPage} className={`w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color ${following.includes(seller) ? "bg-theme-color text-white" : "bg-gray-200"}`}>팔로우</button>
-            {following.includes(seller) && (<button onClick={toggleAlarm} className={`w-[5rem] py-[1px] antialiased justify-self-center rounded-lg ${getAlarm ? "text-white bg-theme-color" : "bg-gray-200"}`}>알림받기</button>)}
+            <button onClick={userSeq ? toggleFollow : toLoginPage} className={`w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color ${following ? (following.includes(seller) ? "bg-theme-color text-white" : "bg-gray-200") : "bg-gray-200"}`}>팔로우</button>
+            {following && following.includes(seller) && (<button onClick={toggleAlarm} className={`w-[5rem] py-[1px] antialiased justify-self-center rounded-lg ${getAlarm ? "text-white bg-theme-color" : "bg-gray-200"}`}>알림받기</button>)}
           </div>
         </div>
       </aside>

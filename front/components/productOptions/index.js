@@ -1,27 +1,32 @@
 import Link from 'next/link';
+import CustomButton from '../ui/button';
+import Router from "next/router";
 
-const ProductOptions = ({options}) => {
+const ProductOptions = ({option}) => {
+
+  const checkOut = (e) => {
+    e.preventDefault();
+    Router.push("/order");
+  }
+
 
   return (
-    <>
-      {options.map(option => {
-        <article className="max-w-sm overflow-hidden shadow-lg">
-          <img className="w-full" src="/welcome.png" alt="Sunset in the mountains" />
-          <section className="px-6 py-4">
-            <div className="mb-2 text-2xl font-black">{option.optionPrice}</div>
-            <div className="mb-2 text-xl font-bold">{option.optionTitle} - {option.Maxamount}개입</div>
-            <p className="text-base text-gray-700">{option.optionText}</p>
-          </section>
-          <Link href={'/order'} key={option.optionTitle} passHref>
-            <button className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">펀딩하기</button>
-          </Link>
-          <section className="px-6 pt-4 pb-2">
-            <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#early bird</span>
-            <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#한정수량</span>
-          </section>
-        </article>
-      })}
-    </>
+    <article className="flex flex-col gap-[1rem] max-w-sm overflow-hidden shadow-lg">
+      <img className="self-center w-fit mt-[2rem]" src="/welcome.png" alt="Sunset in the mountains" />
+      <hr className="mx-[2rem]" />
+      <section className="px-6 py-4">
+        <div className="mb-2 text-2xl font-bold">{option.optionPrice} ₩</div>
+        <div className="mb-2 text-xl font-bold">{option.optionTitle} - {option.maxAmount}개입</div>
+        <p className="text-base text-gray-700">{option.optionText}</p>
+      </section>
+      <Link href={'/order'} key={option.optionTitle} className="align-middle" passHref>
+        <CustomButton func={checkOut} text="펀딩하기" classNameProp="w-40 py-[0.5rem] bg-theme-color text-white font-black antialiased text-xl self-center" />
+      </Link>
+      <section className="px-6 pt-4 pb-2">
+        <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#early bird</span>
+        <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#한정수량</span>
+      </section>
+    </article>
   )
 }
 

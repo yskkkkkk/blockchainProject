@@ -50,6 +50,7 @@ export default function AnnounceModal({fundingSeq, addAnnouncement, handleClose}
         addAnnouncement();  // 공지사항 새롭게 요청해서 화면에 표시 (annoucement 컴포넌트에서 실행됨)
         setTitle('');
         setContent('');
+        handleClose();
       })
       .catch((e) => {
         console.log(e);

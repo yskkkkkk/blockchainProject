@@ -1,7 +1,7 @@
 import {motion} from "framer-motion";
 import { useState, useContext } from "react";
 import {UserContext} from "../../lib/UserContext";
-
+import Send from '../../lib/Send';
 
 export default function QnaModal({fundingSeq, addQna, handleClose}) {
 
@@ -32,6 +32,7 @@ export default function QnaModal({fundingSeq, addQna, handleClose}) {
         setTitle('');
         setContent('');
         setIsSecret(false);
+        handleClose();
       })
       .catch((e) => {
         console.log(e);

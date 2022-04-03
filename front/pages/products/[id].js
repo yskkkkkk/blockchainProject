@@ -66,7 +66,7 @@ const Detail = ({fund, fundingSeq}) => {
 
   return (
     <main className="flex flex-col gap-[4rem]">
-      
+      {console.log(`현재 유저 번호: ${fund.userSeq}`)}
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
       {/* 소스 링크 같은 경우는 prop 이름이 src 여야한다는 슬픈 사실.. */}
       {/* <ProductBasics src={fund.col1} fundInfo={fund} /> */}
@@ -94,8 +94,10 @@ const Detail = ({fund, fundingSeq}) => {
         </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
-        <aside className="flex flex-col gap-[2rem]">
-          <ProductOptions  options={fund.option} />
+        <aside className="flex flex-col gap-[6rem]">
+          {fund.option.map(o => (
+            <ProductOptions option={o} key={o.optionTitle} />
+          ))}
         </aside>
       </section>
     </main>

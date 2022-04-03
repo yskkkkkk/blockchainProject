@@ -2,6 +2,8 @@ import {motion, AnimatePresence} from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Backdrop from '../backdrop';
 import Send from "../../lib/Send.js";
+import CustomButton from '../ui/button';
+
 
 // 상품 공지사항 컴포넌트
 const ProductAnnouncement = ({fundingSeq}) => {
@@ -22,9 +24,10 @@ const ProductAnnouncement = ({fundingSeq}) => {
       .then((data) =>{
         console.log(data.message);
         setAnnouncementList(data.data);
+        console.log(announcementList);
       })
       .catch((e) =>{
-        console.log(e);
+        console.log(`error! ${e}`);
       })
   }
 
@@ -45,22 +48,23 @@ const ProductAnnouncement = ({fundingSeq}) => {
           opacity: 1,
         },
       }}>
-      <section className="grid grid-cols-1 gap-[4rem]">
+      <section className="grid grid-cols-1 gap-[5rem]">
         {/* 상품 공지사항 들어갈 위치 */}
-        {announcementList ? (announcementList.map(announcement => (
-            <article key={announcement} className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border border-black">
+        {announcementList.data ? (announcementList.data.map(announcement => (
+            <article key={announcement.boardContent} className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border-l-4 border-theme-color/50">
               <header className="flex flex-row justify-between mx-[2rem]">
-                <h2 className="text-3xl">announcement {announcement}</h2>
+                <h2 className="text-2xl">제목: {announcement.boardTitle}</h2>
                 <button>삭제</button>
               </header>
+              <p className="mx-[2rem] my-[-1rem] text-gray-500/80">작성일 {announcement.boardCreatedDate}</p>
               <hr className="mx-[2rem]" />
               <p className="mx-[2rem]">
-                감사합니다 {announcement}번째 공지입니다.
+                {announcement.boardContent}입니다.
               </p>
             </article>
           ))) : (<h1>공지사항이 없습니다.</h1>)}
           
-        <button onClick={toggleAnnounceModal} className="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center">공지작성</button>
+        <CustomButton func={toggleAnnounceModal} text="공지작성" classNameProp="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center"/>
       </section>
       <AnimatePresence
         // initial animation (바로 사라져버리는것?) 비활성화시킴
