@@ -1,11 +1,42 @@
 import {motion} from "framer-motion";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import {UserContext} from "../../lib/UserContext";
 
-export default function QnaModal({addQna, handleClose}) {
+
+export default function QnaModal({fundingSeq, addQna, handleClose}) {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [isSecret, setIsSecret] = useState(false);
+  const {userSeq, setUserSeq} = useContext(UserContext);
+
+  const cancel = (e) => {
+    e.preventDefault();
+    handleClose();
+  }
+
+  const submitQna = (e) => {
+    e.preventDefault();
+    let data = {
+      "fundingSeq": fundingSeq,
+      "userSeq": userSeq,
+      "qnaTitle": title,
+      "qnaText": content,
+      "secret": isSecret,
+    }
+    // qna 제출 시 DB에 post 요청 보내고
+    Send.post('http://j6a305.p.ssafy.io:9999/funding/qna', data)
+      .then((data) =>{
+        console.log(data);
+        addQna();  // qna 새롭게 요청해서 화면에 표시 (QnA 컴포넌트에서 실행됨)
+        setTitle('');
+        setContent('');
+        setIsSecret(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
   const popUp = {
     initial: {
@@ -30,34 +61,6 @@ export default function QnaModal({addQna, handleClose}) {
       }
     }
   }
-  
-  const cancel = (e) => {
-    e.preventDefault();
-    handleClose();
-  }
-
-  const submitQna = (e) => {
-    e.preventDefault();
-    let data = {
-      "fundingSeq": 1,
-      "userSeq": 2,
-      "qnaTitle": title,
-      "qnaText": content,
-      "secret": isSecret,
-    }
-    // qna 제출 시 DB에 post 요청 보내고
-    Send.post('/funding/qna', data)
-      .then((data) =>{
-        console.log(data);
-        addQna();  // qna 새롭게 요청해서 화면에 표시 (QnA 컴포넌트에서 실행됨)
-        setTitle('');
-        setContent('');
-        setIsSecret(false);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
 
   return (
     <motion.div
@@ -74,18 +77,18 @@ export default function QnaModal({addQna, handleClose}) {
           <div className="form-check">
             <input checked={isSecret} onClick={(e) => setIsSecret(!isSecret)} className="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer form-check-input checked:bg-theme-color/70 checked:border-theme-color focus:outline-none" type="checkbox" value="" id="secretBox" />
             <label className="inline-block text-gray-800 form-check-label" htmlFor="secretBox">
-              비밀
+              비밀질문
             </label>
           </div>
         </header>
         <section className="my-4">
-          <label className="block mb-2 text-sm font-bold text-gray-700" for="title">
+          <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="title">
             제목
           </label>
           <input onChange={(e) => setTitle(e.target.value)} className="w-full px-3 py-2 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="title" type="text" />
         </section>
         <section className="mb-6">
-          <label className="block mb-2 text-sm font-bold text-gray-700" for="content">
+          <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="content">
             질문 내용
           </label>
           <textarea onChange={(e) => setContent(e.target.value)} className="w-full px-3 py-2 mb-3 text-gray-700 border rounded shadow focus:outline-none focus:shadow-theme-color" id="content" />

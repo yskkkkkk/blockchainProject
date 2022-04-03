@@ -1,19 +1,22 @@
-import {useState} from 'react';
-import Image from 'next/image';
-
+import ProductBasics from "../../components/productBasics";
 import ProductDetail from "../../components/productDetail";
 import ProductAnnouncement from "../../components/productAnnouncement";
 import ProductQNA from "../../components/productQNA";
+import ProductOptions from '../../components/productOptions';
+
+import { useState } from "react";
 
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
   
-  const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
+  // const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
+  const res = await fetch('http://j6a305.p.ssafy.io:9999/funding/lists/1', {"sort": 1});    // 펀딩 리스트 get 요청
   const data = await res.json();
 
-  const paths = data.map(fund => {
+  const paths = data.data.map(fund => {
     return {
-      params: {id: fund.id.toString()}  // 라우트팅에 활용할 id값 return ([id].js 과 key 값의 이름이 동일해야함)
+      // params: {id: fund.id.toString()}  // 라우트팅에 활용할 id값 return ([id].js 과 key 값의 이름이 동일해야함)
+      params: {id: fund.fundingSeq.toString()}
     }
   })
 
@@ -28,18 +31,24 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {  // context == getStaticPaths의 return 값 paths
   
   const id = context.params.id;
-  const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
+  // const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
+  const res = await fetch(`http://j6a305.p.ssafy.io:9999/funding/top/${id}`, {"fundingSeq": id});
   const data = await res.json();
-
+  // return {
+  //   props: {fund: data}
+  // }
   return {
-    props: {fund: data}
+    props: {
+      fund: data.data,
+      fundingSeq: id,
+    }
   }
 }
 
 
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
-const Detail = ({fund}) => {
- 
+const Detail = ({fund, fundingSeq}) => {
+
   const [currentNav, setCurrentNav] = useState(0);
 
   const showProductDetail = (e) => {
@@ -59,30 +68,9 @@ const Detail = ({fund}) => {
     <main className="flex flex-col gap-[4rem]">
       
       {/* 펀드 상품 상단정보가 들어갈 위치 */}
-      <header className="flex flex-row justify-center gap-[10rem]">
-        <section>
-          <Image src={fund.col1} alt="thumbnail" width={300} height={300} />
-        </section>
-        <aside className="flex flex-col gap-[1rem] w-96">
-          <h2>Ambitious funding by {fund.fullName}</h2>
-          <div className="w-full mt-4 bg-gray-200 rounded-full dark:bg-gray-700">
-            <div className="p-1 rounded-full bg-theme-color" style={{width:'45%'}}></div>
-          </div>
-          <p>45% 달성 (100,000원)</p>
-          <p>겉바속촉의 정석! 유명 식당에서 눈치 봐가며 시키던 멘보샤를 집에서도 푸짐하게 즐기세요! 홈메이드 칠리소스도 함께 드립니다:)</p>
-          <div className="flex flex-row justify-evenly">
-            <button>펀딩하기</button>
-            <button>찜하기</button>
-          </div>
-          <div className="flex flex-row justify-evenly">
-            <p> 파트너 정보: 
-              <button>블루샹하이</button>
-            </p>
-            <button>follow</button>
-            <button>알림받기</button>
-          </div>
-        </aside>
-      </header>
+      {/* 소스 링크 같은 경우는 prop 이름이 src 여야한다는 슬픈 사실.. */}
+      {/* <ProductBasics src={fund.col1} fundInfo={fund} /> */}
+      <ProductBasics src={fund.fundingImage} fundInfo={fund} />
       <hr />
       {/* 상품 상세정보의 네비게이션바  */}
       <nav className="flex flex-row gap-[3rem] justify-center mr-[50rem]">
@@ -92,24 +80,22 @@ const Detail = ({fund}) => {
       </nav>
       <section className="flex flex-row gap-[8rem] justify-center">
         {/* 펀딩 상세정보 컴포넌트 */}
-        {/* 하단 section 태그에 flex-1 을 쓴 이유는, 하위 컴포넌트들의 크기를 flex 구조대로 고정시키기 위함입니다 */}
         <section className="flex flex-col gap-[4rem] basis-[50rem]">
           {currentNav === 0 && (
-            <ProductDetail picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
+            // 상세정보 api 요청 후 데이터 어떻게 들어오는지 확인 필요
+            <ProductDetail fundingSeq={fundingSeq} picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {currentNav === 1 && (
-            <ProductAnnouncement announcements={[1, 2, 3, 4, 5]} />
+            <ProductAnnouncement fundingSeq={fundingSeq} />
           )}
           {currentNav === 2 && (
-            <ProductQNA qnas={[1, 2, 3, 4, 5]} />
+            <ProductQNA fundingSeq={fundingSeq} />
           )}
         </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
         <aside className="flex flex-col gap-[2rem]">
-          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
-          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
-          <Image src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Long_March_2D_launching_VRSS-1.jpg" alt="rocket" width={250} height={400} />
+          <ProductOptions  options={fund.option} />
         </aside>
       </section>
     </main>
