@@ -128,6 +128,7 @@ public class FundingServiceImpl implements FundingService{
                     dto.get().getFundingImage(),
                     dto.get().getFundingSimple(),
                     dto.get().getUserNickname(),
+                    dto.get().getFundingContract(),
                     options.get()
             );
             return (response);

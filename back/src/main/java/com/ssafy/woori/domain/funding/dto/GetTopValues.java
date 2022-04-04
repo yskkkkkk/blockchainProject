@@ -6,4 +6,5 @@ public interface GetTopValues {
     String getFundingImage();
     String getFundingSimple();
     String getUserNickname();
+    String getFundingContract();
 }
