@@ -87,6 +87,7 @@ public class FundingServiceImpl implements FundingService{
                         .fundingImage(imgPath)
                         .fundingText(request.getFundingText())
                         .fundingWarning(request.getFundingWarning())
+                        .fundingContract(request.getFundingContract())
                         .build()
         );
 
