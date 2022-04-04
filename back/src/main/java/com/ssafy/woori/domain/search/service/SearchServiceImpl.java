@@ -17,7 +17,7 @@ public class SearchServiceImpl implements SearchService{
     @Override
     public Optional<List<FundingList>> searchFunding(String text, int sort) {
         if(sort == 1){
-//            return(searchRepository.findListByHot("%"+text+"%"));
+            return(searchRepository.findListByHot("%"+text+"%"));
         }
         else if(sort == 2){
             return (searchRepository.findAllByFundingTitleContainsOrderByFundingCreateDate(text));

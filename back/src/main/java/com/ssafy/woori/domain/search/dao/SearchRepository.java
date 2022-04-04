@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Repository
 public interface SearchRepository extends JpaRepository<Funding, Integer>{
-//    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingImage as fundingImage, f.fundingTitle as fundingTitle, f.fundingSimple as fundingSimple, f.fundingContract as fundingContract from Like l, Funding f " +
-//            "where l.fundingSeq = f.fundingSeq and f.fundingTitle like :text group by fundingSeq order by count(f.fundingSeq) desc")
-//    Optional<List<FundingList>> findListByHot(String text);
+    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingImage as fundingImage, f.fundingTitle as fundingTitle, f.fundingSimple as fundingSimple, f.fundingContract as fundingContract from Like l, Funding f " +
+            "where l.fundingSeq = f.fundingSeq and f.fundingTitle like :text group by fundingSeq order by count(f.fundingSeq) desc")
+    Optional<List<FundingList>> findListByHot(String text);
     Optional<List<FundingList>> findAllByFundingTitleContainsOrderByFundingCreateDate(String fundingTitle);
     Optional<List<FundingList>> findAllByFundingTitleContainsOrderByFundingCreateDateDesc(String fundingTitle);
 
