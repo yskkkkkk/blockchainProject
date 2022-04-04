@@ -9,8 +9,15 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
-                .allowedOrigins("https://j6a305.p.ssafy.io","https://j6a305.p.ssafy.io:80", "https://j6a305.p.ssafy.io:3000", "http://localhost:3000",
-                        "http://j6a305.p.ssafy.io","http://j6a305.p.ssafy.io:80", "http://j6a305.p.ssafy.io:3000")
+                .allowedOrigins("https://j6a305.p.ssafy.io",
+                        "https://j6a305.p.ssafy.io:80",
+                        "https://j6a305.p.ssafy.io:3000",
+                        "http://j6a305.p.ssafy.io",
+                        "http://j6a305.p.ssafy.io:80",
+                        "http://j6a305.p.ssafy.io:3000",
+                        "http://127.0.0.1",
+                        "https://127.0.0.1",
+                        "http://127.0.0.1:3000")
                 .allowedMethods("*")
                 .maxAge(3000);
     }
