@@ -1,4 +1,3 @@
-import CustomButton from '../components/ui/button';
 import Router from 'next/router';
 
 
@@ -17,7 +16,7 @@ export default function Login() {
   }
 
   return (
-    <main className="flex flex-col gap-[4rem] items-center">
+    <main className="flex flex-col gap-[4rem] items-center mt-[5rem] mb-[10rem]">
       <h1 className="font-sans text-4xl antialiased text-center ">우리 두레의 회원이 되어<br />당신만의 펀딩을 시작하세요.</h1>
       <section className="flex flex-col gap-[1rem]">
         <div>
@@ -53,10 +52,6 @@ export default function Login() {
           <p className="text-sm">구글로 시작하기</p>
         </div>
       </section>
-
-      
-
-    
     </main>
   )
 }

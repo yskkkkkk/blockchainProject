@@ -76,9 +76,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li className={style.li}>
-              <a onClick={logout}>
-                logout
-              </a>
+              <Link href="/">
+                <a onClick={logout}>
+                  logout
+                </a>
+              </Link>
             </li>
           </>
         )}

@@ -56,14 +56,12 @@ const ProductQNA = ({fundingSeq}) => {
             <details className="border py-[1rem] hover:shadow-lg hover:shadow-theme-color/30  focus:border-theme-color" key={qna.qnaTitle}>
               <summary className="font-sans text-xl antialiased list-none pl-[1rem] cursor-pointer">Q. {qna.qnaTitle}</summary>
               {/* 카톡 메신저 창 처럼 좌측 상대방, 우측 본인 구조로 채팅을 주고받듯이 말풍선 구현 */}
-              {/* map 함수 활용하여 글이 작성된 시간 순으로 위에서 아래로 채팅html 생성할 예정  */}
-              {/* reply text 면 좌측, qna text 면 우측 */}
               <hr className="m-[1rem] py-[1rem]" />
               <section className="flex flex-row justify-end gap-[2rem] my-[1rem] mr-[1rem]">
                 {qna.secret ? (
-                  <p className="mr-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-theme-color/60 max-w-[25rem] shadow-md">{qna.qnaText}</p>
-                ) : (
                   <p className="mr-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-theme-color/60 max-w-[25rem] shadow-md">비밀 질문입니다.</p>
+                ) : (
+                  <p className="mr-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-theme-color/60 max-w-[25rem] shadow-md">{qna.qnaText}</p>
                 )}
                 <span className="mt-[0.5rem] text-theme-color/70 mix-blend-color-dodge">▶</span>
               </section>
@@ -72,9 +70,9 @@ const ProductQNA = ({fundingSeq}) => {
                   <img className="flex-none w-[4rem] h-[4rem] shadow-md border-black rounded-full mr-[-1rem]" src="https://i.pinimg.com/736x/b8/69/5f/b8695f007aea9a08a0419479217ca6aa.jpg" alt="seller profile image" />
                   <span className="mt-[1rem] text-black/20 mix-blend-color-dodge">◀</span>
                   {qna.secret ? (
-                    <p className="ml-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-black/20 max-w-[25rem] shadow-md">{qna.replyText}</p>
-                  ) : (
                     <p className="ml-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-black/20 max-w-[25rem] shadow-md">비밀 답변입니다.</p>
+                  ) : (
+                    <p className="ml-[-2.21rem] pl-[1rem] p-2 antialiased font-normal rounded-[15px] bg-black/20 max-w-[25rem] shadow-md">{qna.replyText}</p>
                   )}
                 </section>
               )}
