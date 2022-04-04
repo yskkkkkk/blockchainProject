@@ -38,10 +38,11 @@ public class UserController {
     
 	@GetMapping("/login")
 	public ResponseEntity<UserInfoResponse> postLoginProcessing() {
-		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-    	return new ResponseEntity<UserInfoResponse>(userService.getUserByUserKey(authentication.getName()), HttpStatus.OK);
+		UserInfoResponse response = userService.getUserByUserKey(authentication.getName());
+		
+		log.info("login Success - user: " + response.getUserNickname());
+    	return new ResponseEntity<UserInfoResponse>(response, HttpStatus.OK);
 	}
     @GetMapping
     public ResponseEntity<UserInfoResponse> userInfo(int userSeq){

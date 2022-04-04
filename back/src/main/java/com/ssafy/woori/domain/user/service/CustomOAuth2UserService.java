@@ -63,7 +63,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         Assert.notNull(userRequest, "userRequest cannot be null");
 
-        if (!StringUtils.hasText(userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri())) {
+        String requestUri = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
+        if (!StringUtils.hasText(requestUri)) {
             OAuth2Error oauth2Error = new OAuth2Error(
                     MISSING_USER_INFO_URI_ERROR_CODE,
                     "Missing required UserInfo Uri in UserInfoEndpoint for Client Registration: " +
@@ -93,8 +94,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             OAuth2Error oauth2Error = ex.getError();
             StringBuilder errorDetails = new StringBuilder();
             errorDetails.append("Error details: [");
-            errorDetails.append("UserInfo Uri: ").append(
-                    userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri());
+            errorDetails.append("UserInfo Uri: ").append(requestUri);
             errorDetails.append(", Error Code: ").append(oauth2Error.getErrorCode());
             if (oauth2Error.getDescription() != null) {
                 errorDetails.append(", Error Description: ").append(oauth2Error.getDescription());
