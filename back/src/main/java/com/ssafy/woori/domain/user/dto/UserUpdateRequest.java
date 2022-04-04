@@ -18,5 +18,6 @@ public class UserUpdateRequest {
 	private String userPhone;
 	private String userIntroduce;
 	private String userCompany;
-
+	private String userWalletAddress;
+	
 }
