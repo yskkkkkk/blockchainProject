@@ -13,5 +13,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 boolean existsByUserKeyAndUserPlatform(String userKey, String userPlatform);
 
 	 Optional<UserInfoResponse> getByUserSeq(int userSeq);
+	 Optional<UserInfoResponse> getByUserKey(String userKey);
 
 }

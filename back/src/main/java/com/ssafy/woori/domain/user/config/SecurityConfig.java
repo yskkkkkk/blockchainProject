@@ -27,7 +27,7 @@ import static com.ssafy.woori.domain.user.config.SocialType.*;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserRepository UserRepository;
+	private UserRepository userRepository;
 	
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
@@ -42,11 +42,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .antMatchers("/google").hasAuthority(GOOGLE.getRoleType())
                     .antMatchers("/kakao").hasAuthority(KAKAO.getRoleType())
-                     .antMatchers("/naver").hasAuthority(NAVER.getRoleType())
+                    .antMatchers("/naver").hasAuthority(NAVER.getRoleType())
                     .anyRequest().authenticated()
                 .and()
                     .oauth2Login()
-                    .userInfoEndpoint().userService(new CustomOAuth2UserService(UserRepository));
+                    .userInfoEndpoint().userService(new CustomOAuth2UserService(userRepository))
+                .and() 
+                	.defaultSuccessUrl("/user/login");
     }
 
     @Bean
