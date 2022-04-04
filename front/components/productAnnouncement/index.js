@@ -50,7 +50,7 @@ const ProductAnnouncement = ({fundingSeq}) => {
       }}>
       <section className="grid grid-cols-1 gap-[5rem]">
         {/* 상품 공지사항 들어갈 위치 */}
-        {announcementList.data ? (announcementList.data.map(announcement => (
+        {announcementList.data && announcementList.data.length > 0 ? (announcementList.data.map(announcement => (
             <article key={announcement.boardContent} className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border-l-4 border-theme-color/50">
               <header className="flex flex-row justify-between mx-[2rem]">
                 <h2 className="text-2xl">제목: {announcement.boardTitle}</h2>

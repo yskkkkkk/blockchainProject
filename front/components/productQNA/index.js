@@ -51,7 +51,7 @@ const ProductQNA = ({fundingSeq}) => {
       }}>
       <section className="grid grid-cols-1 gap-[4rem]">
         {/* 상품 QnA가 들어갈 위치 */}
-        {qnaList.data ? (qnaList.data.map(qna => (
+        {qnaList.data && qnaList.data.length > 0 ? (qnaList.data.map(qna => (
             // 스압방지를 위해서 + 질문 제목 빠르게 파악할 수 있게 하기 위해 질문 단위로 접었다 폇다 가능하게 구현
             <details className="border py-[1rem] hover:shadow-lg hover:shadow-theme-color/30  focus:border-theme-color" key={qna.qnaTitle}>
               <summary className="font-sans text-xl antialiased list-none pl-[1rem] cursor-pointer">Q. {qna.qnaTitle}</summary>
@@ -78,6 +78,7 @@ const ProductQNA = ({fundingSeq}) => {
               )}
             </details>
           ))) : (<h1>첫 질문을 등록해주세요!</h1>)}
+
         <CustomButton func={toggleQnaModal} text="질문하기" classNameProp="w-48 py-[1rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center" />
       </section>
 
