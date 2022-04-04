@@ -12,16 +12,16 @@ import java.util.Optional;
 @Repository
 public interface FundingRepository extends JpaRepository<Funding, Integer> {
 
-    @Query(value = "select fundingSeq as fundingSeq, fundingImage as fundingImage, fundingTitle as fundingTitle, fundingSimple as fundingSimple " +
+    @Query(value = "select fundingSeq as fundingSeq, fundingImage as fundingImage, fundingTitle as fundingTitle, fundingSimple as fundingSimple, fundingContract as fundingContract " +
             "from Funding where fundingStatus not in (3, 4)")
     Optional<List<FundingListResponse>> findBaseList();
 
-    @Query(value = "select fundingSeq as fundingSeq, fundingImage as fundingImage, fundingTitle as fundingTitle, fundingSimple as fundingSimple " +
+    @Query(value = "select fundingSeq as fundingSeq, fundingImage as fundingImage, fundingTitle as fundingTitle, fundingSimple as fundingSimple, fundingContract as fundingContract " +
             "from Funding where fundingStatus not in (3, 4)" +
             "order by fundingCreateDate desc ")
     Optional<List<FundingListResponse>> findNewList();
 
-    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingImage as fundingImage, f.fundingTitle as fundingTitle, f.fundingSimple as fundingSimple from Like l, Funding f " +
+    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingImage as fundingImage, f.fundingTitle as fundingTitle, f.fundingSimple as fundingSimple, f.fundingContract as fundingContract from Like l, Funding f " +
             "where l.fundingSeq = f.fundingSeq and f.fundingStatus not in (3,4) group by fundingSeq order by count(f.fundingSeq) desc")
     Optional<List<FundingListResponse>> findLikeList();
 
@@ -32,7 +32,7 @@ public interface FundingRepository extends JpaRepository<Funding, Integer> {
     Optional<List<OptionListResponse>> findOptions(int fundingSeq);
 
     @Query(value = "select f.fundingTitle as fundingTitle, f.fundingImage as fundingImage, " +
-            "f.fundingSimple as fundingSimple, f.userSeq as userSeq ,f.userNickname as userNickname from Funding f where f.fundingSeq = :fundingSeq")
+            "f.fundingSimple as fundingSimple, f.userSeq as userSeq ,f.userNickname as userNickname, f.fundingContract as fundingContract from Funding f where f.fundingSeq = :fundingSeq")
     Optional<GetTopValues> findTopValues(int fundingSeq);
 
     @Query(value = "select f.fundingSeq as fundingSeq, f.fundingTitle as fundingTitle, f.fundingImage as fundingImage from Funding f " +

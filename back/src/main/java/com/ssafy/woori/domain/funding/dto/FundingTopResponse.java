@@ -15,5 +15,6 @@ public class FundingTopResponse {
     private String fundingImage;
     private String fundingSimple;
     private String userNickname;
+    private String fundingContract;
     private List<GetOptionList> option;
 }

@@ -46,5 +46,6 @@ public class Funding {
     private LocalDate fundingCreateDate;
     @CreatedDate
     private LocalDate fundingModifyDate;
-    
+    @Column
+    private String fundingContract;
 }
