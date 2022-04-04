@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Router from "next/router";
+import Send from '../../lib/Send';
 
 import {useEffect, useContext, useState} from 'react';
-import {getFollowing, follow, unfollow} from '../../lib/User.js';
+import {follow, unfollow} from '../../lib/User.js';
 import CustomButton from '../ui/button.js';
 
 import {UserContext} from "../../lib/UserContext";
@@ -37,6 +38,17 @@ const ProductBasics = ({src, fundInfo}) => {
     setLike(!like);
   }
 
+  const getFollowing = () => {
+    Send.get(`/follow/followings?userSeq=${userSeq}`)
+    .then((data) => {
+      setFollowing([data.data.data.map(e => {return e.seller})]);
+    })
+    .catch((e) => {
+      console.log(`getFollowing 에러: ${e}`);
+      // return false
+    })
+  }
+
   const checkOut = (e) => {
     e.preventDefault();
     Router.push("/order");
@@ -48,15 +60,17 @@ const ProductBasics = ({src, fundInfo}) => {
   }
 
   useEffect(() => {     // 랜더시 팔로잉 리스트 상태값에 저장.   팔로워 로직을 루트에서 한번만 가져와서 저장하고 매번 쓰고싶지만 고민중입니다.
-    setFollowing(getFollowing(userSeq));  // lib 파일에 위치한 함수
-  }, [])
+    getFollowing();  // lib 파일에 위치한 함수
+  }, [userSeq])
+
+  
 
   return (
     <header className="flex flex-row justify-center gap-[10rem]">
       <section>
         <Image src={src} alt="thumbnail" width={300} height={300} />
       </section>
-      <aside className="flex flex-col gap-[2rem] w-96">
+      <section className="flex flex-col gap-[2rem] w-96">
         {/* <h2 className="text-center">유명 음식점에서 맛보던 멘보샤를 집에서!</h2> */}
         <h2>{fundInfo.fundingTitle}</h2>
         <div>
@@ -72,7 +86,6 @@ const ProductBasics = ({src, fundInfo}) => {
             <CustomButton func={checkOut} text="펀딩하기" classNameProp="w-48 py-[0.5rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center" />
           </Link>
           <button onClick={toggleLike} className="w-48 py-[0.5rem] border-2 text-gray-600 font-black antialiased text-xl justify-self-center "><span className={like ? "text-theme-color/70" : "text-gray-400"}>♡ </span>찜하기</button>
-
         </div>
         <div className="flex flex-row justify-evenly">
           <p className="basis-1/2">파트너 정보:
@@ -80,12 +93,13 @@ const ProductBasics = ({src, fundInfo}) => {
             <button>{fundInfo.userNickname}</button>
           </p>
           <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
-            {/* 아직 상태값에 따른 버튼 토클 애니메이션 로직은 미작성 상태입니다  */}
+            {/* 팔로우 버튼 토글 애니매이션 폭망. 다시짜야함  */}
             <button onClick={userSeq ? toggleFollow : toLoginPage} className={`w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color ${following ? (following.includes(seller) ? "bg-theme-color text-white" : "bg-gray-200") : "bg-gray-200"}`}>팔로우</button>
             {following && following.includes(seller) && (<button onClick={toggleAlarm} className={`w-[5rem] py-[1px] antialiased justify-self-center rounded-lg ${getAlarm ? "text-white bg-theme-color" : "bg-gray-200"}`}>알림받기</button>)}
           </div>
         </div>
-      </aside>
+      </section>
+      {console.log(`팔로잉 상대:${following}`)}
     </header>
   )
 }

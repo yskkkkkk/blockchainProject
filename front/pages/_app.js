@@ -7,7 +7,7 @@ import {useState, useEffect, useMemo} from 'react';
 
 function MyApp({ Component, pageProps, router }) {
   // 유저 번호 값 루트 컴포넌트에서 뿌려줄 수 있게 관리
-  const [userSeq, setUserSeq] = useState('');
+  const [userSeq, setUserSeq] = useState('4');  // 임의값
   // 유저 번호 값이 바뀔때만 userSeq 값 수정
   const userSeqValue = useMemo(() => ({userSeq, setUserSeq}), [userSeq, setUserSeq]);
   

@@ -20,7 +20,7 @@ const ProductAnnouncement = ({fundingSeq}) => {
 
   const addAnnouncement = () => {
     // get 요청보낼때 해당 펀드상품의 pk값 필요
-    Send.get(`http://j6a305.p.ssafy.io:9999/funding/board?fundingSeq=${fundingSeq}`)
+    Send.get(`/funding/board?fundingSeq=${fundingSeq}`)
       .then((data) =>{
         console.log(data.message);
         setAnnouncementList(data.data);

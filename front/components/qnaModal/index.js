@@ -25,7 +25,7 @@ export default function QnaModal({fundingSeq, addQna, handleClose}) {
       "secret": isSecret,
     }
     // qna 제출 시 DB에 post 요청 보내고
-    Send.post('http://j6a305.p.ssafy.io:9999/funding/qna', data)
+    Send.post('/funding/qna', data)
       .then((data) =>{
         console.log(data);
         addQna();  // qna 새롭게 요청해서 화면에 표시 (QnA 컴포넌트에서 실행됨)

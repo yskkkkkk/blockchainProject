@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const getStaticProps = async () => {
 
   // const res = await fetch('https://retoolapi.dev/X9nA53/dummy'); // 전체 펀딩리스트를 가져올 수 있는지 확인 필요
-  const res = await fetch('http://j6a305.p.ssafy.io:9999/funding/lists/1', {"sort": 1});
+  const res = await fetch('http://j6a305.p.ssafy.io/api/funding/lists/1', {"sort": 1});
   const data = await res.json();
   
   return {
