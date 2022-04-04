@@ -8,6 +8,14 @@ export default function Login() {
     Router.push("http://j6a305.p.ssafy.io/api/oauth2/authorization/kakao");
   }
 
+  const toNaver = () => {
+    Router.push("http://j6a305.p.ssafy.io/api/oauth2/authorization/kakao");
+  }
+
+  const toGoogle = () => {
+    Router.push("http://j6a305.p.ssafy.io:9999/api/oauth2/authorization/google");
+  }
+
   return (
     <main className="flex flex-col gap-[4rem] items-center">
       <h1 className="font-sans text-4xl antialiased text-center ">우리 두레의 회원이 되어<br />당신만의 펀딩을 시작하세요.</h1>
@@ -26,9 +34,27 @@ export default function Login() {
             <button>전문보기</button>
           </label>
         </div>
-        <hr className="mt-[1.5rem]" />
+        <hr className="mt-[2.5rem] mb-[-1.5rem] border-black/20" />
       </section>
-      <img className="border hover:cursor-pointer mt-[-1rem]" src="/kakao.svg" alt="카카오로그인버튼" onClick={toKakao} />
+
+      <img className="hover:cursor-pointer mt-[1rem]" src="/kakao.png" alt="카카오로그인버튼" onClick={toKakao} />
+      <section className="separator my-[-2rem]">
+        <div className="text-white line">------------------------------------------</div>
+          <h2>또는</h2>
+        <div className="text-white line"></div>
+      </section>
+      <section className="flex flex-row justify-center gap-[2.5rem] mt-[-0.5rem]">
+        <div className="flex flex-row items-center gap-[0.5rem]">
+          <img className="hover:cursor-pointer" src="/naver.png" width="40px" alt="네이버로그인버튼" onClick={toNaver} />
+          <p className="text-sm">네이버로 시작하기</p>
+        </div>
+        <div className="flex flex-row items-center gap-[1rem]">
+          <img className="hover:cursor-pointer" src="/google.svg" alt="구글로그인버튼" onClick={toGoogle} />
+          <p className="text-sm">구글로 시작하기</p>
+        </div>
+      </section>
+
+      
 
     
     </main>
