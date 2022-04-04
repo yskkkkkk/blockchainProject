@@ -5,5 +5,5 @@ public interface FundingList {
     String getFundingImage();
     String getFundingTitle();
     String getFundingSimple();
-    //String getFundingContract();
+    String getFundingContract();
 }
