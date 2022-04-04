@@ -17,4 +17,9 @@ public interface SearchRepository extends JpaRepository<Funding, Integer>{
     Optional<List<FundingList>> findAllByFundingTitleContainsOrderByFundingCreateDate(String fundingTitle);
     Optional<List<FundingList>> findAllByFundingTitleContainsOrderByFundingCreateDateDesc(String fundingTitle);
 
+    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingImage as fundingImage, f.fundingTitle as fundingTitle, f.fundingSimple as fundingSimple, f.fundingContract as fundingContract from Like l, Funding f " +
+            "where l.fundingSeq = f.fundingSeq and f.fundingCategory = :categoryNumber group by fundingSeq order by count(f.fundingSeq) desc")
+    Optional<List<FundingList>> findListsByCategory(int categoryNumber);
+    Optional<List<FundingList>> findAllByFundingCategoryOrderByFundingCreateDate(int categoryNumber);
+    Optional<List<FundingList>> findAllByFundingCategoryOrderByFundingCreateDateDesc(int categoryNumber);
 }
