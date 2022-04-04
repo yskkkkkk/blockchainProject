@@ -16,7 +16,7 @@ const ProductOptions = ({option}) => {
       <hr className="mx-[2rem]" />
       <section className="px-6 py-4">
         <div className="mb-2 text-2xl font-bold">{option.optionPrice} ₩</div>
-        <div className="mb-2 text-xl font-bold">{option.optionTitle} - {option.maxAmount}개입</div>
+        <div className="mb-2 text-xl font-bold">{option.optionTitle} - {option.optionMaxamount}개입</div>
         <p className="text-base text-gray-700">{option.optionText}</p>
       </section>
       <Link href={'/order'} key={option.optionTitle} className="align-middle" passHref>

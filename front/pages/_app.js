@@ -7,7 +7,7 @@ import {useState, useEffect, useMemo} from 'react';
 
 function MyApp({ Component, pageProps, router }) {
   // 유저 번호 값 루트 컴포넌트에서 뿌려줄 수 있게 관리
-  const [userSeq, setUserSeq] = useState('');
+  const [userSeq, setUserSeq] = useState('4');  // 임의값
   // 유저 번호 값이 바뀔때만 userSeq 값 수정
   const userSeqValue = useMemo(() => ({userSeq, setUserSeq}), [userSeq, setUserSeq]);
   
@@ -26,24 +26,24 @@ function MyApp({ Component, pageProps, router }) {
     <>
       <UserContext.Provider value={userSeqValue}>
         {/* framer-motion 라이브러리를 활용, 페이지 라우팅 될 때마다 transition effect를 발생시킵니다  */}
-        <motion.div
-          key={router.route}
-          initial="initial"
-          animate="animate"
-          variants={{
-            initial: {
-              opacity: 0,
-            },
-            animate: {
-              opacity: 1,
-            },
-          }}>
-          <div className="grid grid-cols-1 gap-[5rem] mx-[12rem]">
-            <Navbar />
+        <div className="grid grid-cols-1 gap-[5rem] mx-[12rem]">
+          <Navbar />
+          <motion.div
+            key={router.route}
+            initial="initial"
+            animate="animate"
+            variants={{
+              initial: {
+                opacity: 0,
+              },
+              animate: {
+                opacity: 1,
+              },
+            }}>
             <Component {...pageProps} />
-            <Footer />
-          </div>
-        </motion.div>
+          </motion.div>
+          <Footer />
+        </div>
       </UserContext.Provider>
     </>
   )

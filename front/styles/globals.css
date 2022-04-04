@@ -39,3 +39,17 @@ a {
   width: 100%;
 }
 
+.separator{
+  display: flex;
+  align-items: center;
+}
+
+.separator h2{
+  padding: 0 2rem; /* creates the space */
+}
+
+.separator .line{
+  flex: 1;
+  height: 0.3px;
+  background-color: lightgrey;
+}

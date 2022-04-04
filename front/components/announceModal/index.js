@@ -44,7 +44,7 @@ export default function AnnounceModal({fundingSeq, addAnnouncement, handleClose}
       "boardContent": content,
     }
     // 공지사항 제출 시 DB에 post 요청 보내고
-    Send.post('http://j6a305.p.ssafy.io:9999/funding/board', data)
+    Send.post('/funding/board', data)
       .then((data) =>{
         console.log(data);
         addAnnouncement();  // 공지사항 새롭게 요청해서 화면에 표시 (annoucement 컴포넌트에서 실행됨)

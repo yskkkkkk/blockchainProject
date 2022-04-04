@@ -10,7 +10,7 @@ import { useState } from "react";
 export const getStaticPaths = async () => {
   
   // const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
-  const res = await fetch('http://j6a305.p.ssafy.io:9999/funding/lists/1', {"sort": 1});    // 펀딩 리스트 get 요청
+  const res = await fetch('http://j6a305.p.ssafy.io/api/funding/lists/1', {"sort": 1});    // 펀딩 리스트 get 요청
   const data = await res.json();
 
   const paths = data.data.map(fund => {
@@ -32,7 +32,7 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   
   const id = context.params.id;
   // const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
-  const res = await fetch(`http://j6a305.p.ssafy.io:9999/funding/top/${id}`, {"fundingSeq": id});
+  const res = await fetch(`http://j6a305.p.ssafy.io/api/funding/top/${id}`, {"fundingSeq": id});
   const data = await res.json();
   // return {
   //   props: {fund: data}
