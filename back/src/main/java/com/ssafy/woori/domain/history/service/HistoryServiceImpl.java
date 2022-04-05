@@ -21,6 +21,11 @@ public class HistoryServiceImpl implements HistoryService{
     }
 
     @Override
+    public Optional<List<UserBuyListResponse>> getBuyerList(int fundingSeq) {
+        return (historyRepository.getBuyerList(fundingSeq));
+    }
+
+    @Override
     public boolean changeHistory(int historySeq) {
         Optional<History> history = historyRepository.findById(historySeq);
 
