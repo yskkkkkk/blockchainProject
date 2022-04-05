@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,15 +46,16 @@ public class UserController {
 		log.info("login Success - user: " + response.getUserNickname());
     	return new ResponseEntity<UserInfoResponse>(response, HttpStatus.OK);
 	}
-    @GetMapping
-    public ResponseEntity<UserInfoResponse> userInfo(int userSeq){
+	
+    @GetMapping("/{userSeq}")
+    public ResponseEntity<UserInfoResponse> userInfo(@PathVariable int userSeq){
     	UserInfoResponse response = userService.getUser(userSeq);
     	
     	return new ResponseEntity<UserInfoResponse>(response, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<User> updateUser(UserUpdateRequest request){
+    public ResponseEntity<User> updateUser(@RequestBody UserUpdateRequest request){
     	
     	return new ResponseEntity<User>(userService.updateUser(request), HttpStatus.OK);
     }
@@ -77,24 +79,23 @@ public class UserController {
     	return new ResponseEntity<String>(result, HttpStatus.OK);
     }
     
-    @DeleteMapping
-    public ResponseEntity<String> deleteUser(int userSeq){
+    @DeleteMapping("/{userSeq}")
+    public ResponseEntity<String> deleteUser(@PathVariable int userSeq){
     	
     	return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
     }
     
     @PostMapping("/alarm")
-    public ResponseEntity<Alarm> createAlarm(AlarmCreateRequest request){
+    public ResponseEntity<Alarm> createAlarm(@RequestBody AlarmCreateRequest request){
     	
     	return new ResponseEntity<Alarm>(userService.createAlarm(request), HttpStatus.OK);
     }
 
-    @GetMapping("/alarms")
-    public ResponseEntity<List<AlarmInfoResponse>> userAlarmList(int userSeq){
+    @GetMapping("/alarms/{userSeq}")
+    public ResponseEntity<List<AlarmInfoResponse>> userAlarmList(@PathVariable int userSeq){
     	List<AlarmInfoResponse> response = userService.userAlarmList(userSeq);
     	 
     	return new ResponseEntity<List<AlarmInfoResponse>>(response, HttpStatus.OK);
     }
-    
     
 }
