@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User updateUser(UserUpdateRequest request) {
 		Optional<User> user = userRepository.findById(request.getUserSeq());
-		
 		user.ifPresent(selectUser -> {
 			userRepository.save(User.builder()
 					.userSeq(selectUser.getUserSeq())
@@ -81,10 +80,16 @@ public class UserServiceImpl implements UserService{
 					.userPhone(request.getUserPhone())
 					.userIntroduce(request.getUserIntroduce())
 					.userCompany(request.getUserCompany())
-					.build()
-					);
+					.userEmail(selectUser.getUserEmail())
+					.userIsActive(selectUser.getUserIsActive())
+					.userCreatedDate(selectUser.getUserCreatedDate())
+					.userModifiedDate(selectUser.getUserModifiedDate())
+					.userWalletAddress(selectUser.getUserWalletAddress())
+					.userPlatform(selectUser.getUserPlatform())
+					.userImage(selectUser.getUserImage())
+					.userKey(selectUser.getUserKey())
+					.build());
 		});
-		
 		return user.orElse(null);
 	}
 
@@ -98,7 +103,19 @@ public class UserServiceImpl implements UserService{
 			user.ifPresent(selectUser -> {
 				userRepository.save(User.builder()
 						.userSeq(selectUser.getUserSeq())
+						.userEmail(selectUser.getUserEmail())
+						.userBirth(selectUser.getUserBirth())
+						.userIsActive(selectUser.getUserIsActive())
+						.userCreatedDate(selectUser.getUserCreatedDate())
+						.userModifiedDate(selectUser.getUserModifiedDate())
+						.userNickname(selectUser.getUserNickname())
+						.userWalletAddress(selectUser.getUserWalletAddress())
+						.userPlatform(selectUser.getUserPlatform())
 						.userImage(path)
+						.userPhone(selectUser.getUserPlatform())
+						.userIntroduce(selectUser.getUserIntroduce())
+						.userCompany(selectUser.getUserCompany())
+						.userKey(selectUser.getUserKey())
 						.build());
 			});
 			result = true;
