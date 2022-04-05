@@ -46,23 +46,23 @@ const Products = ({funds}) => {
     <>
       <nav className="flex flex-row justify-center gap-[5rem] mt-[2rem] mb-[6rem]">
         <motion.button whileTap={{ scale: 0.98 }} className={`${category === 1 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showPopular}>
-          <Image width="70rem" height="70rem" className="rounded-t-xl" src="https://thumbs.dreamstime.com/b/pink-heart-isolated-pastel-color-background-shadow-d-rendering-173503543.jpg" alt="seller profile image" />
+          <Image width="70rem" height="70rem" className="rounded-t-xl" src="/category/popular.jpg" alt="popular category button image" />
           <span className="font-black mb-[0.3rem]">인기</span>
         </motion.button>
         <motion.button whileTap={{ scale: 0.98 }} className={`${category === 2 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showNew}>
-          <Image width="70rem" height="70rem" className="rounded-t-xl" src="https://img.freepik.com/free-photo/blue-gift-box-pink-pastel-background_37817-272.jpg" alt="seller profile image" />
+          <Image width="70rem" height="70rem" className="rounded-t-xl" src="/category/new.webp" alt="new category button image" />
           <span className="font-black">신규</span>
         </motion.button>
         <motion.button whileTap={{ scale: 0.98 }} className={`${category === 3 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showTrending}>
-          <Image width="70rem" height="70rem" className="rounded-t-xl" src="https://www.caremanagementmatters.co.uk/wp-content/uploads/2020/04/Image-1-Pastel-stairs.jpg" alt="seller profile image" />
+          <Image width="70rem" height="70rem" className="rounded-t-xl" src="/category/trending.jpg" alt="trending category button image" />
           <span className="font-black">급상승</span>
         </motion.button>
         <motion.button whileTap={{ scale: 0.98 }} className={`${category === 1 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showPopular}>
-          <Image width="70rem" height="70rem" className="object-none rounded-t-xl" src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="seller profile image" />
+          <Image width="70rem" height="70rem" className="object-none rounded-t-xl" src="/category/life.avif" alt="life category button image" />
           <span className="font-black">생활</span>
         </motion.button>
         <motion.button whileTap={{ scale: 0.98 }} className={`${category === 2 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showNew}>
-          <Image width="70rem" height="70rem" className="object-none rounded-t-xl" src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="seller profile image" />
+          <Image width="70rem" height="70rem" className="object-none rounded-t-xl" src="/category/food.avif" alt="food category button image" />
           <span className="font-black">식품</span>
         </motion.button>
         
