@@ -80,7 +80,8 @@ const Products = ({funds}) => {
           <span className="font-black">식품</span>
         </motion.button>
       </nav>
-      
+      <h2 className="text-2xl antialiased font-semibold text-center text-gray-700">{categoryTitle} 펀딩 상품</h2>
+      <hr className="mt-[32px] mb-[50px]  mx-[236px]" />
       <div className="flex flex-wrap justify-center mx-[64px] gap-x-[16px] gap-y-[64px] my-10">
         {funds[category-1] ? funds[category-1][0].map(fund => (
           // <Link href={'/products/' + fund.id} key={fund.id} passHref>
