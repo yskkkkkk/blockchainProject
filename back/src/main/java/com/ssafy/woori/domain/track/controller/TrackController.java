@@ -1,6 +1,7 @@
 package com.ssafy.woori.domain.track.controller;
 
 import com.ssafy.woori.domain.funding.controller.FundingController;
+import com.ssafy.woori.domain.track.dto.InvoiceRequest;
 import com.ssafy.woori.domain.track.service.TrackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +21,13 @@ public class TrackController {
     @Autowired
     TrackService trackService;
 
-    @GetMapping
-    public ResponseEntity<Boolean> invoiceValid(@RequestParam String trackNumber){
-        logger.info("송장번호 확인하기 " + trackNumber);
+    @PutMapping
+    public ResponseEntity<Boolean> invoiceValid(@RequestBody InvoiceRequest request){
+        logger.info("송장번호 확인하기 " + request.getHistorySeq() + " " + request.getTrackNumber());
         HttpStatus status;
         Boolean res = false;
 
-        if(trackService.invoiceValid(trackNumber)){
+        if(trackService.invoiceValid(request)){
             res = true;
             status = HttpStatus.OK;
         }
