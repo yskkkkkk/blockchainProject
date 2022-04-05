@@ -71,15 +71,21 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User updateUser(UserUpdateRequest request) {
-		return userRepository.save(User.builder()
-				.userSeq(request.getUserSeq())
-				.userBirth(request.getUserBirth())
-				.userNickname(request.getUserNickname())
-				.userPhone(request.getUserPhone())
-				.userIntroduce(request.getUserIntroduce())
-				.userCompany(request.getUserCompany())
-				.build()
-				);
+		Optional<User> user = userRepository.findById(request.getUserSeq());
+		
+		user.ifPresent(selectUser -> {
+			userRepository.save(User.builder()
+					.userSeq(selectUser.getUserSeq())
+					.userBirth(request.getUserBirth())
+					.userNickname(request.getUserNickname())
+					.userPhone(request.getUserPhone())
+					.userIntroduce(request.getUserIntroduce())
+					.userCompany(request.getUserCompany())
+					.build()
+					);
+		});
+		
+		return user.orElse(null);
 	}
 
 	@Override
@@ -88,10 +94,13 @@ public class UserServiceImpl implements UserService{
 		try {
 			String path = fileService.uploadFile(request.getMyfile()).get(0);
 		
-			userRepository.save(User.builder()
-					.userSeq(request.getUserSeq())
-					.userImage(path)
-					.build());
+			Optional<User> user = userRepository.findById(request.getUserSeq());
+			user.ifPresent(selectUser -> {
+				userRepository.save(User.builder()
+						.userSeq(selectUser.getUserSeq())
+						.userImage(path)
+						.build());
+			});
 			result = true;
 		} catch (IOException e) {
 			e.printStackTrace();
