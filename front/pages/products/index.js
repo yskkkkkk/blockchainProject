@@ -28,58 +28,87 @@ export const getStaticProps = async () => {
 const Products = ({funds}) => {
 
   const [category, setCategory] = useState(1);
+  const [categoryTitle, setCategoryTitle] = useState('인기');
 
   const showPopular = (e) => {
     e.preventDefault();
     setCategory(1);
+    setCategoryTitle('인기');
   }
   const showNew = (e) => {
     e.preventDefault();
     setCategory(2);
+    setCategoryTitle('신규');
   }
   const showTrending = (e) => {
     e.preventDefault();
     setCategory(3);
+    setCategoryTitle('급상승');
+  }
+  const showLife = (e) => {
+    e.preventDefault();
+    setCategory(4);
+    setCategoryTitle('생활');
+  }
+  const showFood = (e) => {
+    e.preventDefault();
+    setCategory(5);
+    setCategoryTitle('식품');
   }
 
   return (
     <>
       <nav className="flex flex-row justify-center gap-[5rem] mt-[2rem] mb-[6rem]">
-        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 1 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showPopular}>
+        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 1 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow-lg hover:text-theme-color hover:shadow-gray-400/70 rounded-xl`} onClick={showPopular}>
           <Image width="70rem" height="70rem" className="rounded-t-xl" src="/category/popular.jpg" alt="popular category button image" />
           <span className="font-black mb-[0.3rem]">인기</span>
         </motion.button>
-        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 2 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showNew}>
+        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 2 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow-lg hover:text-theme-color hover:shadow-gray-400/70 rounded-xl`} onClick={showNew}>
           <Image width="70rem" height="70rem" className="rounded-t-xl" src="/category/new.webp" alt="new category button image" />
           <span className="font-black">신규</span>
         </motion.button>
-        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 3 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showTrending}>
+        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 3 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow-lg hover:text-theme-color hover:shadow-gray-400/70 rounded-xl`} onClick={showTrending}>
           <Image width="70rem" height="70rem" className="rounded-t-xl" src="/category/trending.jpg" alt="trending category button image" />
           <span className="font-black">급상승</span>
         </motion.button>
-        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 1 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showPopular}>
+        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 4 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow-lg hover:text-theme-color hover:shadow-gray-400/70 rounded-xl`} onClick={showLife}>
           <Image width="70rem" height="70rem" className="object-none rounded-t-xl" src="/category/life.avif" alt="life category button image" />
           <span className="font-black">생활</span>
         </motion.button>
-        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 2 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow hover:text-theme-color hover:shadow-theme-color rounded-xl`} onClick={showNew}>
+        <motion.button whileTap={{ scale: 0.98 }} className={`${category === 5 && "text-theme-color"} "rounded-2xl flex flex-col items-center gap-[0.5rem] shadow-lg hover:text-theme-color hover:shadow-gray-400/70 rounded-xl`} onClick={showFood}>
           <Image width="70rem" height="70rem" className="object-none rounded-t-xl" src="/category/food.avif" alt="food category button image" />
           <span className="font-black">식품</span>
         </motion.button>
-        
       </nav>
-      <div className="flex flex-wrap justify-center gap-[5rem] my-10">
-        {funds[category-1][0].map(fund => (
+      
+      <div className="flex flex-wrap justify-center mx-[64px] gap-x-[16px] gap-y-[64px] my-10">
+        {funds[category-1] ? funds[category-1][0].map(fund => (
           // <Link href={'/products/' + fund.id} key={fund.id} passHref>
           <Link href={'/products/' + fund.fundingSeq} key={fund.fundingSeq} passHref>
             <motion.button
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
-              className="w-1/4 sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4"
+              className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-[16px]"
             >
               <FundCard fund={fund} />
             </ motion.button>
           </Link>
-        ))}
+        )) :
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={{
+            initial: {
+              opacity: 0,
+            },
+            animate: {
+              opacity: 1,
+            },
+          }}
+        >
+          <h2 className="text-center my-[5rem]">해당 카테고리의 펀딩 상품이 없습니다.</h2>
+        </motion.div>
+        }
       </div>
     
     </>
