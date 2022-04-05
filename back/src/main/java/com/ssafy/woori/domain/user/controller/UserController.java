@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,10 +58,10 @@ public class UserController {
     	return new ResponseEntity<User>(userService.updateUser(request), HttpStatus.OK);
     }
     
-    @PutMapping("/profileImage")
+    @PutMapping("/profileImage/{userSeq}")
     public ResponseEntity<String> updateUserProfileImage(
     		@RequestPart(value="file", required = false) MultipartFile[] file,
-			   @RequestPart(value="userSeq") int userSeq){
+    		@PathVariable int userSeq){
     	// 파일입력받아서 수정
     	UserProfileRequest request = UserProfileRequest.builder()
     			.userSeq(userSeq)
