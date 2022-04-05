@@ -14,5 +14,5 @@ public class AddHistory {
     private Integer fundingSeq;
     private Integer optionNum;
     private Integer optionSeq;
-    private Integer seller;
+ //   private Integer seller;
 }

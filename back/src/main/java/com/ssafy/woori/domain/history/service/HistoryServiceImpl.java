@@ -1,5 +1,6 @@
 package com.ssafy.woori.domain.history.service;
 
+import com.ssafy.woori.domain.funding.dao.FundingRepository;
 import com.ssafy.woori.domain.funding.dto.UserBuyListResponse;
 import com.ssafy.woori.domain.funding.repository.HistoryRepository;
 import com.ssafy.woori.domain.history.dto.AddHistory;
@@ -15,6 +16,9 @@ public class HistoryServiceImpl implements HistoryService{
 
     @Autowired
     HistoryRepository historyRepository;
+
+    @Autowired
+    FundingRepository fundingRepository;
 
     @Override
     public Optional<List<UserBuyListResponse>> userBuyList(int userSeq) {
@@ -42,6 +46,7 @@ public class HistoryServiceImpl implements HistoryService{
                            .state(3)
                            .userSeq(selectHistory.getUserSeq())
                            .seller(selectHistory.getSeller())
+//                           .seller(fundingRepository.getSeller(selectHistory.getFundingSeq()))
                            .build()
            );
         });
@@ -57,7 +62,8 @@ public class HistoryServiceImpl implements HistoryService{
                         .optionSeq(request.getOptionSeq())
                         .state(1)
                         .userSeq(request.getUserSeq())
-                        .seller(request.getSeller())
+//                        .seller(request.getSeller())
+                        .seller(fundingRepository.getSeller(request.getFundingSeq()))
                         .build()
         ));
     }
