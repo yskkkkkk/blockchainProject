@@ -1,4 +1,4 @@
-package com.ssafy.woori.domain.history.repository;
+package com.ssafy.woori.domain.funding.repository;
 
 import com.ssafy.woori.domain.funding.dto.UserBuyListResponse;
 import com.ssafy.woori.entity.History;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface HistoryRepository extends JpaRepository<History,Integer> {
-    @Query(value = "select f.fundingTitle as fundingTitle, f.fundingImage as fundingImage from History h, Funding f " +
+    @Query(value = "select h.historySeq as historySeq, f.fundingTitle as fundingTitle, f.fundingImage as fundingImage from History h, Funding f " +
             "where f.fundingSeq = h.fundingSeq and h.userSeq = :userSeq")
     Optional<List<UserBuyListResponse>> findByUserSeq(int userSeq);
 }

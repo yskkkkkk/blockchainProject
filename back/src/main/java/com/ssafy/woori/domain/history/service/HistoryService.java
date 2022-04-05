@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface HistoryService {
     Optional<List<UserBuyListResponse>> userBuyList(int userSeq);
+    boolean changeHistory(int historySeq);
 }
