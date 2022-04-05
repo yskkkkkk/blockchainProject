@@ -2,6 +2,7 @@ package com.ssafy.woori.domain.history.service;
 
 import com.ssafy.woori.domain.funding.dto.UserBuyListResponse;
 import com.ssafy.woori.domain.funding.repository.HistoryRepository;
+import com.ssafy.woori.domain.history.dto.AddHistory;
 import com.ssafy.woori.entity.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,19 @@ public class HistoryServiceImpl implements HistoryService{
            );
         });
         return (true);
+    }
+
+    @Override
+    public History addHistory(AddHistory request) {
+        return (historyRepository.save(
+                History.builder()
+                        .fundingSeq(request.getFundingSeq())
+                        .optionNum(request.getOptionNum())
+                        .optionSeq(request.getOptionSeq())
+                        .state(1)
+                        .userSeq(request.getUserSeq())
+                        .seller(request.getSeller())
+                        .build()
+        ));
     }
 }
