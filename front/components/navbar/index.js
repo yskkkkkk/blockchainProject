@@ -39,7 +39,7 @@ export default function Navbar() {
     .catch((err) => {
       console.log(err);
     })
-  }, [])
+  })
 
   return (
     <nav className={style.container} >
