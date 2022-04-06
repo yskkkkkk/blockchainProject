@@ -110,12 +110,12 @@ export default function Create(){
             _signer.getAddress()
               .then((res) => {
                const address = res
+               if (address !== userWalletAddress) {
+                 throw new Error(`지갑 주소가 저장된 것과 다릅니다.  
+                 ${userWalletAddress} 주소를 이용하여 주세요.`)
+               }
               })
             // const address = await _signer.getAddress()
-            if (address !== userWalletAddress) {
-              throw new Error(`지갑 주소가 저장된 것과 다릅니다.  
-              ${userWalletAddress} 주소를 이용하여 주세요.`)
-            }
           })
           .error(
             (err) => {
