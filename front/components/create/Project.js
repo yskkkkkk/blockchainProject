@@ -6,8 +6,9 @@ import { TextField } from "@mui/material"
 import { Button } from "@mui/material"
 import { display } from "@mui/system"
 import { styled } from "@mui/material"
+import Texteditor from "./Texteditor"
 
-export default function Proeject(props){
+export default function Project(props){
   const {name, intro, category, image, description} = props.projectData
   const categories = [
     {category_number:2, category_name:"뷰티"},
@@ -74,13 +75,14 @@ export default function Proeject(props){
       </div>
       <div>
         <label htmlFor="description">프로젝트 설명:</label>
-        <TextField 
+        {/* <TextField 
           type="text" 
           id="description" 
           name="description"
           onChange={props.handleChange}
           value={description}
-        />
+        /> */}
+        <Texteditor id="description"/>
       </div>
     </div>    
   )

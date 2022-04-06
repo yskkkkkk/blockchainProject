@@ -52,8 +52,8 @@ public class TrackServiceImpl implements TrackService{
                 if(st.hasMoreTokens()){
                     String state = st.nextToken();
                     System.out.println(state);
-                    // 여긴 도착한 상황
-                    if(state.equals("delivered")) {
+                    // 배송도착 혹은 배송중인 상황
+                    if(state.equals("delivered") || state.equals("out_for_delivery")) {
                         // History state 변경
                         if(!historyService.changeHistory(request.getHistorySeq())) return (false);
 
