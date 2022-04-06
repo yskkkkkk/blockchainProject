@@ -22,9 +22,9 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    if (userInfo.userNickname) {
-      setIsLoggedIn(true);
-    }
+    // if (userInfo.userNickname) {
+    //   setIsLoggedIn(true);
+    // }
   }, [userInfo])
   // useEffect(() => {
   //   Send.get('/user/check')

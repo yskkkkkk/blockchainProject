@@ -1,12 +1,48 @@
 import styles from '../styles/Home.module.css'
-import { Fade } from "react-awesome-reveal";
+import { Fade, Slide, Flip, JackInTheBox, Bounce, Rotate } from "react-awesome-reveal";
 
 export default function intro() {
   return (
-    <div style={{marginBottom: "200px"}}>
+    <div style={{margin: "auto", marginBottom: "200px", width: "70%"}}>
       <Fade>
-        <h1 className="text-3xl antialiased font-semibold text-left text-gray-700 ">어려운 펀딩, 어떻게 시작할까요?</h1>
+        <h1 className="text-4xl antialiased font-semibold text-left text-gray-700 mb-10">판매자를 어떻게 믿어요 ㅠ</h1>
       </Fade>
+      <Slide direction={'right'}>
+        <h1 className="text-4xl antialiased font-semibold text-right text-gray-700 mb-40">또 플랫폼은요?</h1>
+      </Slide>
+      <Flip>
+        <h1 className="text-4xl antialiased font-semibold text-center text-gray-700 mb-10">.</h1>
+        <h1 className="text-4xl antialiased font-semibold text-center text-gray-700 mb-10">.</h1>
+        <h1 className="text-4xl antialiased font-semibold text-center text-gray-700 mb-60">.</h1>
+      </Flip>
+      <JackInTheBox>
+        <h1 className="text-5xl antialiased font-bold text-center text-gray-700 mb-40">그런 당신을 위한 단 하나의 플랫폼</h1>
+      </JackInTheBox>
+      <Bounce fraction={0.8} triggerOnce={true}>
+        <img style={{margin: "auto", marginBottom: "2rem"}} src="/wd.webp" width="400px" alt="우리 두레" />
+        <h1 className="text-7xl antialiased font-bold text-center text-gray-700 mb-80">우리 두레</h1>
+      </Bounce>
+
+      <Bounce>
+        <h1 className="text-5xl antialiased font-bold text-center text-gray-700 mb-60">어떻게 사용하냐고요?</h1>
+      </Bounce>
+
+      <Bounce>
+        <h1 className="text-5xl antialiased font-bold text-center text-gray-700 mb-80">걱정 마세요!</h1>
+      </Bounce>
+
+      <Fade fraction={0.8}>
+        <h1 className="text-4xl antialiased font-bold text-left text-gray-700 mb-20">1. 메타마스크 지갑을 준비해요.</h1>
+      </Fade>
+      <iframe width="800" height="400" src="https://www.youtube.com/embed/dHANMtxLXt0" title="YouTube video player" frameㅠorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+      <h1 className="text-4xl mt-60 antialiased font-bold text-right text-gray-700 mb-20">2. 네이버, 카카오 <br/> 어떤 것이든 이용하실 수 있어요.</h1>
+      <div style={{margin: "auto", marginBottom: "2rem", marginRight: "-30px", float: "right"}}>
+        <Fade triggerOnce={true}>
+          <img style={{border: "1px solid grey", borderRadius: "10%"}} src="/login-page.jpg" width="600px" alt="우리 두레" />
+        </Fade>
+      </div>
+
       
       
     </div>
