@@ -1,6 +1,27 @@
 import Image from 'next/image';
 import {motion} from 'framer-motion';
+import contractGetter from '../../lib/ContractGetter';
+import { useEffect, useState } from 'react';
+
 const FundCard = ({fund}) => {
+  const [dDay, setDDay] = useState('...')
+  useEffect(
+    async () => {
+      const contract = contractGetter(fund.fundingContract)
+      const temp = await contract.endDate()
+      const endDate = (Number(BigInt(temp._hex)) * 1000)
+      if ((endDate - Date.now()) / 86400000 > 1) {
+        setDDay(`${parseInt((endDate - Date.now()) / 86400000)}일 남음`)
+      } else if (endDate - Date.now() > 7200000) {
+        setDDay(`${parseInt((endDate - Date.now()) / 3600000)}시간 남음`)
+      } else if (endDate - Date.now() > 120000) {
+        setDDay(`${parseInt((endDate - Date.now()) / 60000)}분 남음`)
+      } else {
+        return
+      }
+    }
+  , [])
+
 
   return (
     <motion.div
@@ -22,8 +43,8 @@ const FundCard = ({fund}) => {
           <p className="text-base text-gray-700">펀드한줄설명{fund.fundingSimple}</p>
         </section>
         <section className="px-6 pt-4 pb-2">
-          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#early bird</span>
-          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#한정수량</span>
+          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full"># {dDay}</span>
+          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full"># 한정수량</span>
         </section>
       </article>
 

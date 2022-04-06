@@ -2,7 +2,7 @@ import axios from 'axios'
 // import {useState, useEffect} from 'react'
 import Banner from '../components/main/banner'
 import Card from '../components/cards/card'
-import CardFav from '../components/cards/cardfav'
+import CardFav from '../components/cards/cardFav'
 import Grid from '@mui/material/Grid'
 import style from "../components/cards/card.module.css"
 import CardSmall from "../components/cards/cardSmall"
