@@ -1,19 +1,33 @@
-import Image from "next/image";
-
+import Image from 'next/image';
+import {motion} from 'framer-motion';
 const FundCard = ({fund}) => {
 
   return (
-    <article className="flex flex-col gap-[1rem] overflow-hidden flex-wrap shadow-lg">
-      <img className="self-center w-fit" src="/productImg.jpg" alt="fund card image" />
-      <section className="px-6">
-        <div className="mb-2 text-xl font-bold">펀드명:{fund.fundingTitle} ₩</div>
-        <p className="text-base text-gray-700">펀드한줄설명{fund.fundingSimple}</p>
-      </section>
-      <section className="px-6 pt-4 pb-2">
-        <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#early bird</span>
-        <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#한정수량</span>
-      </section>
-    </article>
+    <motion.div
+      initial="initial"
+      animate="animate"
+      variants={{
+        initial: {
+          opacity: 0,
+        },
+        animate: {
+          opacity: 1,
+        },
+      }}>
+
+      <article className="flex flex-col gap-[16px] overflow-hidden flex-wrap shadow-lg">
+        <img className="w-full" src="/productImg.jpg" alt="fund card image" />
+        <section className="px-6">
+          <div className="mb-2 text-xl font-bold">펀드명:{fund.fundingTitle} ₩</div>
+          <p className="text-base text-gray-700">펀드한줄설명{fund.fundingSimple}</p>
+        </section>
+        <section className="px-6 pt-4 pb-2">
+          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#early bird</span>
+          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">#한정수량</span>
+        </section>
+      </article>
+
+      </motion.div>
 
     // <div class="max-w-sm min-w-sm lg:max-w-full lg:flex">                                                         {/* 아래거 안될시 style={{backgroundImage: `url('/productImg.jpg')`}} 로 대체*/} 
     //   <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{ backgroundImage: `url(${fund.fundingImage})` }} title="product thumbnail pic">

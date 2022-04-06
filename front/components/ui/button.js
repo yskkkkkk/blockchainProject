@@ -8,7 +8,7 @@ const CustomButton = ({func, text, classNameProp}) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={func}
-          className={classNameProp}
+          className={`${classNameProp} rounded-xl`}
         >
           {text}
     </ motion.button>
