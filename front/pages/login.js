@@ -1,20 +1,23 @@
 import Router from 'next/router';
-
+import { useEffect } from 'react';
+import axios from 'axios';
 
 export default function Login() {
   
   const toKakao = () => {
-    Router.push("http://j6a305.p.ssafy.io/api/oauth2/authorization/kakao");
+
+    Router.push("http://j6a305.p.ssafy.io:9999/api/oauth2/authorization/kakao");
   }
 
   const toNaver = () => {
-    Router.push("http://j6a305.p.ssafy.io/api/oauth2/authorization/kakao");
+    Router.push("http://j6a305.p.ssafy.io:9999/api/oauth2/authorization/naver");
   }
 
   const toGoogle = () => {
     Router.push("http://j6a305.p.ssafy.io:9999/api/oauth2/authorization/google");
   }
 
+  
   return (
     <main className="flex flex-col gap-[4rem] items-center mt-[5rem] mb-[10rem]">
       <h1 className="font-sans text-4xl antialiased text-center ">우리 두레의 회원이 되어<br />당신만의 펀딩을 시작하세요.</h1>
