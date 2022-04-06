@@ -52,9 +52,10 @@ export default function Texteditor(props){
         // .then(res=>console.log(res))
         // .catch(e=>console.log(e))
       const IMG_URL = result.data.file
+      console.log(IMG_URL)
       const editor = quillRef.current.getEditor()
       const range = editor.getSelection()
-      editor.insertEmbed(range.index, 'image', IMG_URL)
+      setTimeout(()=>{editor.insertEmbed(range.index, 'image', IMG_URL)},2000)
       
     })   
   }
