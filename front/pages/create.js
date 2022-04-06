@@ -104,6 +104,7 @@ export default function Create(){
         })
 
         const _provider = new ethers.providers.Web3Provider(window.ethereum);
+        await _provider.send("eth_requestAccounts", []);
         const _signer = _provider.getSigner()
         setProvider(_provider);
         setSigner(_signer);
@@ -148,10 +149,23 @@ export default function Create(){
   // 펀딩 등록할 때 사용하는 함수입니다! 초반부는 컨트랙트 부분이고 후반부는 백엔드 API 연동 부분입니다.
   const createProject = async () => {
     try {
+      const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${userSeq}`);
+      const data = await res.json();
+      const userWalletAddress = data.userWalletAddress;
+      const address = await signer.getAddress()
+      if (address !== userWalletAddress) {
+        toast.error(`지갑 주소가 저장된 것과 다릅니다.  
+        ${userWalletAddress && userWalletAddress.slice(0, 10)}... 주소를 이용하여 주세요.
+        \n 곧 메인페이지로 이동합니다.`)
+        setTimeout(() => {
+          Router.push('/')
+        }, 3000 )
+      }
+
       const factory = new ContractFactory(ABI, Bytecode, signer);
       const contract = await factory.deploy(temp_startDate, temp_endDate, temp_targetAmount, temp_optionPrices);
       const fullMessage = await contract.deployTransaction.wait()
-
+      console.log(fullMessage)
       const contractAddress = contract.address; // 컨트랙트 주소입니다! 이것을 백엔드에 함께 전송해 주십시오!
 
       // 여기서부터 백엔드 API 연동을 해주시면 됩니다.
@@ -161,10 +175,11 @@ export default function Create(){
 
 
       // 맨 마지막에는 거래 성공^^
-      toast.success('축하합니다! 펀딩이 등록되었습니다!')
-      Router.push('/') // 메인페이지로 이동
+      toast.success('축하합니다! 펀딩이 등록되었습니다! \n 잠시 후 메인페이지로 이동합니다.')
+      setTimeout( () => {Router.push('/')}, 4000) // 메인페이지로 이동
 
     } catch (error) {
+      console.log(error)
       toast.error('거래가 정상적으로 이루어지지 않았습니다. 다시 시도해주세요.')
     }
   }
