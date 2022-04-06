@@ -107,17 +107,15 @@ export default function Create(){
         const _signer = _provider.getSigner()
         setProvider(_provider);
         setSigner(_signer);
-        _signer.getAddress()
-          .then((res) => {
-            const address = res
-            if (address !== userWalletAddress) {
-              toast.error(`지갑 주소가 저장된 것과 다릅니다.  
-              ${userWalletAddress && userWalletAddress.slice(0, 10)}... 주소를 이용하여 주세요.`)
-              setTimeout(() => {
-                Router.push('/')
-              }, 3000 )
-            }
-          })
+        console.log("signer: ", _signer)
+        const address = await _signer.getAddress()
+        if (address !== userWalletAddress) {
+          toast.error(`지갑 주소가 저장된 것과 다릅니다.  
+          ${userWalletAddress && userWalletAddress.slice(0, 10)}... 주소를 이용하여 주세요.`)
+          setTimeout(() => {
+            Router.push('/')
+          }, 3000 )
+        }
             // const address = await _signer.getAddress()
 
           // .error(
