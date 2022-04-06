@@ -1,9 +1,12 @@
 import { useRef, useState, useMemo, createRef, forwardRef } from 'react'
+import Image from 'next/image'
 // import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import Send from "../../lib/Send"
 import axios from 'axios'
 import dynamic from 'next/dynamic'
+
+
 
 const ReactQuill = dynamic(async () => {
   const { default: RQ } = await import('react-quill')
@@ -54,8 +57,7 @@ export default function Texteditor(props){
       const IMG_URL = result.data.file
       console.log(IMG_URL)
       const editor = quillRef.current.getEditor()
-      const range = editor.getSelection()
-      setTimeout(()=>{editor.insertEmbed(range.index, 'image', IMG_URL)},2000)
+      const range = editor.getSelection()      
       
     })   
   }
@@ -70,6 +72,7 @@ export default function Texteditor(props){
   return(
     <div>
       {/* <QuillNoSSRWrapper ref={quillRef} theme="snow" modules={modules} formats={formats} onChange={setValue}/> */}
+      <Image src='/files/2022/4/6/d2bb8674-f129-4af2-9304-ef91928780dd_ethereum.png' width={300} height={300}/>
       <ReactQuill forwardedRef={quillRef} theme="snow" modules={modules} formats={formats} value={value} onChange={setValue}/>
     </div>
   )
