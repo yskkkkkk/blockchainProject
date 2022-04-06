@@ -86,7 +86,7 @@ export default function Create(){
     if (window.ethereum && window.ethereum.isMetaMask) {
       try {
         const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${userSeq}`);
-        const data = res.data.json();
+        const data = res.json();
         const userWalletAddress = data.userWalletAddress
         window.ethereum.request({
           method: "wallet_addEthereumChain",
