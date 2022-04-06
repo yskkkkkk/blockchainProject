@@ -32,6 +32,7 @@ import com.ssafy.woori.domain.user.service.UserServiceImpl;
 import com.ssafy.woori.entity.Alarm;
 import com.ssafy.woori.entity.User;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,6 +56,7 @@ public class UserController {
 		httpServletResponse.sendRedirect("https://j6a305.p.ssafy.io/");
 	}
 	
+	@ApiOperation(value = "loginCheck", notes = "메인페이지가 켜질 때 마다 이걸로 로그인 여부를 체크해야 할거 같습니다. null이 반환되면 로그인이 안된거, user이 반환되면 로그인이 된 상태입니다.")
 	@GetMapping("/check")
 	public ResponseEntity<UserInfoResponse> loginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
@@ -69,6 +71,7 @@ public class UserController {
 		return new ResponseEntity<UserInfoResponse>(loginUser, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "logout", notes = "저장된 로그인 유저의 세션을 날립니다. 로그아웃에 걸고 메인페이지로 가게 해서 check에서 null을 반환 받는걸로 로그아웃 처리를 해야할거 같아요.")
 	@GetMapping("/logout")
 	public void logout(HttpServletRequest request){
 		request.getSession().invalidate();
