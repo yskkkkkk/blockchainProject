@@ -1,6 +1,11 @@
 package com.ssafy.woori.domain.user.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,13 +45,35 @@ public class UserController {
     private final String FAIL = "error";
     
 	@GetMapping("/login")
-	public ResponseEntity<UserInfoResponse> postLoginProcessing() {
+	public void postLoginProcessing(HttpServletRequest request, HttpServletResponse httpServletResponse) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserInfoResponse response = userService.getUserByUserKey(authentication.getName());
 		
 		log.info("login Success - user: " + response.getUserNickname());
-    	return new ResponseEntity<UserInfoResponse>(response, HttpStatus.OK);
+		HttpSession session = request.getSession();
+		session.setAttribute("user", response);
+		httpServletResponse.sendRedirect("https://j6a305.p.ssafy.io/");
 	}
+	
+	@GetMapping("/check")
+	public ResponseEntity<UserInfoResponse> loginCheck(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+        if (session == null) {
+            return null;
+        }
+        UserInfoResponse loginUser = (UserInfoResponse) session.getAttribute("user");
+
+        if (loginUser == null) {
+            return null;
+        }
+		return new ResponseEntity<UserInfoResponse>(loginUser, HttpStatus.OK);
+	}
+	
+	@GetMapping("/logout")
+	public void logout(HttpServletRequest request){
+		request.getSession().invalidate();
+	}
+	
 	
     @GetMapping("/{userSeq}")
     public ResponseEntity<UserInfoResponse> userInfo(@PathVariable int userSeq){
