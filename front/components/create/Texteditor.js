@@ -19,6 +19,8 @@ const ReactQuill = dynamic(async () => {
 export default function Texteditor(props){
 
   const [value, setValue] = useState('')
+  const [tempValue, setTempValue] = useState()
+  const [tempValue2, setTempValue2] = useState()
   const quillRef = useRef()
   
   const modules = useMemo(() => {
@@ -58,9 +60,11 @@ export default function Texteditor(props){
       console.log(IMG_URL)
       const editor = quillRef.current.getEditor()
       const range = editor.getSelection()      
-      
+      setTempValue(<Image src={IMG_URL} width={300} height={300}/>)
+      setTempValue2(<img src={IMG_URL}/>)
     })   
   }
+  console.log(typeof(value))
 
   const formats = [
     'header',
@@ -72,6 +76,8 @@ export default function Texteditor(props){
   return(
     <div>
       {/* <QuillNoSSRWrapper ref={quillRef} theme="snow" modules={modules} formats={formats} onChange={setValue}/> */}
+      {tempValue}
+      {tempValue2}
       <Image src='/files/2022/4/6/d2bb8674-f129-4af2-9304-ef91928780dd_ethereum.png' width={300} height={300}/>
       <ReactQuill forwardedRef={quillRef} theme="snow" modules={modules} formats={formats} value={value} onChange={setValue}/>
     </div>
