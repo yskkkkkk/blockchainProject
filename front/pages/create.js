@@ -102,27 +102,30 @@ export default function Create(){
               blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com"]
           }]
         })
-          .then((result) => {
-            const _provider = new ethers.providers.Web3Provider(window.ethereum);
-            const _signer = _provider.getSigner()
-            setProvider(_provider);
-            setSigner(_signer);
-            _signer.getAddress()
-              .then((res) => {
-               const address = res
-               if (address !== userWalletAddress) {
-                 throw new Error(`지갑 주소가 저장된 것과 다릅니다.  
-                 ${userWalletAddress} 주소를 이용하여 주세요.`)
-               }
-              })
-            // const address = await _signer.getAddress()
-          })
-          .error(
-            (err) => {
-              toast.error(err)
-              Router.push('/')
+
+        const _provider = new ethers.providers.Web3Provider(window.ethereum);
+        const _signer = _provider.getSigner()
+        setProvider(_provider);
+        setSigner(_signer);
+        _signer.getAddress()
+          .then((res) => {
+            const address = res
+            if (address !== userWalletAddress) {
+              toast.error(`지갑 주소가 저장된 것과 다릅니다.  
+              ${userWalletAddress && userWalletAddress.slice(0, 10)}... 주소를 이용하여 주세요.`)
+              setTimeout(() => {
+                Router.push('/')
+              }, 3000 )
             }
-          );
+          })
+            // const address = await _signer.getAddress()
+
+          // .error(
+          //   (err) => {
+          //     toast.error(err)
+          //     Router.push('/')
+          //   }
+          // );
         
       } catch (error) {
         console.error("유저 정보 획득 실패:", error)
