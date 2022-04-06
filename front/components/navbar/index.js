@@ -1,31 +1,39 @@
 import Link from 'next/link';
-
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import style from './navbar.module.css';
-
+import { UserContext } from '../../lib/UserContext';
+import Send from '../../lib/Send';
 
 export default function Navbar() {
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState('');
-  const [userName, setUserName] = useState('');
-  const [userImage, setUserImage] = useState('');
+
+  const {userInfo, setUserInfo} = useContext(UserContext);
+  
 
   const logout = (e) => {
     e.preventDefault();
-    localStorage.clear("token");
+    Send.get('/user/logout')
+    .then((data) => {
+      console.log(data);
+      setUserInfo('');
+      setIsLoggedIn(false);
+    })
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      // 토큰 안에 들어있는 userId, userName, userImage값들을
-      // 컴포넌트 상태 정보 값에 저장 
-    }
-    else {
-      console.log("미회원");
-    }
-  });
+    Send.get('/user/check')
+    .then((data) => {
+      console.log(data);
+      setUserInfo(data.data);
+      if (data.data) {
+        setIsLoggedIn(true);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [])
 
   return (
     <nav className={style.container} >
@@ -72,7 +80,7 @@ export default function Navbar() {
           <>
             <li className={style.li}>
               <Link href="/profile">
-                <a>profile</a>
+                <a>{userInfo.userNickname}</a>
               </Link>
             </li>
             <li className={style.li}>

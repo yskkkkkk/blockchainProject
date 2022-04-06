@@ -1,8 +1,8 @@
 import {motion, AnimatePresence} from 'framer-motion';
 import {useState, useEffect} from 'react';
-import Backdrop from '../backdrop';
-import Send from '../../lib/Send';
-import CustomButton from '../ui/button';
+import Backdrop from '../../modal/backdrop';
+import Send from '../../../lib/Send';
+import CustomButton from '../../ui/button/button';
 
 
 // 상품 QnA 컴포넌트
