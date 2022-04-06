@@ -5,11 +5,11 @@ export default function Banner() {
   return (
     <Carousel autoPlay showThumbs={false} infiniteLoop>
       <div>
-        <img style={{ height: "300px" }} alt="" src="/donlee.jpg" />
+        <img style={{ height: "320px" }} alt="" src="/donlee.jpg" />
         {/* <p className="legend">Legend 1</p> */}
       </div>
       <div>
-        <img style={{ height: "300px" }} alt="" src="/logo.png" />
+        <img style={{ height: "320px" }} alt="" src="/logo.png" />
         {/* <p className="legend">Legend 2</p> */}
       </div>
     </Carousel>
