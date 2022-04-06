@@ -8,7 +8,7 @@ export default function CardFav(props) {
       <div style={{marginBottom: "3%"}}>
         <img src="/donlee.jpg" alt="" />
       </div>
-      <h2 style={{fontWeight: "600"}}>{props.info}</h2>
+      <h2 style={{fontWeight: "600"}}>{props.info.fundingTitle}</h2>
       <div className={style.flexJustifyBetween}>
         <span>78%</span>
         <span>~2022.4.8</span>
