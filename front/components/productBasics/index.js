@@ -8,6 +8,7 @@ import {follow, unfollow} from '../../lib/User.js';
 import CustomButton from '../ui/button.js';
 
 import {UserContext} from "../../lib/UserContext";
+import commonContract from '../../lib/CommonContract';
 
 const ProductBasics = ({src, fundInfo}) => {
 
@@ -17,6 +18,8 @@ const ProductBasics = ({src, fundInfo}) => {
   const [getAlarm, setGetAlarm] = useState(false);        // 보여주기용 알람 버튼 토글 상태값
   const [like, setLike] = useState(false);                // 찜 버튼 토글 상태 값
   const [seller, setSeller] = useState(fundInfo.userSeq);
+  const [overall, setOverall] = useState('0 ETH');           // 현재까지의 모금액 총계
+  const [fundRatio, setFundRatio] = useState('0%');         // 현재까지 몇 퍼센트가 모였는지 알려주는 string
 
   const toggleFollow = (e) => {
     e.preventDefault();
@@ -63,7 +66,14 @@ const ProductBasics = ({src, fundInfo}) => {
     getFollowing();  // lib 파일에 위치한 함수
   }, [userSeq])
 
-  
+  useEffect(async () => {
+    console.log("fundinfo", fundInfo.fundingContract)
+    const contract = await commonContract(fundInfo.fundingContract)
+    const _overall = await contract.getOverall()
+    const _target = await contract.getTargetAmount()
+    setOverall((Number(BigInt(_overall._hex) / BigInt(1e15)) / 1000).toString() + ' ETH') // 전체 모금액 설정
+    setFundRatio((BigInt(_overall._hex) * 100n / BigInt(_target._hex)).toString() + '%')  // 몇 퍼센트 모았는지 설정
+  }, [])
 
   return (
     <header className="flex flex-row justify-center gap-[10rem]">
@@ -75,9 +85,9 @@ const ProductBasics = ({src, fundInfo}) => {
         <h2>{fundInfo.fundingTitle}</h2>
         <div>
           <div className="w-full mt-4 bg-gray-200 rounded-full dark:bg-gray-700">
-            <div className="p-1 rounded-full bg-theme-color" style={{width:'45%'}}></div>
+            <div className="p-1 rounded-full bg-theme-color" style={{width: fundRatio}}></div>
           </div>
-          <p>45% 달성 (100,000원)</p>
+          <p>{fundRatio} 달성 ({overall})</p>
         </div>
         {/* <p>겉바속촉의 정석! 유명 식당에서 눈치 봐가며 시키던 멘보샤를 집에서도 푸짐하게 즐기세요! 홈메이드 칠리소스도 함께 드립니다:)</p> */}
         <p>매우 간편한 설명! : {fundInfo.fundingSimple}</p>
