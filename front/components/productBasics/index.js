@@ -8,7 +8,7 @@ import {follow, unfollow} from '../../lib/User.js';
 import CustomButton from '../ui/button.js';
 
 import {UserContext} from "../../lib/UserContext";
-import commonContract from '../../lib/CommonContract';
+import contractGetter from '../../lib/ContractGetter';
 
 const ProductBasics = ({src, fundInfo}) => {
 
@@ -68,7 +68,7 @@ const ProductBasics = ({src, fundInfo}) => {
 
   useEffect(async () => {
     console.log("fundinfo", fundInfo.fundingContract)
-    const contract = await commonContract(fundInfo.fundingContract)
+    const contract = await contractGetter(fundInfo.fundingContract)
     const _overall = await contract.getOverall()
     const _target = await contract.getTargetAmount()
     setOverall((Number(BigInt(_overall._hex) / BigInt(1e15)) / 1000).toString() + ' ETH') // 전체 모금액 설정
