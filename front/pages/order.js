@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import Backdrop from "../components/backdrop";
+import Backdrop from "../components/modal/backdrop";
 import {motion, AnimatePresence} from 'framer-motion';
 
 const Order = () => {
@@ -51,7 +51,6 @@ const Order = () => {
   return (
     <main>
       <section className="flex flex-col items-center gap-[5rem]">
-
         <form class="w-full max-w-xl">
           <div class="flex flex-row -mx-3 mb-6">
             <p className=" basis-[6rem]">수령인</p>
@@ -93,6 +92,11 @@ const Order = () => {
           </div>
         </form>
       </section>
+
+      <section>
+        
+      </section>
+
       <AnimatePresence
       // initial animation (바로 사라져버리는것?) 비활성화시킴
       initial={false}

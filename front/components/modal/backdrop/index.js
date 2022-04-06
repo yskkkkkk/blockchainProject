@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import AnnounceModal from "../announceModal";
 import QnaModal from "../qnaModal";
-import DaumPost from "../daumPost";
+import DaumPost from "../../daumPost";
 
 const Backdrop = ({fundingSeq, addQna, addAnnouncement, label, handleClose, setAddress}) => {
  

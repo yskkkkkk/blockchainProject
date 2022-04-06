@@ -1,9 +1,9 @@
-import ProductBasics from '../../components/productBasics';
-import ProductDetail from '../../components/productDetail';
-import ProductAnnouncement from '../../components/productAnnouncement';
-import ProductQNA from '../../components/productQNA';
-import ProductOptions from '../../components/productOptions';
-import Loader from '../../components/loader';
+import ProductBasics from '../../components/products/productBasics';
+import ProductDetail from '../../components/products/productDetail';
+import ProductAnnouncement from '../../components/products/productAnnouncement';
+import ProductQNA from '../../components/products/productQNA';
+import ProductOptions from '../../components/products/productOptions';
+import Loader from '../../components/ui/loader';
 
 import { useState, Suspense } from 'react';
 

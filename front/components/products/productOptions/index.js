@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import CustomButton from '../ui/button';
+import CustomButton from '../../ui/button/button';
 import Router from "next/router";
 
 const ProductOptions = ({option}) => {
