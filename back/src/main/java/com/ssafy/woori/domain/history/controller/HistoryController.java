@@ -1,7 +1,7 @@
 package com.ssafy.woori.domain.history.controller;
 
 import com.ssafy.woori.domain.funding.controller.FundingController;
-import com.ssafy.woori.domain.history.dto.AddHistory;
+import com.ssafy.woori.domain.history.dto.AddHistoryDTO;
 import com.ssafy.woori.domain.history.service.HistoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class HistoryController {
     private HistoryService historyService;
 
     @PostMapping
-    public ResponseEntity<String> getHistory(@RequestBody AddHistory request){
+    public ResponseEntity<String> addHistory(@RequestBody AddHistoryDTO request){
 
         logger.info("펀딩 구매하기 " + request.getUserSeq());
         String message = FAIL;

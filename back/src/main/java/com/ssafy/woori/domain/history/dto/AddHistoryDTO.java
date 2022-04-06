@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AddHistory {
+public class AddHistoryDTO {
     private Integer userSeq;
     private Integer fundingSeq;
     private Integer optionNum;

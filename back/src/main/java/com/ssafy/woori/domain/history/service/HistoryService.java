@@ -1,7 +1,7 @@
 package com.ssafy.woori.domain.history.service;
 
 import com.ssafy.woori.domain.funding.dto.UserBuyListResponse;
-import com.ssafy.woori.domain.history.dto.AddHistory;
+import com.ssafy.woori.domain.history.dto.AddHistoryDTO;
 import com.ssafy.woori.entity.History;
 
 import java.util.List;
@@ -11,5 +11,5 @@ public interface HistoryService {
     Optional<List<UserBuyListResponse>> userBuyList(int userSeq);
     Optional<List<UserBuyListResponse>> getBuyerList(int fundingSeq);
     boolean changeHistory(int historySeq);
-    History addHistory(AddHistory request);
+    History addHistory(AddHistoryDTO request);
 }

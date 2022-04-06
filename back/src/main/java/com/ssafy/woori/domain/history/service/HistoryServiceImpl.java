@@ -3,7 +3,7 @@ package com.ssafy.woori.domain.history.service;
 import com.ssafy.woori.domain.funding.dao.FundingRepository;
 import com.ssafy.woori.domain.funding.dto.UserBuyListResponse;
 import com.ssafy.woori.domain.funding.repository.HistoryRepository;
-import com.ssafy.woori.domain.history.dto.AddHistory;
+import com.ssafy.woori.domain.history.dto.AddHistoryDTO;
 import com.ssafy.woori.entity.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +54,7 @@ public class HistoryServiceImpl implements HistoryService{
     }
 
     @Override
-    public History addHistory(AddHistory request) {
+    public History addHistory(AddHistoryDTO request) {
         return (historyRepository.save(
                 History.builder()
                         .fundingSeq(request.getFundingSeq())
