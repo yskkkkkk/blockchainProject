@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import AnnounceModal from "../announceModal";
 import QnaModal from "../qnaModal";
+import DaumPost from "../daumPost";
 
-const Backdrop = ({fundingSeq, addQna, addAnnouncement, label, handleClose}) => {
+const Backdrop = ({fundingSeq, addQna, addAnnouncement, label, handleClose, setAddress}) => {
  
   return (
     <motion.div
@@ -14,6 +15,7 @@ const Backdrop = ({fundingSeq, addQna, addAnnouncement, label, handleClose}) => 
     >
       {label === "qna" && <QnaModal addQna={addQna} fundingSeq={fundingSeq} handleClose={handleClose} />}
       {label === "announcement" && <AnnounceModal addAnnouncement={addAnnouncement} fundingSeq={fundingSeq} handleClose={handleClose} />}
+      {label === "post" && <DaumPost handleClose={handleClose} setAddress={setAddress} />}
     </motion.div>
   );
 };
