@@ -24,7 +24,13 @@ export default function Navbar() {
   useEffect(() => {
     Send.get('/user/check')
     .then((data) => {
-      console.log(data);
+      console.log(1, data);
+      console.log(2, data.data);
+      data.json();
+    })
+    .then((data) => {
+      console.log(3, data);
+      console.log(4, data.data);
       setUserInfo(data.data);
       if (data.data) {
         setIsLoggedIn(true);
