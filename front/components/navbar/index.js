@@ -25,8 +25,8 @@ export default function Navbar() {
     Send.get('/user/check')
     .then((data) => {
       console.log(data);
-      setUserInfo(data);
-      if (data) {
+      setUserInfo(data.data);
+      if (data.data) {
         setIsLoggedIn(true);
       }
     })
