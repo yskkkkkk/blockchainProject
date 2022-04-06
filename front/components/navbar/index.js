@@ -22,6 +22,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
+    console.log('여기까진!')
     Send.get('/user/check')
     .then((data) => {
       console.log(1, data);
