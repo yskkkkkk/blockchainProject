@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 
 const FundCard = ({fund}) => {
   const [dDay, setDDay] = useState('...')
-  console.log(fund)
   useEffect(
     async () => {
       const contract = contractGetter(fund.fundingContract)
@@ -20,9 +19,6 @@ const FundCard = ({fund}) => {
       } else {
         return
       }
-      console.log((endDate - Date.now()) / 86400000)
-      console.log(temp)
-      // setDDay(temp)
     }
   , [])
 
