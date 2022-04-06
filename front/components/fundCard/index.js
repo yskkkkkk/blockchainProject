@@ -20,9 +20,6 @@ const FundCard = ({fund}) => {
       } else {
         return
       }
-      console.log((endDate - Date.now()) / 86400000)
-      console.log(temp)
-      // setDDay(temp)
     }
   , [])
 
