@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Router from "next/router";
-import Send from '../../lib/Send';
+import Send from '../../../lib/Send';
 
 import {useEffect, useContext, useState} from 'react';
-import {follow, unfollow} from '../../lib/User.js';
-import CustomButton from '../ui/button.js';
+import {follow, unfollow} from '../../../lib/User.js';
+import CustomButton from '../../ui/button/button.js';
 
-import {UserContext} from "../../lib/UserContext";
-import contractGetter from '../../lib/ContractGetter';
+import {UserContext} from "../../../lib/UserContext";
+import contractGetter from '../../../lib/ContractGetter';
 
 const ProductBasics = ({src, fundInfo}) => {
 

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import FundCard from '../../components/fundCard';
+import FundCard from '../../components/ui/fundCard';
 import {motion} from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';

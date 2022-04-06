@@ -1,5 +1,5 @@
 import {motion} from "framer-motion";
-import Send from "../../lib/Send.js";
+import Send from "../../../lib/Send.js";
 import {useState} from 'react';
 
 export default function AnnounceModal({fundingSeq, addAnnouncement, handleClose}) {

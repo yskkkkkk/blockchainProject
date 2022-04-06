@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import {motion} from 'framer-motion';
-import contractGetter from '../../lib/ContractGetter';
+import contractGetter from '../../../lib/ContractGetter';
 import { useEffect, useState } from 'react';
 
 const FundCard = ({fund}) => {
