@@ -38,4 +38,7 @@ public interface FundingRepository extends JpaRepository<Funding, Integer> {
     @Query(value = "select f.fundingSeq as fundingSeq, f.fundingTitle as fundingTitle, f.fundingImage as fundingImage from Funding f " +
             "where f.userSeq = :userSeq")
     Optional<List<GetSellList>> findAllByUserSeq(int userSeq);
+
+    @Query(value = "select f.userSeq from Funding f where f.fundingSeq = :fundingSeq")
+    Integer getSeller(int fundingSeq);
 }

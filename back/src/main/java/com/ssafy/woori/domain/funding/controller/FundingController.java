@@ -193,4 +193,27 @@ public class FundingController {
 
         return (new ResponseEntity<>(response, status));
     }
+
+    @GetMapping("/lists/buyer/{fundingSeq}")
+    public ResponseEntity<Map<String,Object>> getBuyerList(@PathVariable int fundingSeq){
+        logger.info("펀딩 구매자 목록 가져오기(판매자 입장) " + fundingSeq);
+        String message = FAIL;
+        HttpStatus status = HttpStatus.OK;
+
+        Map<String, Object> response = new HashMap<>();
+        Optional<List<UserBuyListResponse>> dto = historyService.getBuyerList(fundingSeq);
+
+        if(dto.isPresent()){
+            message = SUCCESS;
+            status = HttpStatus.OK;
+            response.put("data", dto);
+        }
+        else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        response.put("message", message);
+
+
+        return (new ResponseEntity<>(response, status));
+    }
 }

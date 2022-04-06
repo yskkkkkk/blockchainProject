@@ -1,16 +1,18 @@
-import ProductBasics from "../../components/productBasics";
-import ProductDetail from "../../components/productDetail";
-import ProductAnnouncement from "../../components/productAnnouncement";
-import ProductQNA from "../../components/productQNA";
+import ProductBasics from '../../components/productBasics';
+import ProductDetail from '../../components/productDetail';
+import ProductAnnouncement from '../../components/productAnnouncement';
+import ProductQNA from '../../components/productQNA';
 import ProductOptions from '../../components/productOptions';
+import Loader from '../../components/loader';
 
-import { useState } from "react";
+import { useState, Suspense } from 'react';
+
 
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
 export const getStaticPaths = async () => {
   
   // const res = await fetch('https://retoolapi.dev/X9nA53/dummy');    // 펀딩 리스트 get 요청
-  const res = await fetch('http://j6a305.p.ssafy.io/api/funding/lists/1', {"sort": 1});    // 펀딩 리스트 get 요청
+  const res = await fetch('https://j6a305.p.ssafy.io/api/funding/lists/1', {"sort": 1});    // 펀딩 리스트 get 요청
   const data = await res.json();
 
   const paths = data.data.map(fund => {
@@ -32,7 +34,7 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
   
   const id = context.params.id;
   // const res = await fetch(`https://retoolapi.dev/X9nA53/dummy/${id}`);  // 펀딩 상세정보 get 요청
-  const res = await fetch(`http://j6a305.p.ssafy.io/api/funding/top/${id}`, {"fundingSeq": id});
+  const res = await fetch(`https://j6a305.p.ssafy.io/api/funding/top/${id}`, {"fundingSeq": id});
   const data = await res.json();
   // return {
   //   props: {fund: data}
@@ -86,10 +88,14 @@ const Detail = ({fund, fundingSeq}) => {
             <ProductDetail fundingSeq={fundingSeq} picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {currentNav === 1 && (
-            <ProductAnnouncement fundingSeq={fundingSeq} />
+            <Suspense fallback={<Loader />}>
+              <ProductAnnouncement fundingSeq={fundingSeq} />
+            </Suspense>
           )}
           {currentNav === 2 && (
-            <ProductQNA fundingSeq={fundingSeq} />
+            <Suspense fallback={<Loader />}>
+              <ProductQNA fundingSeq={fundingSeq} />
+            </Suspense>
           )}
         </section>
         
