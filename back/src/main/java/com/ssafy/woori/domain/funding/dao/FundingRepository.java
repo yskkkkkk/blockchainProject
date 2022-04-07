@@ -35,7 +35,7 @@ public interface FundingRepository extends JpaRepository<Funding, Integer> {
             "f.fundingSimple as fundingSimple, f.userSeq as userSeq ,f.userNickname as userNickname, f.fundingContract as fundingContract from Funding f where f.fundingSeq = :fundingSeq")
     Optional<GetTopValues> findTopValues(int fundingSeq);
 
-    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingTitle as fundingTitle, f.fundingImage as fundingImage from Funding f " +
+    @Query(value = "select f.fundingSeq as fundingSeq, f.fundingTitle as fundingTitle, f.fundingImage as fundingImage, f.fundingContract as fundingContract, f.userSeq as userSeq, f.fundingSimple as fundingSimple from Funding f " +
             "where f.userSeq = :userSeq")
     Optional<List<GetSellList>> findAllByUserSeq(int userSeq);
 
