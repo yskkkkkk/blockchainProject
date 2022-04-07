@@ -11,14 +11,17 @@ import { ethers, ContractFactory } from 'ethers'
 import toast, { Toaster } from 'react-hot-toast';
 import ABI from '../lib/ABI.json'
 import Bytecode from '../lib/Bytecode.json'
+import Send from "../lib/Send"
+
 
 export default function Create(){
-  const [creatorData, setCreatorData] = useState({nickname:"", phone:"", description:"" })
-  const [projectData, setProjectData] = useState({name:"", intro:"", category:"", image:"", description:""})
-  const [fundingData, setFundingData] = useState({goal:"", startDay:new Date(), startTime:"", endDay:"", options:[]})
+  const [creatorData, setCreatorData] = useState({userNickname:"", userPhone:"", userIntroduce:"" })
+  const [projectData, setProjectData] = useState({fundingTitle:"", fundingSimple:"", fundingCategory:"", image:"", fundingText:""})
+  const [fundingData, setFundingData] = useState({goal:"", startDay:new Date(), startTime:"", endDay:"", option:[]})
   const [choice, setChoice] = useState(0)
   const [provider, setProvider] = useState(null)
   const [signer, setSigner] = useState(null)
+  const [categories, setCategories] = useState([])
 
   const {userSeq, setUserSeq} = useContext(UserContext);
  
@@ -73,7 +76,7 @@ export default function Create(){
     setFundingData(prevData => {
       return {
         ...prevData,
-        options: [...prevData.options, item]
+        option: [...prevData.option, item]
       }
     })
   }
@@ -88,6 +91,7 @@ export default function Create(){
         const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${userSeq}`);
         const data = await res.json();
         const userWalletAddress = data.userWalletAddress
+        setCreatorData({userNickname:data.userNickname, userPhone:data.userPhone, userIntroduce:data.userIntroduce})
         window.ethereum.request({
           method: "wallet_addEthereumChain",
           params: [{
@@ -117,7 +121,7 @@ export default function Create(){
             Router.push('/')
           }, 3000 )
         }
-            // const address = await _signer.getAddress()
+          //   const address = await _signer.getAddress()
 
           // .error(
           //   (err) => {
@@ -137,7 +141,11 @@ export default function Create(){
         2000
       )
     }
-    // console.log(userSeq)
+    
+    Send.get(`https://j6a305.p.ssafy.io/api/categories`)
+      .then(res=>setCategories(res.data.data))
+      .catch(e=>console.log(e))
+
   }, [])
 
 
@@ -161,16 +169,22 @@ export default function Create(){
           Router.push('/')
         }, 3000 )
       }
-
+      
+      
       const factory = new ContractFactory(ABI, Bytecode, signer);
       const contract = await factory.deploy(temp_startDate, temp_endDate, temp_targetAmount, temp_optionPrices);
       const fullMessage = await contract.deployTransaction.wait()
       console.log(fullMessage)
       const contractAddress = contract.address; // 컨트랙트 주소입니다! 이것을 백엔드에 함께 전송해 주십시오!
-
+      
       // 여기서부터 백엔드 API 연동을 해주시면 됩니다.
-
-
+      const tempProjectData = {...projectData}
+      delete tempProjectData.image
+      const TotalData = Object.assign({}, creatorData, tempProjectData, {option:fundingData.option}, {userSeq:userSeq, fundingContract:contractAddress})
+      Send.post(`https://j6a305.p.ssafy.io/api/funding`,{file:projectData.image, request:TotalData})
+        .then(res=>console.log('success'))
+        .catch(e=>console.log(`error ${e}`))
+      
 
 
 
@@ -196,7 +210,7 @@ export default function Create(){
       </ButtonGroup>
       
       {choice===0 && <Creator creatorData={creatorData} handleChange={handleChange}/>}
-      {choice===1 && <Project projectData={projectData} handleChange={handleChange}/>}
+      {choice===1 && <Project projectData={projectData} categories={categories} handleChange={handleChange}/>}
       {choice===2 && <Funding fundingData={fundingData} handleChange={handleChange} addItem={addItem} changeDate={changeDate}/>}
       {choice===3 && <Policy/>}
       <button onClick={createProject}>프로젝트 생성!</button>
