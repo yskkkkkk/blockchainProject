@@ -4,23 +4,39 @@ import { useState } from "react"
 import { Button } from "@mui/material"
 import OnFundingTable from "./OnFundingTable"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import contractGetter from "../../lib/ContractGetter"
+import Image from "next/image"
 
-export default function FundingCard(){
+export default function FundingCard({fundingData, isMine}){
   const [expanded, setExpanded] = useState(false)  
-
+  const d1 = new Date().getTime()
+  const [sellData, setSellData] = useState(false)
+  useState(async ()=>{
+    if(fundingData){
+      const contract = contractGetter(fundingData.fundingContract)
+      const endDate = await contract.endDate()
+      const startDate = await contract.startDate()
+      const endTime = new Date(parseInt(endDate._hex,16)*1000)
+      const startTime = new Date(parseInt(startDate._hex,16)*1000)
+      if (parseInt(startDate._hex, 16)*1000 <= d1 && d1 <= parseInt(endDate._hex, 16)*1000) {        
+        setSellData({startTime:startTime, endTime:endTime})
+      } 
+    }
+  }, [fundingData])
+  console.log(sellData, fundingData)  
 
   return(  
     <div className="my-4">
-      <Accordion expanded={expanded} onChange={()=>setExpanded(!expanded)}>
+      {sellData && <Accordion expanded={expanded} onChange={()=>setExpanded(!expanded)}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="flex flex-row">
-           <img className="w-32 h-32" src="https://www.ikea.com/kr/en/images/products/kavalkad-frying-pan-black__0811388_pe771635_s5.jpg" alt="pan" />
+           <Image width="32" height="32" src={fundingData.fundingImage} alt={fundingData.fundingTitle} />
            <div>
-             <p>제목: Title</p>
+             <p>제목: {fundingData.fundingTitle}</p>
              <p>현재모금액: Amount1</p>
              <p>목표모금액: Amount2</p>
              <p>달성률: percentage</p>
-             <p>기간: startData ~ endDate</p>
+             <p>기간: {sellData.startTime.toLocaleString()} ~ {sellData.endTime.toLocaleString()}</p>
            </div>
           </div>
         </AccordionSummary>
@@ -29,13 +45,23 @@ export default function FundingCard(){
           <OnFundingTable/>
           <h3 className="p-4">선물 정보</h3>
           <div className="p-6 border-2 border-black border-solid">
-            <p>선물 구성: gift</p>
+            {/* <p>선물 구성: gift</p>
             <p>후원 금액: amount</p>
-            <p>전달 상태: state</p>
+            <p>전달 상태: state</p> */}
+            {fundingData.option.map(opt => {
+              return(
+                <div className="p-2 border-1 border-black border-solid">                  
+                  <p>옵션 제목: {opt.optionTitle}</p>
+                  <p>옵션 가격: {opt.optionPrice}</p>
+                  <p>옵션 내용: {opt.optionText}</p>
+                  <p>최대 선택 가능 개수: {opt.optionMaxamount}</p>
+                </div>
+              )
+            })}
           </div>
           <Button className="mt-2 border-2 border-solid">펀딩 취소</Button>
         </AccordionDetails>
-      </Accordion>
+      </Accordion>}
     </div>
   )
 }
