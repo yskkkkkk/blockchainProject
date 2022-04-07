@@ -21,9 +21,24 @@ export default function Navbar() {
     })
   }
 
+  useEffect(async () => {
+    const res = await fetch('https://j6a305.p.ssafy.io/api/user/check');
+    console.log('response ok:' + res.ok);
+    console.log('before json: ' + res);
+    const data = await res.json();
+    console.log('json화 data: ' + data);
+    console.log('json화 data.body' + data.body);
+    console.log('json화 data.data: ' + data.data);
+
+    if (res.ok) {
+      setUserInfo(data);
+    }
+  })
+
   useEffect(() => {
-    if (userInfo && userInfo.userNickname) {
+    if (userInfo) {
       setIsLoggedIn(true);
+      console.log('저장된 사용자 정보:' + userInfo);
       console.log(`${userInfo.userNickname}'s navber login status: ${isLoggedIn}`);
     }
   }, [userInfo])
