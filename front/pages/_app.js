@@ -8,8 +8,8 @@ import Send from '../lib/Send';
 
 function MyApp({ Component, pageProps, router }) {
   // 유저 번호 값 루트 컴포넌트에서 뿌려줄 수 있게 관리
-  const [userSeq, setUserSeq] = useState('4');  // 임의값
-  const [userInfo, setUserInfo] = useState('');
+  const [userSeq, setUserSeq] = useState('');  // 임의값
+  const [userInfo, setUserInfo] = useState({});
   // 유저 번호 값이 바뀔때만 userSeq 값 수정
   const userSeqValue = useMemo(() => ({userSeq, setUserSeq}), [userSeq, setUserSeq]);
   const userInfoValue = useMemo(() => ({userInfo, setUserInfo}), [userInfo, setUserInfo]);
