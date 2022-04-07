@@ -11,14 +11,14 @@ export default function Home() {
   useEffect(() => {
     Send.get('/user/check')
     .then((data) => {
+      if (data.data) {
+        console.log(0, data.json());
+      }
       console.log(1, data);
       console.log(2, data.data);
-      data.json();
-    })
-    .then((data) => {
-      console.log(3, data);
-      console.log(4, data.data);
-      setUserInfo(data.data);
+      if (data.data) {
+        setUserInfo(data.data);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -33,6 +33,7 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
       {userInfo ? <h2>로그인 성공</h2> : <h2>로그인 실패</h2>}
+      <h2>wow</h2>
     </div>
   )
 }
