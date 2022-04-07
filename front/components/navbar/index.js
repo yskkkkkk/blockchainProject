@@ -28,30 +28,26 @@ export default function Navbar() {
     try {
     const temp = await data.json();
     console.log('JSON화:', temp);
-    console.log('유저 시퀀스:', temp.userSeq);
-    setUserSeq(temp.userSeq);
-    console.log('저장된 유저 시퀸스:', userSeq);
-    setUserInfo(temp);
-    console.log('유저 상태값:', userInfo)
+    await setUserSeq(temp.userSeq);
+    await setUserInfo(temp);
     } catch {
         console.log('사용자가 아닙니다');
     }
+  }
+
+  const b = (e) => {
+    e.preventDefault();
+    console.log('현재 로그인 상태', isLoggedIn);
   }
 
   useEffect(() => {
     getUserInfo();
   }, [])
 
-  useEffect(() => {
-    if (userInfo.userSeq) {
-      setIsLoggedIn(true);
-      console.log('저장된 사용자 정보:' + userInfo);
-      console.log(`${userInfo.userNickname}'s navber login status: ${isLoggedIn}`);
-    }
-  }, [userInfo])
 
   return (
     <nav className={style.container} >
+      <button onClick={b}>get login status</button>
       <ul className="border-b-4">
         <li className={style.li}>
           <Link href="/" passHref>
