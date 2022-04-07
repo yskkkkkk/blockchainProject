@@ -95,7 +95,6 @@ export default function Create(){
     try {
       const temp = await data.json();
     } catch {
-      console.log('로그인페이지도 보낸대 ㄷㄷ', )
       toast.error('로그인되지 않은 사용자입니다. 로그인페이지로 이동합니다.')
       setTimeout(() => {
         Router.push('/login')
@@ -218,12 +217,14 @@ export default function Create(){
   return (
     <div className="container mx-auto py-10">
       {/* flex: inline-flex -> flex로 */}      
-      <ButtonGroup style={{color: "#6667AB"}} className="flex justify-center mb-8" variant="text" aria-label="text button group">
-        <Button style={choice === 0 ? {color: "#6667AB"} : {color: "grey", textDecorationColor: "grey"}} className="font-semibold" onClick={handleChoice} value={0}>창작자 정보</Button>
-        <Button style={choice === 1 ? {color: "#6667AB"} : {color: "grey", textDecoration: "none"}} className="font-semibold" onClick={handleChoice} value={1}>프로젝트 정보</Button>
-        <Button style={choice === 2 ? {color: "#6667AB"} : {color: "grey", textDecoration: "none"}} className="font-semibold" onClick={handleChoice} value={2}>펀딩 계획</Button>
-        <Button style={choice === 3 ? {color: "#6667AB"} : {color: "grey", textDecoration: "none"}} className="font-semibold" onClick={handleChoice} value={3}>정책 안내</Button>
-      </ButtonGroup>
+      <div style={{margin: "auto"}}>
+        <ButtonGroup style={{color: "#6667AB", margin: "auto"}} className="flex justify-center mb-8" variant="text" aria-label="text button group">
+          <Button style={choice === 0 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={0}>창작자 정보</Button>
+          <Button style={choice === 1 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={1}>프로젝트 정보</Button>
+          <Button style={choice === 2 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={2}>펀딩 계획</Button>
+          <Button style={choice === 3 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={3}>정책 안내</Button>
+        </ButtonGroup>
+      </div>
       
       {choice===0 && <Creator creatorData={creatorData} handleChange={handleChange}/>}
       {choice===1 && <Project projectData={projectData} categories={categories} handleChange={handleChange}/>}
