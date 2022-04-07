@@ -1,20 +1,31 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import RecepientForm from "../components/orderPage/recepientForm";
 import { motion } from "framer-motion";
 import Image from 'next/image';
 import OptionTable from "../components/orderPage/optionTable";
+import { UserContext } from "../lib/UserContext";
+import CustomButton from "../components/ui/button/button";
+// import {useRouter} from 'next/router';
 
 const Order = () => {
   
-  const [openPostSearch, setOpenPostSearch] = useState(false);
-  
   const [orderProcess, setOrderProcess] = useState(1);
+  const [openPostSearch, setOpenPostSearch] = useState(false);
+
+  const {curOption, setCurOption} = useContext(UserContext);
 
   const [address, setAddress] = useState('');
   const [address2, setAddress2] = useState('');
   const [receiver, setReceiver] = useState('');
   const [telNumber, setTelNumber] = useState('');
   const phoneRef = useRef();
+
+  //https://velog.io/@sbinha/next.js-Router%EB%A5%BC-%ED%86%B5%ED%95%B4-props-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84
+  // 위 글대로 했는데 왜 안되지;
+  // const router = useRouter();
+  // console.log("option:", router.query.option);
+  // console.log("fundingSeq:", router.query.fundingSeq);
+
 
   const handlePhone = (e) => {
     const value = phoneRef.current.value.replace(/\D+/g, "");
@@ -51,6 +62,18 @@ const Order = () => {
   const open = () => setOpenPostSearch(true);
   const close = () => setOpenPostSearch(false);
 
+  const toProductSelection = (e) => {
+    e.preventDefault();
+    setOrderProcess(0);
+  }
+  const toRecepientForm = (e) => {
+    e.preventDefault();
+    setOrderProcess(1);
+  }
+  const toFinalConfirm = (e) => {
+    e.preventDefault();
+    setOrderProcess(2);
+  }
 
   return (
     <main className="flex flex-col gap-[5rem]">
@@ -58,6 +81,7 @@ const Order = () => {
         <motion.button 
           whileTap={{ scale: 0.98 }} 
           className={`${orderProcess === 0 && "text-theme-color border-theme-color/70 border-b-4"} "rounded-lg hover:text-theme-color hover:border-b-4 w-20 h-10`}
+          onClick={toProductSelection}
         >
           <span className="text-lg antialiased font-medium">상품 선택</span>
         </motion.button>
@@ -65,6 +89,7 @@ const Order = () => {
         <motion.button 
           whileTap={{ scale: 0.98 }} 
           className={`${orderProcess === 1 && "text-theme-color border-theme-color/70 border-b-4"} "rounded-lg hover:text-theme-color hover:border-b-4 w-20 h-10`}
+          onClick={toRecepientForm}
         >
           <span className="text-lg antialiased font-medium">수령 정보</span>
         </motion.button>
@@ -72,13 +97,24 @@ const Order = () => {
         <motion.button 
           whileTap={{ scale: 0.98 }} 
           className={`${orderProcess === 2 && "text-theme-color border-theme-color/70 border-b-4"} "rounded-lg hover:text-theme-color hover:border-b-4 w-20 h-10`}
+          onClick={toFinalConfirm}
         >
           <span className="text-lg antialiased font-medium">최종 확인</span>
         </motion.button>
       </nav>
 
       {orderProcess === 0 && (
-        <OptionTable />
+        <section className="flex flex-col items-center gap-[2rem] border-2 py-[1rem] mx-[255px]">
+          <section className="flex flex-wrap justify-center gap-x-[45px] gap-y-[96px] my-10">
+            {curOption.map(option => (
+              <OptionTable option={option} key={option.optionTitle} />
+            ))}
+            {curOption.map(option => (
+              <OptionTable option={option} key={option.optionTitle} />
+            ))}
+          </section>
+          <CustomButton text="수령정보 입력" func={toRecepientForm} classNameProp="bg-theme-color text-white font-semibold w-40 h-10 self-center mt-[-1rem] mb-[2rem]" />
+        </section>
       )}
 
       {orderProcess === 1 && (
@@ -86,6 +122,7 @@ const Order = () => {
         togglePostSearch={togglePostSearch} 
         setReceiver={setReceiver} 
         receiver={receiver} 
+        setOrderProcess={setOrderProcess}
         address={address}
         setAddress={setAddress}
         setAddress2={setAddress2} 

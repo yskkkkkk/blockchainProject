@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Footer() {
   
   return (
-    <footer id="footer" className="flex flex-col gap-[1.5rem]">
+    <footer id="footer" className="flex flex-col gap-[1.5rem] mt-[7rem] mb-[2rem]">
       <div className="flex justify-center gap-[2rem]">
         <a href="#">
           {/* <img src="/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" /> */}
