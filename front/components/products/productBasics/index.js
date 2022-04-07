@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Router from "next/router";
-import Send from '../../../lib/Send';
 
 import {useEffect, useContext, useState} from 'react';
 import {follow, unfollow} from '../../../lib/User.js';
@@ -33,7 +32,11 @@ const ProductBasics = ({src, fundInfo}) => {
 
   const checkOut = (e) => {
     e.preventDefault();
-    Router.push("/order");
+    if (userSeq) {
+      Router.push("/order");
+    } else {
+      Router.push("/login");
+    }
   }
 
   const toLoginPage = (e) => {

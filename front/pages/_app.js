@@ -4,7 +4,7 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { UserContext } from '../lib/UserContext';
 import {useState, useEffect, useMemo} from 'react';
-import Send from '../lib/Send';
+
 
 function MyApp({ Component, pageProps, router }) {
   // 유저 번호 값 루트 컴포넌트에서 뿌려줄 수 있게 관리
