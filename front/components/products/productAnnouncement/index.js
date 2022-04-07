@@ -1,15 +1,18 @@
 import {motion, AnimatePresence} from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Backdrop from '../../modal/backdrop';
 import Send from "../../../lib/Send.js";
 import CustomButton from '../../ui/button/button';
-
+import { UserContext } from '../../../lib/UserContext';
 
 // 상품 공지사항 컴포넌트
-const ProductAnnouncement = ({fundingSeq}) => {
+const ProductAnnouncement = ({fundingSeq, fundInfo}) => {
   
   const [openAnnounceModal, setOpenAnnounceModal] = useState(false);
   const [announcementList, setAnnouncementList] = useState([]);
+  const [seller, setSeller] = useState(fundInfo.userSeq);
+
+  const {userSeq, setUserSeq} = useContext(UserContext);
 
   const toggleAnnounceModal = (e) => {
     e.preventDefault();
@@ -54,7 +57,7 @@ const ProductAnnouncement = ({fundingSeq}) => {
             <article key={announcement.boardContent} className="flex flex-col py-[1.5rem] gap-[2rem] justify-evenly border-l-4 border-theme-color/50">
               <header className="flex flex-row justify-between mx-[2rem]">
                 <h2 className="text-2xl">제목: {announcement.boardTitle}</h2>
-                <button>삭제</button>
+                {userSeq === seller && <button>삭제</button>}
               </header>
               <p className="mx-[2rem] my-[-1rem] text-gray-500/80">작성일 {announcement.boardCreatedDate}</p>
               <hr className="mx-[2rem]" />
