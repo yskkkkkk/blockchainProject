@@ -8,47 +8,50 @@ export default function Navbar() {
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const {userSeq, setUserSeq} = useContext(UserContext);
   const {userInfo, setUserInfo} = useContext(UserContext);
-  
 
   const logout = (e) => {
     e.preventDefault();
     Send.get('/user/logout')
     .then((data) => {
       console.log(data);
+      setUserSeq('');
       setUserInfo('');
       setIsLoggedIn(false);
     })
   }
 
-  useEffect(() => {
-    if (userInfo && userInfo.userNickname) {
-      setIsLoggedIn(true);
-      console.log(`${userInfo.userNickname}'s navber login status: ${isLoggedIn}`);
+  const getUserInfo = async () => {
+    const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
+    console.log('받아온 raw data:', data);
+    try {
+    const temp = await data.json();
+    console.log('JSON화:', temp);
+    await setUserSeq(temp.userSeq);
+    await setUserInfo(temp);
+    } catch {
+        console.log('사용자가 아닙니다');
+    } finally {
+      if (userSeq) {
+        setIsLoggedIn(true);
+      }
     }
-  }, [userInfo])
-  // useEffect(() => {
-  //   Send.get('/user/check')
-  //   .then((data) => {
-  //     console.log(1, data);
-  //     console.log(2, data.data);
-  //     data.json();
-  //   })
-  //   .then((data) => {
-  //     console.log(3, data);
-  //     console.log(4, data.data);
-  //     setUserInfo(data.data);
-  //     if (data.data) {
-  //       setIsLoggedIn(true);
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  // })
+  }
+
+  const b = (e) => {
+    e.preventDefault();
+    console.log('현재 로그인 상태', isLoggedIn);
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  }, [])
+
 
   return (
     <nav className={style.container} >
+      <button onClick={b}>get login status</button>
       <ul className="border-b-4">
         <li className={style.li}>
           <Link href="/" passHref>
