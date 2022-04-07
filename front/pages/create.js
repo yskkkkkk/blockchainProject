@@ -82,7 +82,11 @@ export default function Create(){
   }
 
   const handleNext = () => {
-    setChoice((choice) => {return (choice + 1)})
+    setChoice((choice) => {
+      if (choice <= 2) {
+        return (choice + 1)  
+      }
+      })
   }
 
   // 유저 정보를 받아오고, 지갑도 확인한 뒤 지갑주소가 유저 정보에 저장된 지갑주소와 같은지 확인합니다.
