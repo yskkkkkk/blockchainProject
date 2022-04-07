@@ -30,12 +30,11 @@ export default function Navbar() {
     console.log('JSON화:', temp);
     await setUserSeq(temp.userSeq);
     await setUserInfo(temp);
+    if (temp.userSeq) {
+      setIsLoggedIn(true);
+    }
     } catch {
         console.log('사용자가 아닙니다');
-    } finally {
-      if (temp.userSeq) {
-        setIsLoggedIn(true);
-      }
     }
   }
 
