@@ -22,24 +22,30 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    Send.get('/user/check')
-    .then((data) => {
-      console.log(1, data);
-      console.log(2, data.data);
-      data.json();
-    })
-    .then((data) => {
-      console.log(3, data);
-      console.log(4, data.data);
-      setUserInfo(data.data);
-      if (data.data) {
-        setIsLoggedIn(true);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  })
+    if (userInfo && userInfo.userNickname) {
+      setIsLoggedIn(true);
+      console.log(`${userInfo.userNickname}'s navber login status: ${isLoggedIn}`);
+    }
+  }, [userInfo])
+  // useEffect(() => {
+  //   Send.get('/user/check')
+  //   .then((data) => {
+  //     console.log(1, data);
+  //     console.log(2, data.data);
+  //     data.json();
+  //   })
+  //   .then((data) => {
+  //     console.log(3, data);
+  //     console.log(4, data.data);
+  //     setUserInfo(data.data);
+  //     if (data.data) {
+  //       setIsLoggedIn(true);
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // })
 
   return (
     <nav className={style.container} >

@@ -9,11 +9,8 @@ import { styled } from "@mui/material"
 import Texteditor from "./Texteditor"
 
 export default function Project(props){
-  const {name, intro, category, image, description} = props.projectData
-  const categories = [
-    {category_number:2, category_name:"뷰티"},
-    {category_number:3, category_name:"생활"},
-  ]
+  const {fundingTitle, fundingSimple, fundingCategory, image, fundingText} = props.projectData  
+  
   
   const Input = styled('input')(
     {display: 'none'}
@@ -23,40 +20,49 @@ export default function Project(props){
     console.log(event)
   }
 
-  const categoryItems = categories.map(item => 
-    <MenuItem value={item.category_name} key={item.category_number}>{item.category_name}</MenuItem>
+  function handleImage(event){
+    const image = event.target.files[0]
+    console.log(image)
+    const formData = new FormData()
+    formData.append('file',image)
+    console.log(formData)
+    props.handleChange({target:{name:'image', value:formData}})
+  }
+
+  const categoryItems = props.categories.map(item => 
+    <MenuItem value={item.categoryName} key={item.categoryNumber}>{item.categoryName}</MenuItem>
   )
 
   return(
     <div className="flex flex-col items-center">
       <div>
-        <label htmlFor="name">프로젝트 명:</label>
+        <label htmlFor="fundingTitle">프로젝트 명:</label>
         <TextField 
           type="text" 
-          id="name" 
-          name="name"
+          id="fundingTitle" 
+          name="fundingTitle"
           onChange={props.handleChange}
-          value={name}
+          value={fundingTitle}
         />
       </div>
       <div>
-        <label htmlFor="intro">프로젝트 한줄 소개:</label>
+        <label htmlFor="fundingSimple">프로젝트 한줄 소개:</label>
         <TextField 
           type="text" 
-          id="intro" 
-          name="intro"
+          id="fundingSimple" 
+          name="fundingSimple"
           onChange={props.handleChange}
-          value={intro}
+          value={fundingSimple}
         />
       </div>
       <div>
-        <label htmlFor="category">프로젝트 카테고리</label>        
+        <label htmlFor="fundingCategory">프로젝트 카테고리</label>        
         <FormControl sx={{ m:1, minWidth: 120}}>          
           <Select             
-            value={category}
+            value={fundingCategory}
             onChange={props.handleChange}
             displayEmpty
-            name="category"
+            name="fundingCategory"
           >
             <MenuItem value="">카테고리 선택</MenuItem>
             {categoryItems}
@@ -66,23 +72,23 @@ export default function Project(props){
       </div>
       <div>
         <label htmlFor="image">
-          프로젝트 이미지 : {image}
-          <Input id="image"  accept="image/*" multiple type="file" name="image" onChange={props.handleChange} />
+          프로젝트 이미지 : 
+          <Input id="image"  accept="image/*" multiple type="file" name="image" onChange={handleImage} />
           <Button variant="contained" component="span">
             Upload
           </Button>          
         </label>
       </div>
       <div>
-        <label htmlFor="description">프로젝트 설명:</label>
+        <label htmlFor="fundingText">프로젝트 설명:</label>
         {/* <TextField 
           type="text" 
           id="description" 
           name="description"
           onChange={props.handleChange}
           value={description}
-        /> */}
-        <Texteditor id="description"/>
+        /> */}        
+        <Texteditor id="fundingText" handleChange={props.handleChange}/>
       </div>
     </div>    
   )

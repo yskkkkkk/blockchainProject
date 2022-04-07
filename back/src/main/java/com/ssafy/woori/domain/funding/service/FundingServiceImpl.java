@@ -148,6 +148,9 @@ public class FundingServiceImpl implements FundingService{
                 lists.add(
                         FundingTopResponse
                                 .builder()
+                                .fundingContract(tmp.getFundingContract())
+                                .fundingSimple(tmp.getFundingSimple())
+                                .userSeq(tmp.getUserSeq())
                                 .fundingTitle(tmp.getFundingTitle())
                                 .fundingImage(tmp.getFundingImage())
                                 .option(optionRepository.getOptionsList(tmp.getFundingSeq()).get())

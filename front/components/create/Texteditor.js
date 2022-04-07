@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo, createRef, forwardRef } from 'react'
+import { useRef, useState, useMemo, createRef, forwardRef, useEffect } from 'react'
 import Image from 'next/image'
 // import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -40,6 +40,10 @@ export default function Texteditor(props){
     }
   }, [])
 
+  useEffect(()=>{
+    props.handleChange({target:{name:'fundingText', value:value}})
+  }, [value])
+
   function imageHandler() {    
     const input = document.createElement('input')
 
@@ -56,7 +60,7 @@ export default function Texteditor(props){
       const result = await axios.post(`https://j6a305.p.ssafy.io/api/file`, formData)
         // .then(res=>console.log(res))
         // .catch(e=>console.log(e))
-      const IMG_URL = result.data.file
+      const IMG_URL = await result.data.file
       console.log(IMG_URL)
       const editor = quillRef.current.getEditor()
       const range = editor.getSelection()      
