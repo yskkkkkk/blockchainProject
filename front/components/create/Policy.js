@@ -7,7 +7,7 @@ export default function Policy(props){
     <div style={{
       maxHeight: "400px",
       overflowY: "scroll"
-    }} className="w-6/12 mx-auto border-[#6667AB] border-solid border-2">
+    }} className="w-6/12 mt-16 mx-auto border-[#6667AB] border-solid border-2">
       <p>
         제1조 (펀딩의 신청 전 유의사항) <br/>
         서포터는 본 약관에 따른 펀딩을 신청하기 전에 홈페이지를 통해 제공되는 정보뿐만 아니라 프로젝트 펀딩기간, 리워드 제공의 조건 등 프로젝트의 내용을 충분히 숙지한 후 펀딩을 신청하여야 합니다.
