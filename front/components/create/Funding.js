@@ -14,7 +14,7 @@ import { ListItem } from "@mui/material"
 import { ListItemText } from "@mui/material"
 
 export default function Funding(props){
-  const {goal, startDay, startTime, endDay, options} = props.fundingData
+  const {goal, startDay, startTime, endDay, option} = props.fundingData
   const [open, setOpen]   = useState(false);
   const [itemData, setItemData] = useState({optionTitle:"", optionPrice:"", optionDescription:"", optionMaxAmount:1})
 
@@ -62,10 +62,10 @@ export default function Funding(props){
     return result;
   }
 
-  const itemList = options.map((option,index) => {
+  const itemList = option.map((option,index) => {
     return (
       <ListItem key={index}>
-        <ListItemText primary={`${option.optionTitle}: ${option.optionPrice}원에 ${option.optionDescription}의 구성`} />
+        <ListItemText primary={`${option.optionTitle}: ${option.optionPrice}eth에 ${option.optionDescription}의 구성`} />
       </ListItem>
     )
   })
@@ -79,7 +79,7 @@ export default function Funding(props){
           id="goal" 
           name="goal"
           InputProps={{
-            endAdornment:<InputAdornment position="end">원</InputAdornment>,
+            endAdornment:<InputAdornment position="end">eth</InputAdornment>,
           }}
           onChange={props.handleChange}
           value={goal}
@@ -136,7 +136,7 @@ export default function Funding(props){
             fullWidth
             value={itemData.optionPrice}
             InputProps={{
-              endAdornment:<InputAdornment position="end">원</InputAdornment>,
+              endAdornment:<InputAdornment position="end">eth</InputAdornment>,
             }}
             name="optionPrice"
             onChange={handleItem}
