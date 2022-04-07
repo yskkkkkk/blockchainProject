@@ -80,7 +80,12 @@ const ProductBasics = ({src, fundInfo}) => {
           </p>
           <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
             {/* 팔로우 버튼 토글 애니매이션 폭망. 다시짜야함  */}
-            <button onClick={userSeq ? toggleFollowing : toLoginPage} className={`${userSeq && following ? "bg-theme-color text-white" : "text"} w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color`}>팔로우</button>
+            <button 
+              onClick={userSeq ? toggleFollowing : toLoginPage} 
+              className={`${userSeq && following ? "bg-theme-color text-white" : "text"} w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color`}
+            >
+              {following ? <span>팔로잉</span> : <span>팔로우</span> }
+            </button>
           </div>
         </div>
       </section>

@@ -5,7 +5,8 @@ import ProductQNA from '../../components/products/productQNA';
 import ProductOptions from '../../components/products/productOptions';
 import Loader from '../../components/ui/loader';
 
-import { useState, Suspense } from 'react';
+import { useState, useContext, Suspense, useEffect } from 'react';
+import { UserContext } from '../../lib/UserContext';
 
 
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
@@ -51,6 +52,8 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund, fundingSeq}) => {
 
+  const {curOption, setCurOption} = useContext(UserContext);
+
   const [currentNav, setCurrentNav] = useState(0);
 
   const showProductDetail = (e) => {
@@ -65,6 +68,10 @@ const Detail = ({fund, fundingSeq}) => {
     e.preventDefault();
     setCurrentNav(2);
   }
+
+  useEffect(() => {
+    setCurOption(fund.option);
+  }, [])
 
   return (
     <main className="flex flex-col gap-[4rem]">
