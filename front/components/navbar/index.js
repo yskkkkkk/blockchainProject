@@ -22,8 +22,9 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    if (userInfo.userNickname) {
+    if (userInfo && userInfo.userNickname) {
       setIsLoggedIn(true);
+      console.log(`${userInfo.userNickname}'s navber login status: ${isLoggedIn}`);
     }
   }, [userInfo])
   // useEffect(() => {
