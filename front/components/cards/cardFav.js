@@ -42,13 +42,13 @@ const FundCard = ({fund}) => {
           <div className="mb-2 text-base font-bold">펀드명:{fund.fundingTitle} ₩</div>
           <p className="text-sm text-gray-700">펀드한줄설명{fund.fundingSimple}</p>
         </section>
-        <section className="px-6 pt-4 pb-2">
+        <section className="px-6 pb-2">
           <span className="inline-block px-3 py-1 mb-2 mr-2 text-xs font-semibold text-gray-700 bg-gray-200 rounded-full"># {dDay}</span>
           <span className="inline-block px-3 py-1 mb-2 mr-2 text-xs font-semibold text-gray-700 bg-gray-200 rounded-full"># 한정수량</span>
         </section>
       </article>
 
-      </motion.div>
+    </motion.div>
 
     // <div class="max-w-sm min-w-sm lg:max-w-full lg:flex">                                                         {/* 아래거 안될시 style={{backgroundImage: `url('/productImg.jpg')`}} 로 대체*/} 
     //   <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{ backgroundImage: `url(${fund.fundingImage})` }} title="product thumbnail pic">
