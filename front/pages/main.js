@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid'
 import FundCardFav from '../components/cards/cardFav'
 import FundCard from '../components/cards/card';
 import FundCardSmall from '../components/cards/cardSmall';
+import FundCardSmallTest from '../components/cards/cardSmall';
 import {motion} from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -31,16 +32,14 @@ export const getStaticProps = async () => {
 
 const Products = ({funds}) => {
 
-  
-
   return (
     <>
       <Banner />
       <Grid container style={{marginTop: "10px"}}>
         <Grid item xs={8}>
           <div>
-            <h2 className="mt-2.5" style={{ fontSize: "26px", marginBottom: "5px" }}>회원님이 좋아할 펀딩</h2>
-            <div className="flex flex-wrap justify-center mx-[64px] gap-x-[16px] gap-y-[64px] my-10">
+            <h2 className="mt-2 pl-2" style={{ fontSize: "26px", marginBottom: "5px" }}>회원님이 좋아할 펀딩</h2>
+            <div className="flex flex-wrap justify-center mx-[0px] gap-x-[5%] gap-y-[40px] mt-4 mb-9">
               {/* funds[0] -> 인기, 1 -> 신규, 2 -> 급상승 */}
               {funds[0][0].slice(0, 6).map(fund => (
                 // <Link href={'/products/' + fund.id} key={fund.id} passHref>
@@ -48,7 +47,7 @@ const Products = ({funds}) => {
                   <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
-                    className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-[16px]"
+                    className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4"
                   >
                     <FundCardFav fund={fund} />
                   </ motion.button>
@@ -59,18 +58,16 @@ const Products = ({funds}) => {
         </Grid>
         <Grid item xs={4} style={{ paddingLeft: "15px", borderLeft: "1px solid #e5e7eb" }}>
           <div>
-            <h2 className="mt-3.5" style={{ fontSize: "26px", marginBottom: "5px" }}>인기 펀딩</h2>
-            <div className="flex flex-wrap justify-center mx-[64px] gap-x-[16px] gap-y-[64px] my-10">
-              {/* funds[0] -> 인기, 1 -> 신규, 2 -> 급상승 */}
-              {funds[0][0].slice(0, 5).map(fund => (
+            <h2 className="mt-2 pl-2" style={{ fontSize: "26px", marginBottom: "5px" }}>인기 펀딩</h2>
+            <div className="flex flex-col flex-wrap justify-center gap-x-[16px] gap-y-[25px] mt-4 mb-8">
+              {funds[0][0].slice(0, 5).map((fund, index) => (
                 // <Link href={'/products/' + fund.id} key={fund.id} passHref>
                 <Link href={'/products/' + fund.fundingSeq} key={fund.fundingSeq} passHref>
                   <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
-                    className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-[16px]"
                   >
-                    <FundCardSmall fund={fund} />
+                    <FundCardSmall fund={fund} index={index} />
                   </ motion.button>
                 </Link>
               ))}
@@ -80,17 +77,16 @@ const Products = ({funds}) => {
       </Grid>
         <hr />
         <div>
-          <h2 className="mt-3.5" style={{ fontSize: "26px" }}>급상승 펀딩</h2>
+          <h2 className="mt-3.5 pl-2" style={{ fontSize: "26px" }}>급상승 펀딩</h2>
           <Grid container>
-            <div className="flex flex-wrap justify-center mx-[64px] gap-x-[16px] gap-y-[64px] my-10">
-              {/* funds[0] -> 인기, 1 -> 신규, 2 -> 급상승 */}
+            <div className="flex flex-wrap justify-center gap-x-[3.6%] gap-y-[32px] mt-4 mb-9">
               {funds[0][0].slice(0, 4).map(fund => (
                 // <Link href={'/products/' + fund.id} key={fund.id} passHref>
                 <Link href={'/products/' + fund.fundingSeq} key={fund.fundingSeq} passHref>
                   <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
-                    className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-[16px]"
+                    className="w-1/2 sm:w-1/2 md:w-1/5 lg:w-1/5 xl:w-1/5"
                   >
                     <FundCard fund={fund} />
                   </ motion.button>
@@ -101,17 +97,16 @@ const Products = ({funds}) => {
         </div>
         <hr />
         <div>
-          <h2 className="mt-3.5" style={{ fontSize: "26px" }}>신규 펀딩</h2>
+          <h2 className="mt-3.5 pl-2" style={{ fontSize: "26px" }}>신규 펀딩</h2>
           <Grid container>
-            <div className="flex flex-wrap justify-center mx-[64px] gap-x-[16px] gap-y-[64px] my-10">
-              {/* funds[0] -> 인기, 1 -> 신규, 2 -> 급상승 */}
+            <div className="flex flex-wrap justify-center gap-x-[3.6%] gap-y-[64px] mt-4 mb-9">
               {funds[2][0].slice(0, 4).map(fund => (
                 // <Link href={'/products/' + fund.id} key={fund.id} passHref>
                 <Link href={'/products/' + fund.fundingSeq} key={fund.fundingSeq} passHref>
                   <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
-                    className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-[16px]"
+                    className="w-1/2 sm:w-1/2 md:w-1/5 lg:w-1/5 xl:w-1/5"
                   >
                     <FundCard fund={fund} />
                   </ motion.button>
@@ -120,10 +115,8 @@ const Products = ({funds}) => {
             </div>
           </Grid>
         </div>
-    
     </>
   )
-
 }
 
 export default Products;
