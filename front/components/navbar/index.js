@@ -32,6 +32,10 @@ export default function Navbar() {
     await setUserInfo(temp);
     } catch {
         console.log('사용자가 아닙니다');
+    } finally {
+      if (userSeq) {
+        setIsLoggedIn(true);
+      }
     }
   }
 
