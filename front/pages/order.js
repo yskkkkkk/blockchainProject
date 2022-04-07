@@ -5,11 +5,12 @@ import Image from 'next/image';
 import OptionTable from "../components/orderPage/optionTable";
 import { UserContext } from "../lib/UserContext";
 import CustomButton from "../components/ui/button/button";
+import FinalConfirm from "../components/orderPage/finalConfirm";
 // import {useRouter} from 'next/router';
 
 const Order = () => {
   
-  const [orderProcess, setOrderProcess] = useState(1);
+  const [orderProcess, setOrderProcess] = useState(0);
   const [openPostSearch, setOpenPostSearch] = useState(false);
 
   const {curOption, setCurOption} = useContext(UserContext);
@@ -75,6 +76,8 @@ const Order = () => {
     setOrderProcess(2);
   }
 
+  
+
   return (
     <main className="flex flex-col gap-[5rem]">
       <nav className="flex flex-row justify-center gap-[4rem]">
@@ -107,10 +110,12 @@ const Order = () => {
         <section className="flex flex-col items-center gap-[2rem] border-2 py-[1rem] mx-[255px]">
           <section className="flex flex-wrap justify-center gap-x-[45px] gap-y-[96px] my-10">
             {curOption.map(option => (
-              <OptionTable option={option} key={option.optionTitle} />
-            ))}
-            {curOption.map(option => (
-              <OptionTable option={option} key={option.optionTitle} />
+              <motion.button 
+                whileTap={{ scale: 0.98 }} 
+                className="flex flex-col items-center gap-[0.5rem] shadow-lg hover:text-theme-color hover:shadow-gray-400/70 rounded-xl" 
+              >
+                <OptionTable option={option} key={option.optionTitle} />
+              </motion.button>
             ))}
           </section>
           <CustomButton text="수령정보 입력" func={toRecepientForm} classNameProp="bg-theme-color text-white font-semibold w-40 h-10 self-center mt-[-1rem] mb-[2rem]" />
@@ -135,7 +140,7 @@ const Order = () => {
       )
       }
       {orderProcess === 2 && (
-        <h2>최종 페이지</h2>
+        <FinalConfirm />
       )}
       
 
