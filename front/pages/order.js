@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import RecepientForm from "../components/orderPage/recepientForm";
 import { motion } from "framer-motion";
 import Image from 'next/image';
+import OptionTable from "../components/orderPage/optionTable";
 
 const Order = () => {
   
@@ -77,7 +78,7 @@ const Order = () => {
       </nav>
 
       {orderProcess === 0 && (
-        <h2>상품 페이지</h2>
+        <OptionTable />
       )}
 
       {orderProcess === 1 && (
