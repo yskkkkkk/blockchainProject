@@ -64,28 +64,28 @@ export default function Funding(props){
 
   const itemList = option.map((option,index) => {
     return (
-      <ListItem key={index}>
-        <ListItemText primary={`${option.optionTitle}: ${option.optionPrice}eth에 ${option.optionDescription}의 구성`} />
+      <ListItem sx={{border: "2px solid #6667AB", borderRadius: "5px"}} key={index}>
+        <ListItemText primary={`${option.optionTitle}: ${option.optionPrice}ETH에 ${option.optionDescription}의 구성`} />
       </ListItem>
     )
   })
   
   return(
-    <div className="flex flex-col items-center">
-      <div>
+    <div className="grid gap-6 items-center mt-16 w-5/12 mx-auto min-w-max">
+      <div className="flex grid-cols-12 flex-col items-left">
         <label htmlFor="goal">목표 금액</label>
         <TextField 
           type="text"
           id="goal" 
           name="goal"
           InputProps={{
-            endAdornment:<InputAdornment position="end">eth</InputAdornment>,
+            endAdornment:<InputAdornment position="end">ETH</InputAdornment>,
           }}
           onChange={props.handleChange}
           value={goal}
         />
       </div>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <LocalizationProvider dateAdapter={AdapterDateFns} sx={{ marginY: "1.5rem" }}>
         <DatePicker
           label="시작일"
           value={startDay}
@@ -111,11 +111,13 @@ export default function Funding(props){
           renderInput={(params)=> <TextField {...params} />}
         />
       </LocalizationProvider>
-      <p>선물옵션</p>
-      <List>
-        {itemList}
-      </List>
-      <Button variant="outlined" onClick={handleClickOpen}>새 옵션</Button>
+      <div>
+        <p>선물옵션</p>
+        <List>
+          {itemList}
+        </List>
+      </div>
+      <Button sx={{width: "100px", marginLeft: "auto"}} variant="outlined" onClick={handleClickOpen}>+ 새 옵션</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>새로운 옵션</DialogTitle>
         <DialogContent>
@@ -136,7 +138,7 @@ export default function Funding(props){
             fullWidth
             value={itemData.optionPrice}
             InputProps={{
-              endAdornment:<InputAdornment position="end">eth</InputAdornment>,
+              endAdornment:<InputAdornment position="end">ETH</InputAdornment>,
             }}
             name="optionPrice"
             onChange={handleItem}

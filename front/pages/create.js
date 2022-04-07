@@ -81,14 +81,29 @@ export default function Create(){
     })
   }
 
+  const handleNext = () => {
+    setChoice((choice) => {
+      if (choice <= 2) {
+        return (choice + 1)  
+      }
+      })
+  }
+
   // 유저 정보를 받아오고, 지갑도 확인한 뒤 지갑주소가 유저 정보에 저장된 지갑주소와 같은지 확인합니다.
   useEffect( async () => {
-    if (!userSeq) {
-      Router.push('login/')
+    const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
+    try {
+      const temp = await data.json();
+    } catch {
+      toast.error('로그인되지 않은 사용자입니다. 로그인페이지로 이동합니다.')
+      setTimeout(() => {
+        Router.push('/login')
+      }, 2000 )
     }
+
     if (window.ethereum && window.ethereum.isMetaMask) {
       try {
-        const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${userSeq}`);
+        const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${temp.userSeq}`);
         const data = await res.json();
         const userWalletAddress = data.userWalletAddress
         setCreatorData({userNickname:data.userNickname, userPhone:data.userPhone, userIntroduce:data.userIntroduce})
@@ -202,18 +217,24 @@ export default function Create(){
   return (
     <div className="container mx-auto py-10">
       {/* flex: inline-flex -> flex로 */}      
-      <ButtonGroup className="flex justify-center mb-8" variant="text" aria-label="text button group">
-        <Button onClick={handleChoice} value={0}>창작자 정보</Button>
-        <Button onClick={handleChoice} value={1}>프로젝트 정보</Button>
-        <Button onClick={handleChoice} value={2}>펀딩 계획</Button>
-        <Button onClick={handleChoice} value={3}>정책 안내</Button>
-      </ButtonGroup>
+      <div style={{margin: "auto"}}>
+        <ButtonGroup style={{color: "#6667AB", margin: "auto"}} className="flex justify-center mb-8" variant="text" aria-label="text button group">
+          <Button style={choice === 0 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={0}>창작자 정보</Button>
+          <Button style={choice === 1 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={1}>프로젝트 정보</Button>
+          <Button style={choice === 2 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={2}>펀딩 계획</Button>
+          <Button style={choice === 3 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={3}>정책 안내</Button>
+        </ButtonGroup>
+      </div>
       
       {choice===0 && <Creator creatorData={creatorData} handleChange={handleChange}/>}
       {choice===1 && <Project projectData={projectData} categories={categories} handleChange={handleChange}/>}
       {choice===2 && <Funding fundingData={fundingData} handleChange={handleChange} addItem={addItem} changeDate={changeDate}/>}
       {choice===3 && <Policy/>}
-      <button onClick={createProject}>프로젝트 생성!</button>
+      <br/>
+      { choice <= 2 ? 
+      <button style={{borderRadius: "1rem", display: "block"}} className="mt-4 mx-auto text-center border-2 p-3 font-semibold text-[#6667AB] border-[#6667AB]" onClick={handleNext}>다음으로 넘어가기</button>
+      : <button style={{borderRadius: "1rem", display: "block"}} className="mt-4 mx-auto text-center border-2 p-3 font-semibold text-white bg-[#6667AB] border-[#6667AB]" onClick={createProject}>동의하고 프로젝트 생성!</button>
+      }
       <Toaster />
     </div>
   )

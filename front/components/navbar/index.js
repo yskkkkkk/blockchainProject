@@ -24,24 +24,17 @@ export default function Navbar() {
 
   const getUserInfo = async () => {
     const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
-    console.log('받아온 raw data:', data);
     try {
     const temp = await data.json();
-    console.log('JSON화:', temp);
+    console.log('JSON화 유저정보: ', temp);
     await setUserSeq(temp.userSeq);
     await setUserInfo(temp);
+    if (temp.userSeq) {
+      setIsLoggedIn(true);
+    }
     } catch {
         console.log('사용자가 아닙니다');
-    } finally {
-      if (userSeq) {
-        setIsLoggedIn(true);
-      }
     }
-  }
-
-  const b = (e) => {
-    e.preventDefault();
-    console.log('현재 로그인 상태', isLoggedIn);
   }
 
   useEffect(() => {
@@ -51,7 +44,6 @@ export default function Navbar() {
 
   return (
     <nav className={style.container} >
-      <button onClick={b}>get login status</button>
       <ul className="border-b-4">
         <li className={style.li}>
           <Link href="/" passHref>
@@ -76,7 +68,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li className={style.li}>
-          <Link href="/project" passHref>
+          <Link href="/create" passHref>
             <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">프로젝트 생성</button>
           </Link>
         </li>
