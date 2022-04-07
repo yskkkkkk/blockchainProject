@@ -97,7 +97,7 @@ export default function Create(){
     } catch {
       toast.error('로그인되지 않은 사용자입니다. 로그인페이지로 이동합니다.')
       setTimeout(() => {
-        // Router.push('/login')
+        Router.push('/login')
       }, 2000 )
     }
 
