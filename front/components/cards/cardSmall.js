@@ -3,7 +3,7 @@ import {motion} from 'framer-motion';
 import contractGetter from '../../lib/ContractGetter';
 import { useEffect, useState } from 'react';
 
-const FundCardSmall = ({fund}) => {
+const FundCardSmallTest = ({fund, index}) => {
   const [dDay, setDDay] = useState('...')
   useEffect(
     async () => {
@@ -24,50 +24,53 @@ const FundCardSmall = ({fund}) => {
 
 
   return (
-    // <motion.div
-    //   initial="initial"
-    //   animate="animate"
-    //   variants={{
-    //     initial: {
-    //       opacity: 0,
-    //     },
-    //     animate: {
-    //       opacity: 1,
-    //     },
-    //   }}>
+    <motion.div
+      initial="initial"
+      animate="animate"
+      variants={{
+        initial: {
+          opacity: 0,
+        },
+        animate: {
+          opacity: 1,
+        },
+      }}>
 
-    //   <article className="flex flex-col gap-[16px] overflow-hidden flex-wrap shadow-lg">
-    //     <img className="w-full" src="/productImg.jpg" alt="fund card image" />
-    //     <section className="px-6">
-    //       <div className="mb-2 text-xl font-bold">펀드명:{props.info.fundingTitle} ₩</div>
-    //       <p className="text-base text-gray-700">펀드한줄설명{props.info.fundingSimple}</p>
-    //     </section>
-    //     <section className="px-6 pt-4 pb-2">
-    //       <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full"># {dDay}</span>
-    //       <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full"># 한정수량</span>
-    //     </section>
-    //   </article>
-
-    //   </motion.div>
-
-    <div class="max-w-sm min-w-sm lg:max-w-full lg:flex">                                                         {/* 아래거 안될시 style={{backgroundImage: `url('/productImg.jpg')`}} 로 대체*/} 
-      <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{ backgroundImage: `url(${fund.fundingImage})` }} title="product thumbnail pic">
-      </div>
-      <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-        <div class="mb-8">
-          <div class="text-gray-900 font-bold text-xl mb-2">{fund.fundingTitle}</div>
-          <p class="text-gray-700 text-base">매우단순한 설명입니다:</p>
-          <p class="text-gray-700 text-base">{fund.fundingSimple}</p>
+      <article className="flex items-center ml-1 grid grid-cols-12 shadow-md">
+        <b className="col-span-1" style={{ fontSize: "20px", padding: "0 10px"}}>{index+1}</b>
+        <img className="w-full col-span-3" src="/productImg.jpg" alt="fund card image" />
+        <div className="col-span-8">
+          <section className="px-[3%] overflow-hidden">
+            <div className="mb-1 font-bold" style={{fontSize: "14px"}}>펀드명:{fund.fundingTitle} 1234₩</div>
+            <div className="text-gray-700" style={{fontSize: "13px"}}>펀드한줄설명{fund.fundingSimple}</div>
+          </section>
+          <section className="px-[3%] pb-2">
+            <span className="inline-block px-3 py-1 mt-2 mb-0.5 mr-2 font-semibold text-gray-700 bg-gray-200 rounded-full" style={{fontSize: "12px"}}># {dDay}</span>
+            <span className="inline-block px-3 py-1 mt-2 mb-0.5 mr-2 font-semibold text-gray-700 bg-gray-200 rounded-full" style={{fontSize: "12px"}}># 한정수량</span>
+          </section>
         </div>
-        <div class="flex items-center">
-          <Image width="30rem" height="30rem" class="rounded-full mr-4" src="https://i.pinimg.com/736x/b8/69/5f/b8695f007aea9a08a0419479217ca6aa.jpg" alt="seller pic" />
-          <div class="text-sm">
-            <p class="text-gray-900 leading-none">Jonathan Reinink</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      </article>
+
+    </motion.div>
+
+    // <div class="max-w-sm min-w-sm lg:max-w-full lg:flex">                                                         {/* 아래거 안될시 style={{backgroundImage: `url('/productImg.jpg')`}} 로 대체*/} 
+    //   <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{ backgroundImage: `url(${fund.fundingImage})` }} title="product thumbnail pic">
+    //   </div>
+    //   <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    //     <div class="mb-8">
+    //       <div class="text-gray-900 font-bold text-xl mb-2">{fund.fundingTitle}</div>
+    //       <p class="text-gray-700 text-base">매우단순한 설명입니다:</p>
+    //       <p class="text-gray-700 text-base">{fund.fundingSimple}</p>
+    //     </div>
+    //     <div class="flex items-center">
+    //       <Image width="30rem" height="30rem" class="rounded-full mr-4" src="https://i.pinimg.com/736x/b8/69/5f/b8695f007aea9a08a0419479217ca6aa.jpg" alt="seller pic" />
+    //       <div class="text-sm">
+    //         <p class="text-gray-900 leading-none">Jonathan Reinink</p>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   )
 }
 
-export default FundCardSmall;
+export default FundCardSmallTest;
