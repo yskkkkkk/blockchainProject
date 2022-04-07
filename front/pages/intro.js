@@ -15,7 +15,7 @@ export default function intro() {
         <h1 className="text-4xl antialiased font-semibold text-center text-gray-700 mb-10">.</h1>
         <h1 className="text-4xl antialiased font-semibold text-center text-gray-700 mb-60">.</h1>
       </Flip>
-      <JackInTheBox>
+      <JackInTheBox fraction={0.8}>
         <h1 className="text-5xl antialiased font-bold text-center text-gray-700 mb-40">그런 당신을 위한 단 하나의 플랫폼</h1>
       </JackInTheBox>
       <Bounce fraction={0.8} triggerOnce={true}>

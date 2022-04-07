@@ -68,7 +68,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li className={style.li}>
-          <Link href="/project" passHref>
+          <Link href="/create" passHref>
             <button className="underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70">프로젝트 생성</button>
           </Link>
         </li>
