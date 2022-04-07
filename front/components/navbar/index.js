@@ -40,7 +40,7 @@ export default function Navbar() {
 
   useEffect(() => {
     getUserInfo();
-  }, [userInfo])
+  }, [])
 
   useEffect(() => {
     if (userInfo.userSeq) {
