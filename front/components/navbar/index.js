@@ -21,18 +21,21 @@ export default function Navbar() {
     })
   }
 
-  useEffect(async () => {
-    const res = await fetch('https://j6a305.p.ssafy.io/api/user/check');
-    console.log('response ok:' + res.ok);
-    console.log('before json: ' + res);
-    const data = await res.json();
-    console.log('json화 data: ' + data);
-    console.log('json화 data.body' + data.body);
-    console.log('json화 data.data: ' + data.data);
-
-    if (res.ok) {
-      setUserInfo(data);
+  const a = async () => {
+    const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
+    console.log('받아온 것:', data);
+    try {
+    const temp = await data.json();
+    console.log('JSON화:', temp);
+    console.log('유저 시퀀스:', temp.userSeq);
+    setUserInfo(temp);
+    } catch {
+        console.log('사용자가 아닙니다');
     }
+  }
+
+  useEffect(() => {
+    a();
   })
 
   useEffect(() => {
