@@ -16,12 +16,13 @@ export default function Navbar() {
     Send.get('/user/logout')
     .then((data) => {
       console.log(data);
+      setUserSeq('');
       setUserInfo('');
       setIsLoggedIn(false);
     })
   }
 
-  const a = async () => {
+  const getUserInfo = async () => {
     const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
     console.log('받아온 raw data:', data);
     try {
@@ -38,8 +39,8 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    a();
-  })
+    getUserInfo();
+  }, [userInfo])
 
   useEffect(() => {
     if (userInfo.userSeq) {
