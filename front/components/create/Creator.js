@@ -7,29 +7,33 @@ export default function Creator(props){
   return(
 
     <div className="flex flex-col items-center">
-      <Image className="my-6" width={150} height={40} src="/welcome.png" alt="welcome" />      
-      <div className="flex items-center my-6">
-        <label htmlFor="userNickname">창작자 닉네임:</label>
+      <div className="my-10">
+        <Image className="my-6" style={{marginBottom: "3rem"}} width={150} height={40} src="/welcome.png" alt="welcome" />      
+      </div>
+      <div className="flex items-center my-6 w-2/4">
+        <label className="mr-5" htmlFor="userNickname">창작자 닉네임:</label>
         <TextField 
           type="text"
           id="userNickname" 
           name="userNickname"
           onChange={props.handleChange}
           value={userNickname}
+          className="w-3/4"
         />
       </div>
-      <div className="flex items-center my-6">
-        <label htmlFor="userPhone">창작자 연락처:</label>
+      <div className="flex items-center my-6 w-2/4">
+        <label className="mr-5"  htmlFor="userPhone">창작자 연락처:</label>
         <TextField 
           type="text" 
           id="userPhone" 
           name="userPhone"
           onChange={props.handleChange}
           value={userPhone}
+          className="w-3/4"
         />
       </div>
-      <div className="flex items-center my-6">
-        <label htmlFor="userIntroduce">창작자 소개글:</label>
+      <div className="flex items-center my-6 w-2/4">
+        <label className="mr-5" htmlFor="userIntroduce">창작자 소개글: </label>
         <TextField 
           type="text" 
           id="userIntroduce" 
@@ -37,6 +41,7 @@ export default function Creator(props){
           onChange={props.handleChange}
           value={userIntroduce}
           multiline
+          className="w-3/4"
         />
       </div>
     </div>

@@ -213,7 +213,8 @@ export default function Create(){
       {choice===1 && <Project projectData={projectData} categories={categories} handleChange={handleChange}/>}
       {choice===2 && <Funding fundingData={fundingData} handleChange={handleChange} addItem={addItem} changeDate={changeDate}/>}
       {choice===3 && <Policy/>}
-      <button onClick={createProject}>프로젝트 생성!</button>
+      <br/>
+      <button style={{borderRadius: "1rem", display: "block"}} className="mt-4 mx-auto text-center border-2 p-3 font-semibold text-[#6667AB] font-grey border-[#6667AB]" onClick={createProject}>프로젝트 생성!</button>
       <Toaster />
     </div>
   )

@@ -78,12 +78,12 @@ export default function Texteditor(props){
   ]
   
   return(
-    <div>
+    <div style={{height: "500px", width: "100%"}}>
       {/* <QuillNoSSRWrapper ref={quillRef} theme="snow" modules={modules} formats={formats} onChange={setValue}/> */}
       {tempValue}
       {tempValue2}
-      <Image src='/files/2022/4/6/d2bb8674-f129-4af2-9304-ef91928780dd_ethereum.png' width={300} height={300}/>
-      <ReactQuill forwardedRef={quillRef} theme="snow" modules={modules} formats={formats} value={value} onChange={setValue}/>
+      {/* <Image src='/files/2022/4/6/d2bb8674-f129-4af2-9304-ef91928780dd_ethereum.png' width={300} height={300}/> */}
+      <ReactQuill style={{height: "500px"}} forwardedRef={quillRef} theme="snow" modules={modules} formats={formats} value={value} onChange={setValue}/>
     </div>
   )
 }

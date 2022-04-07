@@ -34,29 +34,31 @@ export default function Project(props){
   )
 
   return(
-    <div className="flex flex-col items-center">
-      <div>
-        <label htmlFor="fundingTitle">프로젝트 명:</label>
+    <div className="mt-4 flex flex-col items-center">
+      <div className="my-6 flex-col flex items-start">
+        <label className="mr-6" htmlFor="fundingTitle">프로젝트 명:</label>
         <TextField 
           type="text" 
           id="fundingTitle" 
           name="fundingTitle"
           onChange={props.handleChange}
           value={fundingTitle}
+          className="w-96"
         />
       </div>
-      <div>
-        <label htmlFor="fundingSimple">프로젝트 한줄 소개:</label>
+      <div className="my-6 flex-col flex items-start">
+        <label className="mr-6" htmlFor="fundingSimple">프로젝트 한줄 소개:</label>
         <TextField 
           type="text" 
           id="fundingSimple" 
           name="fundingSimple"
           onChange={props.handleChange}
           value={fundingSimple}
+          className="w-96"
         />
       </div>
-      <div>
-        <label htmlFor="fundingCategory">프로젝트 카테고리</label>        
+      <div className="my-6 flex items-center w-96">
+        <label className="mr-6" htmlFor="fundingCategory">프로젝트 카테고리:</label>        
         <FormControl sx={{ m:1, minWidth: 120}}>          
           <Select             
             value={fundingCategory}
@@ -70,16 +72,16 @@ export default function Project(props){
           </Select>
         </FormControl>
       </div>
-      <div>
-        <label htmlFor="image">
+      <div className="my-6 flex items-center w-96">
+        <label className="mr-6" htmlFor="image">
           프로젝트 이미지 : 
+        </label>
           <Input id="image"  accept="image/*" multiple type="file" name="image" onChange={handleImage} />
           <Button variant="contained" component="span">
             Upload
           </Button>          
-        </label>
       </div>
-      <div>
+      <div className="my-6 mt-12 flex items-start flex-col w-9/12 mx-auto">
         <label htmlFor="fundingText">프로젝트 설명:</label>
         {/* <TextField 
           type="text" 
