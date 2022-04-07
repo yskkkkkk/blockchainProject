@@ -3,17 +3,18 @@ import '../styles/globals.css'
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { UserContext } from '../lib/UserContext';
-import {useState, useEffect, useMemo} from 'react';
-import Send from '../lib/Send';
+import {useState, useMemo} from 'react';
+
 
 function MyApp({ Component, pageProps, router }) {
   // 유저 번호 값 루트 컴포넌트에서 뿌려줄 수 있게 관리
   const [userSeq, setUserSeq] = useState('');  // 임의값
   const [userInfo, setUserInfo] = useState('');
+  const [curOption, setCurOption] = useState([]);
   // 유저 번호 값이 바뀔때만 userSeq 값 수정
   const userInfoValue = useMemo(() => ({
-    userSeq, setUserSeq, userInfo, setUserInfo}), 
-    [userSeq, setUserSeq, userInfo, setUserInfo]);
+    userSeq, setUserSeq, userInfo, setUserInfo, curOption, setCurOption}), 
+    [userSeq, setUserSeq, userInfo, setUserInfo, curOption, setCurOption]);
 
   return (
     <>

@@ -5,7 +5,8 @@ import ProductQNA from '../../components/products/productQNA';
 import ProductOptions from '../../components/products/productOptions';
 import Loader from '../../components/ui/loader';
 
-import { useState, Suspense } from 'react';
+import { useState, useContext, Suspense, useEffect } from 'react';
+import { UserContext } from '../../lib/UserContext';
 
 
 // 다이나믹 루트 활용하여 각 상세 페이지에 대해 라우트와 html 페이지를 생성해주기 위한 함수
@@ -51,6 +52,8 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 // getStaticProps 에서 fetch 된 데이터들을 props로 받아와서 Detail 페이지에서 활용하게됨
 const Detail = ({fund, fundingSeq}) => {
 
+  const {curOption, setCurOption} = useContext(UserContext);
+
   const [currentNav, setCurrentNav] = useState(0);
 
   const showProductDetail = (e) => {
@@ -66,6 +69,10 @@ const Detail = ({fund, fundingSeq}) => {
     setCurrentNav(2);
   }
 
+  useEffect(() => {
+    setCurOption(fund.option);
+  }, [])
+
   return (
     <main className="flex flex-col gap-[4rem]">
       {console.log(`현재 유저 번호: ${fund.userSeq}`)}
@@ -75,21 +82,21 @@ const Detail = ({fund, fundingSeq}) => {
       <ProductBasics src={fund.fundingImage} fundInfo={fund} />
       <hr />
       {/* 상품 상세정보의 네비게이션바  */}
-      <nav className="flex flex-row gap-[3rem] justify-center mr-[50rem]">
+      <nav className="flex flex-row gap-[3rem] justify-center mr-[40rem]">
         <button onClick={showProductDetail} className={`${currentNav === 0 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>상품 정보</button>
         <button onClick={showAnnouncement} className={`${currentNav === 1 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>공지사항</button>
         <button onClick={showQNA} className={`${currentNav === 2 ? "decoration-theme-color/70 text-theme-color font-semibold" : "text-black text-opacity-50"} font-sans text-2xl antialiased underline decoration-4 underline-offset-8 decoration-white hover:decoration-theme-color/70`}>Q & A</button>
       </nav>
-      <section className="flex flex-row gap-[8rem] justify-center">
+      <section className="flex flex-row gap-[3rem] justify-center">
         {/* 펀딩 상세정보 컴포넌트 */}
-        <section className="flex flex-col gap-[4rem] basis-[50rem]">
+        <section className="flex flex-col gap-[4rem] basis-[45rem]">
           {currentNav === 0 && (
             // 상세정보 api 요청 후 데이터 어떻게 들어오는지 확인 필요
             <ProductDetail fundingSeq={fundingSeq} picture="https://images.unsplash.com/photo-1603408639326-fad10b8fbc1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZyUyMHdheXxlbnwwfHwwfHw%3D&w=1000&q=80"/>
           )}
           {currentNav === 1 && (
             <Suspense fallback={<Loader />}>
-              <ProductAnnouncement fundingSeq={fundingSeq} />
+              <ProductAnnouncement fundingSeq={fundingSeq} fundInfo={fund} />
             </Suspense>
           )}
           {currentNav === 2 && (
@@ -100,7 +107,7 @@ const Detail = ({fund, fundingSeq}) => {
         </section>
         
         {/* 펀드 상품 종류 선택 컴포넌트들 들어갈 위치  */}
-        <aside className="flex flex-col gap-[6rem]">
+        <aside className="flex flex-col gap-[3rem] max-w-[250px] min-w-[230px]">
           {fund.option.map(o => (
             <ProductOptions option={o} key={o.optionTitle} />
           ))}

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Router from "next/router";
-import Send from '../../../lib/Send';
 
 import {useEffect, useContext, useState} from 'react';
 import {follow, unfollow} from '../../../lib/User.js';
@@ -33,7 +32,11 @@ const ProductBasics = ({src, fundInfo}) => {
 
   const checkOut = (e) => {
     e.preventDefault();
-    Router.push("/order");
+    if (userSeq) {
+      Router.push("/order");
+    } else {
+      Router.push("/login");
+    }
   }
 
   const toLoginPage = (e) => {
@@ -53,7 +56,8 @@ const ProductBasics = ({src, fundInfo}) => {
   return (
     <header className="flex flex-row justify-center gap-[10rem]">
       <section>
-        <Image src={src} alt="thumbnail" width={300} height={300} />
+        <Image src={src} alt="thumbnail" width="470px" height="300px" />
+        {/* <Image width="470px" height="300px" src="/productImg.jpg" alt="펀드 썸네일 사진" /> */}
       </section>
       <section className="flex flex-col gap-[2rem] w-96">
         <h2>{fundInfo.fundingTitle}</h2>
@@ -68,7 +72,7 @@ const ProductBasics = ({src, fundInfo}) => {
           <Link href={'/order/'} passHref>
             <CustomButton func={checkOut} text="펀딩하기" classNameProp="w-48 py-[0.5rem] bg-theme-color text-white font-black antialiased text-xl justify-self-center" />
           </Link>
-          <button onClick={toggleLike} className="w-48 py-[0.5rem] border-2 text-gray-600 font-black antialiased text-xl justify-self-center "><span className={like ? "text-theme-color/70" : "text-gray-400"}>♡ </span>찜하기</button>
+          <button onClick={toggleLike} className="w-48 py-[0.5rem] border-2 text-gray-600 font-black antialiased text-xl justify-self-center "><span className={like ? "text-theme-color/70 font-black" : "hidden"}>♡ </span>{like ? <span>찜콕~!</span> : <span>찜하기</span>}</button>
         </div>
         <div className="flex flex-row justify-evenly">
           <p className="basis-1/2">파트너 정보:
@@ -76,7 +80,12 @@ const ProductBasics = ({src, fundInfo}) => {
           </p>
           <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
             {/* 팔로우 버튼 토글 애니매이션 폭망. 다시짜야함  */}
-            <button onClick={userSeq ? toggleFollowing : toLoginPage} className={`${userSeq ? "bg-theme-color text-white" : ""} w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color`}>팔로우</button>
+            <button 
+              onClick={userSeq ? toggleFollowing : toLoginPage} 
+              className={`${userSeq && following ? "bg-theme-color text-white" : "text"} w-[4.5rem] py-[1px] antialiased border-2 justify-self-center rounded-lg hover:border-theme-color`}
+            >
+              {following ? <span>팔로잉</span> : <span>팔로우</span> }
+            </button>
           </div>
         </div>
       </section>
