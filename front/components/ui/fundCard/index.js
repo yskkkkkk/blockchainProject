@@ -37,12 +37,18 @@ const FundCard = ({fund}) => {
       }}>
 
       <article className="flex flex-col gap-[16px] overflow-hidden flex-wrap shadow-lg">
-        <img className="w-full" src="/productImg.jpg" alt="fund card image" />
+        {fund.fundingImage ? (
+          <Image width="250px" height="200px" src={fund.fundingImage} alt="펀드 썸네일 사진" />
+          ) : (
+          // <img className="w-full" src="/productImg.jpg" alt="fund card image" />
+          <Image width="250px" height="200px" src="/productImg.jpg" alt="펀드 썸네일 사진" />
+        )}
+        {console.log(fund.fundingImage)}
         <section className="px-6">
-          <div className="mb-2 text-xl font-bold">펀드명:{fund.fundingTitle} ₩</div>
-          <p className="text-base text-gray-700">펀드한줄설명{fund.fundingSimple}</p>
+          <div className="mb-2 text-xl font-bold">{fund.fundingTitle}</div>
+          <p className="text-base text-gray-700">{fund.fundingSimple.length > 17 ? fund.fundingSimple.substring(0, 18) + "..." : fund.fundingSimple}</p>
         </section>
-        <section className="px-6 pt-4 pb-2">
+        <section className="px-6 pb-2">
           <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full"># {dDay}</span>
           <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full"># 한정수량</span>
         </section>

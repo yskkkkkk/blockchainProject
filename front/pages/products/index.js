@@ -82,14 +82,15 @@ const Products = ({funds}) => {
       </nav>
       <h2 className="text-2xl antialiased font-semibold text-center text-gray-700">{categoryTitle} 펀딩 상품</h2>
       <hr className="mt-[32px] mb-[50px]  mx-[236px]" />
-      <div className="flex flex-wrap justify-center mx-[64px] gap-x-[16px] gap-y-[64px] my-10">
+      <div className="flex flex-wrap justify-center mx-[230px] gap-x-[45px] gap-y-[96px] my-10">
         {funds[category-1] ? funds[category-1][0].map(fund => (
           // <Link href={'/products/' + fund.id} key={fund.id} passHref>
           <Link href={'/products/' + fund.fundingSeq} key={fund.fundingSeq} passHref>
             <motion.button
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
-              className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-[16px]"
+              // className="w-1/2 sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-[16px]"
+              className="max-w-[320px] min-w-[320px] min-h-[300] max-h-[300px]"
             >
               <FundCard fund={fund} />
             </ motion.button>
