@@ -19,5 +19,6 @@ public class AddFundingRequest {
     private Integer fundingCategory;
     private String fundingText;
     private String fundingWarning;
+    private String fundingContract;
     private AddOptionRequest[] option;
 }

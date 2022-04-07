@@ -3,10 +3,7 @@ package com.ssafy.woori.domain.funding.service;
 import com.ssafy.woori.domain.file.service.FileService;
 import com.ssafy.woori.domain.funding.dao.FundingRepository;
 import com.ssafy.woori.domain.funding.dao.OptionRepository;
-import com.ssafy.woori.domain.funding.dto.AddFundingRequest;
-import com.ssafy.woori.domain.funding.dto.FundingInfoResponse;
-import com.ssafy.woori.domain.funding.dto.FundingListResponse;
-import com.ssafy.woori.domain.funding.dto.OptionListResponse;
+import com.ssafy.woori.domain.funding.dto.*;
 import com.ssafy.woori.entity.Funding;
 import com.ssafy.woori.entity.Option;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +29,20 @@ public class FundingServiceImpl implements FundingService{
     FileService fileService;
 
     @Override
-    public List<FundingListResponse> fundingHot() {
+    public Optional<List<FundingListResponse>> fundingList(int sort) {
 
-        return (fundingRepository.findByEmailAdd());
+        if(sort == 1){
+            return (fundingRepository.findBaseList());
+        }
+        else if(sort == 2){
+            return (fundingRepository.findNewList());
+        }
+        else if(sort == 3){
+            return (fundingRepository.findLikeList());
+        }
+        else{
+            return (Optional.empty());
+        }
     }
 
     @Override
@@ -78,6 +87,7 @@ public class FundingServiceImpl implements FundingService{
                         .fundingImage(imgPath)
                         .fundingText(request.getFundingText())
                         .fundingWarning(request.getFundingWarning())
+                        .fundingContract(request.getFundingContract())
                         .build()
         );
 
@@ -89,11 +99,63 @@ public class FundingServiceImpl implements FundingService{
                             .optionPrice(request.getOption()[i].getOptionPrice())
                             .optionText(request.getOption()[i].getOptionText())
                             .optionMaxamount(request.getOption()[i].getOptionMaxamount())
-                            .optionOrder(1)
+                            .optionOrder(i)
                             .build()
             );
         }
 
         return (funding);
+    }
+
+    @Override
+    public boolean deleteFunding(int fundingSeq) {
+        if(fundingRepository.findById(fundingSeq).isPresent()){
+            fundingRepository.deleteById(fundingSeq);
+            return (true);
+        }
+        return false;
+    }
+
+    @Override
+    public FundingTopResponse getFunding(int fundingSeq) {
+
+        Optional<GetTopValues> dto = fundingRepository.findTopValues(fundingSeq);
+        Optional<List<GetOptionList>> options = optionRepository.getOptionsList(fundingSeq);
+
+        if(dto.isPresent() && options.isPresent()){
+            FundingTopResponse response = new FundingTopResponse(
+                    dto.get().getFundingTitle(),
+                    dto.get().getUserSeq(),
+                    dto.get().getFundingImage(),
+                    dto.get().getFundingSimple(),
+                    dto.get().getUserNickname(),
+                    dto.get().getFundingContract(),
+                    options.get()
+            );
+            return (response);
+        }
+        return null;
+    }
+
+    @Override
+    public List<FundingTopResponse> getSellList(int userSeq) {
+
+        Optional<List<GetSellList>> dto = fundingRepository.findAllByUserSeq(userSeq);
+
+        List<FundingTopResponse> lists = new ArrayList<>();
+        if(dto.isPresent()){
+            for(GetSellList tmp : dto.get()){
+                lists.add(
+                        FundingTopResponse
+                                .builder()
+                                .fundingTitle(tmp.getFundingTitle())
+                                .fundingImage(tmp.getFundingImage())
+                                .option(optionRepository.getOptionsList(tmp.getFundingSeq()).get())
+                                .build()
+                );
+            }
+        }
+
+        return (lists);
     }
 }

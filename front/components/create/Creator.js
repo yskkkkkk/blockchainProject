@@ -7,7 +7,7 @@ export default function Creator(props){
   return(
 
     <div className="flex flex-col items-center">
-      <Image className="my-6" src="/welcome.png" alt="welcome" />      
+      <Image className="my-6" width={150} height={40} src="/welcome.png" alt="welcome" />      
       <div className="flex items-center my-6">
         <label htmlFor="nickname">창작자 닉네임:</label>
         <TextField 

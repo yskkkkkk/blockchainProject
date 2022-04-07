@@ -31,7 +31,7 @@ public class User {
     private LocalDate userModifiedDate;
     @Column(length = 20)
     private String userNickname;
-    @Column(unique = true)
+    @Column
     private String userWalletAddress;
     @Column(length = 50)
     private String userPlatform;

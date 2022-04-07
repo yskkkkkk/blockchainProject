@@ -15,9 +15,9 @@ public class UserUpdateRequest {
 	private int userSeq;
 	private LocalDate userBirth;
 	private String userNickname;
-	private String userImage;
 	private String userPhone;
 	private String userIntroduce;
 	private String userCompany;
-
+	private String userWalletAddress;
+	
 }

@@ -2,6 +2,8 @@ package com.ssafy.woori.domain.user.dto;
 
 import java.time.LocalDate;
 
+import com.ssafy.woori.entity.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +27,19 @@ public class UserInfoResponse {
 	private String userIntroduce;
 	private String userCompany;
 
+	public UserInfoResponse(User user) {
+		this.userSeq = user.getUserSeq();
+		this.userEmail = user.getUserEmail();
+		this.userBirth = user.getUserBirth();
+		this.userCreatedDate = user.getUserCreatedDate();
+		this.userNickname = user.getUserNickname();
+		this.userModifiedDate = user.getUserModifiedDate();
+		this.userWalletAddress = user.getUserWalletAddress();
+		this.userPlatform = user.getUserPlatform();
+		this.userImage = user.getUserImage();
+		this.userPhone = user.getUserPhone();
+		this.userIntroduce = user.getUserIntroduce();
+		this.userCompany = user.getUserCompany();
+	}
+	
 }
