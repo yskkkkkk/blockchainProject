@@ -92,8 +92,9 @@ export default function Create(){
   // 유저 정보를 받아오고, 지갑도 확인한 뒤 지갑주소가 유저 정보에 저장된 지갑주소와 같은지 확인합니다.
   useEffect( async () => {
     const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
+    let temp
     try {
-      const temp = await data.json();
+      temp = await data.json();
     } catch {
       toast.error('로그인되지 않은 사용자입니다. 로그인페이지로 이동합니다.')
       setTimeout(() => {
@@ -217,7 +218,7 @@ export default function Create(){
   return (
     <div className="container mx-auto py-10">
       {/* flex: inline-flex -> flex로 */}      
-      <div style={{margin: "auto"}}>
+      <div style={{margin: "auto", display: "flex", justifyContent: "center"}}>
         <ButtonGroup style={{color: "#6667AB", margin: "auto"}} className="flex justify-center mb-8" variant="text" aria-label="text button group">
           <Button style={choice === 0 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={0}>창작자 정보</Button>
           <Button style={choice === 1 ? {color: "#6667AB", fontWeight: "bold"} : {color: "grey"}} className="font-semibold" onClick={handleChoice} value={1}>프로젝트 정보</Button>
