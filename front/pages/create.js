@@ -93,15 +93,18 @@ export default function Create(){
   useEffect( async () => {
     const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
     try {
-    const temp = await data.json();
+      const temp = await data.json();
     } catch {
+      console.log('로그인페이지도 보낸대 ㄷㄷ', )
       toast.error('로그인되지 않은 사용자입니다. 로그인페이지로 이동합니다.')
-      Router.push('/login')
+      setTimeout(() => {
+        Router.push('/login')
+      }, 2000 )
     }
 
     if (window.ethereum && window.ethereum.isMetaMask) {
       try {
-        const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${userSeq}`);
+        const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${temp.userSeq}`);
         const data = await res.json();
         const userWalletAddress = data.userWalletAddress
         setCreatorData({userNickname:data.userNickname, userPhone:data.userPhone, userIntroduce:data.userIntroduce})
