@@ -33,7 +33,7 @@ export default function Navbar() {
     } catch {
         console.log('사용자가 아닙니다');
     } finally {
-      if (userSeq) {
+      if (temp.userSeq) {
         setIsLoggedIn(true);
       }
     }
