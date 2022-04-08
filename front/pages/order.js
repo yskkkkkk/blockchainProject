@@ -92,7 +92,7 @@ const Order = () => {
     setOrderProcess(2);
   } 
 
-  const confirmFinalOrder = (e) => {
+  const confirmFinalOrder = async (e) => {
     e.preventDefault();
     const contract = await new ethers.Contract('0x2aDbcD4Be17fB724b39ad7FC80963b118669A805', ABI, signer);
     try {
