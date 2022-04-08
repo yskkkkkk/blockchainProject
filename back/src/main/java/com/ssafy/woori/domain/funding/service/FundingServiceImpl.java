@@ -161,4 +161,9 @@ public class FundingServiceImpl implements FundingService{
 
         return (lists);
     }
+
+	@Override
+	public List<DeliveryList> getDeliveryList(int fundingSeq) {
+		return fundingRepository.getDeliveryList(fundingSeq).orElse(null);
+	}
 }
