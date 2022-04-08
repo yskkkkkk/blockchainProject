@@ -62,28 +62,24 @@ export default function Setting(){
 
   return(
     <div>
-      <h2>설정</h2>
+      <h2 className="p-4">설정</h2>
       <TabContext value={tabNum}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleTab} aria-label="lab API tabs example">
-            <Tab label="프로필" value="0" />
-            <Tab label="계정" value="1" />
+            <Tab label="프로필" value="0" />            
             <Tab label="지갑" value="2" />
-            <Tab label="배송지" value="3" />
+            {/* <Tab label="배송지" value="3" /> */}
           </TabList>
         </Box>
         <TabPanel value="0">
           <Profile userData={userData} handleChange={handleChange}/>
-        </TabPanel>
-        <TabPanel value="1">
-          <Account userData={userData} handleChange={handleChange}/>
-        </TabPanel>
+        </TabPanel>        
         <TabPanel value="2">
           <Wallet userData={userData} handleChange={handleChange}/>
         </TabPanel>
-        <TabPanel value="3">
+        {/* <TabPanel value="3">
           <Address userSeq={userSeq} address={address}/>
-        </TabPanel>
+        </TabPanel> */}
       </TabContext>
     </div>
   )
