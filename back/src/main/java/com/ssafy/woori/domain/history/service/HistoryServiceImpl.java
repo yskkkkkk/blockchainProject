@@ -1,6 +1,7 @@
 package com.ssafy.woori.domain.history.service;
 
 import com.ssafy.woori.domain.funding.dao.FundingRepository;
+import com.ssafy.woori.domain.funding.dto.DeliveryList;
 import com.ssafy.woori.domain.funding.dto.UserBuyListResponse;
 import com.ssafy.woori.domain.funding.repository.HistoryRepository;
 import com.ssafy.woori.domain.history.dto.AddHistoryDTO;
@@ -67,4 +68,9 @@ public class HistoryServiceImpl implements HistoryService{
                         .build()
         ));
     }
+
+	@Override
+	public Optional<List<DeliveryList>> getDeliveryList(int fundingSeq) {
+		return (fundingRepository.getDeliveryList(fundingSeq));
+	}
 }

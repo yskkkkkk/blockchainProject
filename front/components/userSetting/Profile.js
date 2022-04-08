@@ -34,8 +34,7 @@ export default function Profile(props){
 
 
   return (
-    <div>
-      {changeChoice}      
+    <div>      
       <div className="flex justify-between">      
         <p>프로필 사진</p>
         <Button onClick={()=>setChangeChoice(0)}>변경</Button>

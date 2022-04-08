@@ -16,4 +16,5 @@ public interface FundingService {
     boolean deleteFunding(int fundingSeq);
     FundingTopResponse getFunding(int fundingSeq);
     List<FundingTopResponse> getSellList(int userSeq);
+    List<DeliveryList> getDeliveryList(int fundingSeq);
 }

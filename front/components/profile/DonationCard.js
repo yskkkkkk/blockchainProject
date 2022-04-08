@@ -3,37 +3,58 @@ import { AccordionSummary } from "@mui/material"
 import { useState } from "react"
 import { Button } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Image from 'next/image'
+import contractGetter from "../../lib/ContractGetter";
 
-export default function DonationCard(props){
+export default function DonationCard({donationData, walletAddress}){
   const [expanded, setExpanded] = useState(false)
+  const [buyData, setBuyData] = useState(false)
   const finished = false
+
+  const sumValues = obj => Object.values(obj).reduce((a,b)=>(a.price*a.amount+b.price*b.amount))
+
+  useState(async ()=>{
+    if(donationData && walletAddress){
+      const contract = contractGetter(donationData.fundingContract)
+      const endDate = await contract.endDate()
+      const startDate = await contract.startDate()
+      const endTime = new Date(parseInt(endDate._hex,16)*1000)
+      const startTime = new Date(parseInt(startDate._hex,16)*1000)
+      const total = await contract.funderToAmount(walletAddress)
+      const ftl = await contract.getFunderToList(walletAddress)
+      const options = []
+      await ftl.map(async (option,index) => {
+        const price = await contract.optionPrices(index)
+        const value = parseInt(price._hex,16)/10**18
+        options.push({index:index,amount:parseInt(option._hex,16), price:value})
+      })
+      options.sort((a,b)=> a.index - b.index)
+      setBuyData({startTime:startTime, endTime:endTime, total:total ,options:options})
+
+    }
+  },[donationData,walletAddress])
+  console.log(buyData)
   return(
     <div className="my-4">
       <Accordion expanded={expanded} onChange={()=>setExpanded(!expanded)}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="flex flex-row">
-           <img className="h-32 w-32" src="https://www.ikea.com/kr/en/images/products/kavalkad-frying-pan-black__0811388_pe771635_s5.jpg" alt="pan" />
+           {donationData && <Image width="120" height="120" src={donationData.fundingImage} alt={donationData.fundingTitle} />}
            <div>
-             <p>제목: Title</p>
-             <p>일시: Date</p>
-             <p>내용: Content</p>
+             {donationData && <p>제목: {donationData.fundingTitle}</p>}
+             {donationData && <p>스마트컨트랙트 번호: {donationData.fundingContract}</p>}
            </div>
           </div>
         </AccordionSummary>
         <AccordionDetails>
           <h3 className="p-4">후원 정보</h3>
           <div className="border-solid border-black border-2 p-6">
-            <p>후원 날짜: Date</p>
-            <p>후원 번호: Num</p>
-            <p>펀딩 마감일: endDate</p>
+            {buyData && <p>펀딩 시작일: {buyData.startTime.toLocaleString()}</p>}
+            {buyData && <p>펀딩 마감일: {buyData.endTime.toLocaleString()}</p>}
+            {buyData && buyData.options.sort((a,b)=>a.index-b.index).map(option => <p>{option.index+1}번 옵션 - {option.price}ETH로 {option.amount}개 후원</p>)}
+            {buyData && <p>총 소비액: {parseFloat(buyData.total/10**18,16)}ETH</p>}
           </div>
-          <h3 className="p-4">선물 정보</h3>
-          <div className="border-solid border-black border-2 p-6">
-            <p>선물 구성: gift</p>
-            <p>후원 금액: amount</p>
-            <p>전달 상태: state</p>
-          </div>
-          {!finished && <Button className="mt-2 border-solid  border-2">후원 취소</Button>}
+          
         </AccordionDetails>
       </Accordion>
     </div>

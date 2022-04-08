@@ -197,7 +197,9 @@ export default function Create(){
       const tempProjectData = {...projectData}
       delete tempProjectData.image
       const TotalData = Object.assign({}, creatorData, tempProjectData, {option:fundingData.option}, {userSeq:userSeq, fundingContract:contractAddress})
-      Send.post(`https://j6a305.p.ssafy.io/api/funding`,{file:projectData.image, request:TotalData})
+      const formData = projectData.image
+      formData.append("request", new Blob([JSON.stringify(TotalData)], {type: "application/json"}))
+      Send.post(`https://j6a305.p.ssafy.io/api/funding`,formData)
         .then(res=>console.log('success'))
         .catch(e=>console.log(`error ${e}`))
       
