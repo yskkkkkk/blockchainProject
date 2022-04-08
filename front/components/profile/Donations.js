@@ -5,7 +5,7 @@ import { Button } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import contractGetter from "../../lib/ContractGetter";
 import DonationCard from "./DonationCard";
-import OnDonation from "./onDonation";
+
 
 export default function Donations(props){
   const [onDonations,setOnDonations] = useState()
