@@ -36,12 +36,12 @@ const FundCardSmallTest = ({fund, index}) => {
         },
       }}>
 
-      <article className="flex items-center ml-1 grid grid-cols-12 shadow-md">
+      <article className="flex items-center ml-1.5 grid grid-cols-12 shadow-md">
         <b className="col-span-1" style={{ fontSize: "20px", padding: "0 10px"}}>{index+1}</b>
-        <img className="w-full col-span-3" src="/productImg.jpg" alt="fund card image" />
+        <img className="w-full col-span-3" src={fund.fundingImage} alt="fund card image" />
         <div className="col-span-8">
           <section className="px-[3%] overflow-hidden">
-            <div className="mb-1 font-bold" style={{fontSize: "14px"}}>펀드명:{fund.fundingTitle} 1234₩</div>
+            <div className="mb-1 font-bold" style={{fontSize: "14px"}}>펀드명:{fund.fundingTitle}</div>
             <div className="text-gray-700" style={{fontSize: "13px"}}>펀드한줄설명{fund.fundingSimple}</div>
           </section>
           <section className="px-[3%] pb-2">
