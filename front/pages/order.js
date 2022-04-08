@@ -94,13 +94,10 @@ const Order = () => {
 
   const confirmFinalOrder = async (e) => {
     e.preventDefault();
-    const contract = await new ethers.Contract('0x2aDbcD4Be17fB724b39ad7FC80963b118669A805', ABI, signer);
+    const contract = new ethers.Contract('0x2aDbcD4Be17fB724b39ad7FC80963b118669A805', ABI, signer);
     try {
-      await contract.fund(choices, {value: ethers.utils.parseEther("0.06")}).
-      then((result) => console.log(result))
-    } catch (error) {
-      toast.error("거래가 정상적으로 완료되지 않았어요 ㅠ")
-    }
+      await contract.fund(choices, {value: ethers.utils.parseEther("0.06")})
+    
     for (let i = 0; i < choices.length; i++) {
       let data = {
         "userSeq": userSeq,
@@ -120,6 +117,9 @@ const Order = () => {
             console.log(err);
           })
       }
+    }
+    } catch (error) {
+      toast.error("거래가 정상적으로 완료되지 않았어요 ㅠ")
     }
   }
 

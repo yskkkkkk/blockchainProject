@@ -26,7 +26,7 @@ export default function Profile(props){
   const {userSeq, setUserSeq} = useContext(UserContext);
   const profileId = userSeq
   const [userData, setUserData] = useState({})
-  const [isMine, setIsMine] = useState(profileId === userSeq? true : false)
+  const [isMine, setIsMine] = useState(profileId === userSeq? false : true)
   const [tabNum, setTabNum] = useState(isMine?"0":"1")
   const [openState, setOpenState] = useState([false,false])
   const [followingList, setFollowingList] = useState([])
