@@ -140,7 +140,6 @@ const Order = () => {
         const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${temp.userSeq}`);
         const data = await res.json();
         const userWalletAddress = data.userWalletAddress
-        setCreatorData({userNickname:data.userNickname, userPhone:data.userPhone, userIntroduce:data.userIntroduce})
         window.ethereum.request({
           method: "wallet_addEthereumChain",
           params: [{
