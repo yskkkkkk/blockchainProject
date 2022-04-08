@@ -9,6 +9,10 @@ import AddSubt from "../components/orderPage/addsubt";
 import Send from "../lib/Send";
 import Router from "next/router";
 // import {useRouter} from 'next/router';
+import { ethers, ContractFactory } from 'ethers'
+import toast, { Toaster } from 'react-hot-toast';
+import ABI from '../lib/ABI.json'
+import Bytecode from '../lib/Bytecode.json'
 
 const Order = () => {
   
@@ -30,6 +34,8 @@ const Order = () => {
       temp.push(0)
     }
   const [choices, setChoices] = useState(temp);
+  const [provider, setProvider] = useState(null)
+  const [signer, setSigner] = useState(null)
 
   //https://velog.io/@sbinha/next.js-Router%EB%A5%BC-%ED%86%B5%ED%95%B4-props-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84
   // 위 글대로 했는데 왜 안되지;
@@ -88,6 +94,13 @@ const Order = () => {
 
   const confirmFinalOrder = (e) => {
     e.preventDefault();
+    const contract = await new ethers.Contract('0x2aDbcD4Be17fB724b39ad7FC80963b118669A805', ABI, signer);
+    try {
+      await contract.fund(choices, {value: ethers.utils.parseEther("0.06")}).
+      then((result) => console.log(result))
+    } catch (error) {
+      toast.error("거래가 정상적으로 완료되지 않았어요 ㅠ")
+    }
     for (let i = 0; i < choices.length; i++) {
       let data = {
         "userSeq": userSeq,
@@ -109,6 +122,76 @@ const Order = () => {
       }
     }
   }
+
+  useEffect( async () => {
+    const data = await fetch('https://j6a305.p.ssafy.io/api/user/check');
+    let temp
+    try {
+      temp = await data.json();
+    } catch {
+      toast.error('로그인되지 않은 사용자입니다. 로그인페이지로 이동합니다.')
+      setTimeout(() => {
+        Router.push('/login')
+      }, 2000 )
+    }
+
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      try {
+        const res = await fetch(`https://j6a305.p.ssafy.io/api/user/${temp.userSeq}`);
+        const data = await res.json();
+        const userWalletAddress = data.userWalletAddress
+        setCreatorData({userNickname:data.userNickname, userPhone:data.userPhone, userIntroduce:data.userIntroduce})
+        window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+              chainId: "0x13881",
+              rpcUrls: ["https://rpc-mumbai.matic.today"],
+              chainName: "Mumbai Testnet",
+              nativeCurrency: {
+                  name: "MATIC",
+                  symbol: "MATIC",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com"]
+          }]
+        })
+
+        const _provider = new ethers.providers.Web3Provider(window.ethereum);
+        await _provider.send("eth_requestAccounts", []);
+        const _signer = _provider.getSigner()
+        setProvider(_provider);
+        setSigner(_signer);
+        console.log("signer: ", _signer)
+        const address = await _signer.getAddress()
+        if (address !== userWalletAddress) {
+          toast.error(`지갑 주소가 저장된 것과 다릅니다.  
+          ${userWalletAddress && userWalletAddress.slice(0, 10)}... 주소를 이용하여 주세요.`)
+          setTimeout(() => {
+            Router.push('/')
+          }, 3000 )
+        }
+          //   const address = await _signer.getAddress()
+
+          // .error(
+          //   (err) => {
+          //     toast.error(err)
+          //     Router.push('/')
+          //   }
+          // );
+        
+      } catch (error) {
+        console.error("유저 정보 획득 실패:", error)
+        return
+      }
+    } else {
+      toast.error('메타마스크를 먼저 설치해 주세요 ㅠ')
+      setTimeout(
+        () => {Router.push('/intro')},
+        2000
+      )
+    }
+
+  }, [])
   
 
   return (
@@ -176,6 +259,7 @@ const Order = () => {
       <section>
         
       </section>
+      <Toaster></Toaster>
     </main>
     
   )
