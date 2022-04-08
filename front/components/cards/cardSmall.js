@@ -38,7 +38,7 @@ const FundCardSmallTest = ({fund, index}) => {
 
       <article className="flex items-center ml-1.5 grid grid-cols-12 shadow-md">
         <b className="col-span-1" style={{ fontSize: "20px", padding: "0 10px"}}>{index+1}</b>
-        <img className="w-full h-10 col-span-3" src={fund.fundingImage} alt="fund card image" />
+        <img className="w-full col-span-3" src={fund.fundingImage} alt="fund card image" />
         <div className="col-span-8">
           <section className="px-[3%] overflow-hidden">
             <div className="mb-1 font-bold" style={{fontSize: "14px"}}>{fund.fundingTitle}</div>
