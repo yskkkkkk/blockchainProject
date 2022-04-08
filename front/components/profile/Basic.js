@@ -32,14 +32,16 @@ export default function Basic(props){
     }
     if (isFollow) {
       follow(userSeq, props.profileId)
+      setIsFollow(prev => !prev)
     } else {
       unfollow(userSeq, props.profileId)
+      setIsFollow(prev => !prev)
     }
   }
 
   return(
     <div className="flex flex-row justify-center align-middle">            
-      <img className="h-32 w-32" src={props.userData.userImage===null?"https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max":props.userData.userImage} alt="userImg" />
+      <img className="h-32 w-32 m-4" src={props.userData.userImage===null?"https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max":props.userData.userImage} alt="userImg" />
 
       <div>
         <p className="pl-4">{props.userData.userNickname}
@@ -66,7 +68,7 @@ export default function Basic(props){
           setShowChoice={setShowChoice}
         />
       </div>
-      <div>
+      <div className="p-4">
         <p>자기소개 글 
           {isMine && !isEdit && <button onClick={()=>setIsEdit(true)}><EditIcon/></button>}
           {isEdit && <button onClick={()=>setIsEdit(false)}><CheckCircleOutlineIcon/></button>}</p>

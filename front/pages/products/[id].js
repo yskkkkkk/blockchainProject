@@ -53,6 +53,7 @@ export const getStaticProps = async (context) => {  // context == getStaticPaths
 const Detail = ({fund, fundingSeq}) => {
 
   const {curOption, setCurOption} = useContext(UserContext);
+  const {fundSeq, setFundSeq} = useContext(UserContext);
 
   const [currentNav, setCurrentNav] = useState(0);
 
@@ -71,6 +72,7 @@ const Detail = ({fund, fundingSeq}) => {
 
   useEffect(() => {
     setCurOption(fund.option);
+    setFundSeq(fundingSeq);
   }, [])
 
   return (

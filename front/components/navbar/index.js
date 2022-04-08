@@ -46,7 +46,7 @@ export default function Navbar() {
     <nav className={style.container} >
       <ul className="border-b-4">
         <li className={style.li}>
-          <Link href="/" passHref>
+          <Link href="/main" passHref>
             <button>
               <img className="-mb-4" src="logo.png" width="50" alt="home logo" />
             </button>
@@ -86,8 +86,8 @@ export default function Navbar() {
         {isLoggedIn && (
           <>
             <li className={style.li}>
-              <Link href="/profile">
-                <a>{userInfo.userNickname}</a>
+              <Link href={`/profile/${userSeq}`}>
+                <a className="text-lg antialiased font-semibold text-theme-color">{userInfo.userNickname}</a>
               </Link>
             </li>
             <li className={style.li}>
