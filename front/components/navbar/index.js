@@ -3,9 +3,10 @@ import {useState, useEffect, useContext} from 'react';
 import style from './navbar.module.css';
 import { UserContext } from '../../lib/UserContext';
 import Send from '../../lib/Send';
+import {Router, useRouter} from "next/router"
 
 export default function Navbar() {
-  
+  const router = useRouter()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const {userSeq, setUserSeq} = useContext(UserContext);
@@ -85,10 +86,8 @@ export default function Navbar() {
         {/* 유저 로그인 상태 */}
         {isLoggedIn && (
           <>
-            <li className={style.li}>
-              <Link href={`/profile/${userSeq}`}>
-                <a className="text-lg antialiased font-semibold text-theme-color">{userInfo.userNickname}</a>
-              </Link>
+            <li className={style.li}>              
+              <a onClick={()=>router.push(`/profile/${userSeq}`)} className="text-lg antialiased font-semibold text-theme-color">{userInfo.userNickname}</a>              
             </li>
             <li className={style.li}>
               <Link href="/">
