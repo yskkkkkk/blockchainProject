@@ -87,7 +87,9 @@ export default function Navbar() {
         {isLoggedIn && (
           <>
             <li className={style.li}>              
-              <a onClick={()=>router.push(`/profile/${userSeq}`)} className="text-lg antialiased font-semibold text-theme-color">{userInfo.userNickname}</a>              
+              <Link href={`/profile/${userSeq}`}>
+                <a className="text-lg antialiased font-semibold text-theme-color">{userInfo.userNickname}</a>
+              </Link>
             </li>
             <li className={style.li}>
               <Link href="/">
