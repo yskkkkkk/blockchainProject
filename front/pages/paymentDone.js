@@ -12,7 +12,7 @@ export default function PaymentDone() {
     <div className="flex justify-center" style={{marginTop: "-30px"}}>
       <div className="border-4 border-[#6667AB]/[.6] p-10 shadow-lg mt-[5rem]">
         <div className="flex justify-center mb-5 w-[40rem]">
-          <Image width="400rem" height="260rem" src="/productImg.jpg" alt="" />
+          <Image width="400rem" height="260rem" src="/shrimpJang.webp" alt="" />
         </div>
         <div className="flex justify-center my-[3rem]">
           <h2 className="text-2xl antialiased font-semibold">🎉 후원해주셔서 감사합니다! 🎉</h2>
