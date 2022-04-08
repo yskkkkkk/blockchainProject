@@ -37,9 +37,9 @@ const FundCard = ({fund}) => {
       }}>
 
       <article className="flex flex-col gap-[16px] overflow-hidden flex-wrap shadow-lg">
-        <img className="w-full" src="/productImg.jpg" alt="fund card image" />
+        <img className="w-full" src={fund.fundingImage} alt="fund card image" />
         <section className="px-6">
-          <div className="mb-2 text-base font-bold">펀드명:{fund.fundingTitle} ₩</div>
+          <div className="mb-2 text-base font-bold">펀드명:{fund.fundingTitle}</div>
           <p className="text-sm text-gray-700">펀드한줄설명{fund.fundingSimple}</p>
         </section>
         <section className="px-6 pb-2">

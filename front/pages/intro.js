@@ -36,12 +36,35 @@ export default function intro() {
       </Fade>
       <iframe width="800" height="400" src="https://www.youtube.com/embed/dHANMtxLXt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-      <h1 className="text-4xl mt-60 antialiased font-bold text-right text-gray-700 mb-20">2. 네이버, 카카오 <br/> 어떤 것이든 이용하실 수 있어요.</h1>
-      <div style={{margin: "auto", marginBottom: "2rem", marginRight: "-30px", float: "right"}}>
-        <Fade triggerOnce={true}>
+      <h1 className="text-4xl mt-60 antialiased font-bold text-right text-gray-700 mb-20">2. 네이버, 카카오, 구글 <br/> 어떤 것이든 이용하실 수 있어요.</h1>
+      <div style={{margin: "auto", marginBottom: "2rem", marginLeft: "max(50%, 400px)"}}>
+        <Fade>
           <img style={{border: "1px solid grey", borderRadius: "10%"}} src="/login-page.jpg" width="600px" alt="우리 두레" />
         </Fade>
       </div>
+
+      <div>
+        <Fade fraction={0.8}>
+          <h1 className="text-4xl mt-48 antialiased font-bold text-left text-gray-700 mb-20">3. 지갑으로 확인을 누르시면 <br/> 펀딩을 생성할 수 있어요.</h1>
+        </Fade>
+      </div>
+      <div style={{margin: "auto", marginBottom: "2rem", marginRight: "-30px"}}>
+        <Fade fraction={0.3}>
+          <img style={{border: "1px solid grey"}} src="/intro/creation.jpg" width="600px" alt="우리 두레" />
+        </Fade>
+      </div>
+
+      <div>
+        <Bounce fraction={0.8}>
+          <h1 className="text-4xl mt-48 antialiased font-bold text-right text-gray-700 mb-20">4. 옵션 개수를 선택해 주세요</h1>
+        </Bounce>
+      </div>
+      <div style={{margin: "auto", marginBottom: "2rem", marginLeft: "max(50%, 400px)"}}>
+        <Bounce fraction={0.3}>
+          <img style={{border: "1px solid grey"}} src="/intro/buy.jpg" width="600px" alt="우리 두레" />
+        </Bounce>
+      </div>
+
 
       
       
