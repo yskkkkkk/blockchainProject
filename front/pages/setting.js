@@ -1,22 +1,26 @@
 import { Box } from "@mui/material"
 import { TabList, TabContext, TabPanel } from "@mui/lab"
 import { Tab } from "@mui/material"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useContext } from "react"
 import Profile from "../components/userSetting/Profile"
 import Account from "../components/userSetting/Account"
 import Wallet from "../components/userSetting/Wallet"
+import Address from "../components/userSetting/Address"
 import Send from "../lib/Send"
-
+import { UserContext } from '../lib/UserContext'
+import Router from "next/router";
 
 export default function Setting(){
   const [tabNum, setTabNum] = useState("0")
   const [userData, setUserData] = useState("")
+  const [address, setAddress] = useState([])
   function handleTab(event, newValue){
     setTabNum(newValue)
   }
+  const {userSeq, setUserSeq} = useContext(UserContext);
 
   const getUserData = () => {
-    Send.get(`http://j6a305.p.ssafy.io:9999/api/user?userSeq=7`)
+    Send.get(`https://j6a305.p.ssafy.io/api/user/${userSeq}`)
       .then(({data}) => {        
         setUserData(data)
       })
@@ -24,8 +28,23 @@ export default function Setting(){
         console.log(`error! ${e}`)
       })
   }
-  useEffect(()=>{
+
+  const getAddress = () => {
+    Send.get(`https://j6a305.p.ssafy.io/api/delivery/list?userSeq=${userSeq}`)
+      .then(({data}) => {        
+        setAddress(data)
+      })
+      .catch((e) => {
+        console.log(`error! ${e}`)
+      })
+  }
+
+  useEffect(async ()=>{
+    if (!userSeq) {
+      Router.push('/login')
+    }
     getUserData()
+    getAddress()
   },[])
   
 
@@ -63,7 +82,7 @@ export default function Setting(){
           <Wallet userData={userData} handleChange={handleChange}/>
         </TabPanel>
         <TabPanel value="3">
-          add
+          <Address userSeq={userSeq} address={address}/>
         </TabPanel>
       </TabContext>
     </div>
