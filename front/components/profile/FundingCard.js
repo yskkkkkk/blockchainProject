@@ -18,8 +18,10 @@ export default function FundingCard({fundingData, isMine}){
       const startDate = await contract.startDate()
       const endTime = new Date(parseInt(endDate._hex,16)*1000)
       const startTime = new Date(parseInt(startDate._hex,16)*1000)
+      const nowAmount =  await contract.getOverall()
+      const goalAmount =  await contract.getTargetAmount()
       if (parseInt(startDate._hex, 16)*1000 <= d1 && d1 <= parseInt(endDate._hex, 16)*1000) {        
-        setSellData({startTime:startTime, endTime:endTime})
+        setSellData({startTime:startTime, endTime:endTime, nowAmount:parseInt(nowAmount._hex,16)/10**18, goalAmount:parseInt(goalAmount._hex,16)/10**18})
       } 
     }
   }, [fundingData])
@@ -30,12 +32,12 @@ export default function FundingCard({fundingData, isMine}){
       {sellData && <Accordion expanded={expanded} onChange={()=>setExpanded(!expanded)}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="flex flex-row">
-           <Image width="32" height="32" src={fundingData.fundingImage} alt={fundingData.fundingTitle} />
+           <Image width="120" height="120" src={fundingData.fundingImage} alt={fundingData.fundingTitle} />
            <div>
              <p>제목: {fundingData.fundingTitle}</p>
-             <p>현재모금액: Amount1</p>
-             <p>목표모금액: Amount2</p>
-             <p>달성률: percentage</p>
+             <p>현재모금액: {sellData.nowAmount}ETH</p>
+             <p>목표모금액: {sellData.goalAmount}ETH</p>
+             <p>달성률: {(sellData.nowAmount*100)/(sellData.goalAmount*100)*100}%</p>
              <p>기간: {sellData.startTime.toLocaleString()} ~ {sellData.endTime.toLocaleString()}</p>
            </div>
           </div>

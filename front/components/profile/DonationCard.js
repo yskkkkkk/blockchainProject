@@ -39,7 +39,7 @@ export default function DonationCard({donationData, walletAddress}){
       <Accordion expanded={expanded} onChange={()=>setExpanded(!expanded)}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="flex flex-row">
-           {donationData && <Image width="32" height="32" src={donationData.fundingImage} alt={donationData.fundingTitle} />}
+           {donationData && <Image width="120" height="120" src={donationData.fundingImage} alt={donationData.fundingTitle} />}
            <div>
              {donationData && <p>제목: {donationData.fundingTitle}</p>}
              {donationData && <p>스마트컨트랙트 번호: {donationData.fundingContract}</p>}
