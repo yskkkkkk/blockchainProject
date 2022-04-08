@@ -30,7 +30,7 @@ export default function Project(props){
   }
 
   const categoryItems = props.categories.map(item => 
-    <MenuItem value={item.categoryName} key={item.categoryNumber}>{item.categoryName}</MenuItem>
+    <MenuItem value={item.categoryNumber} key={item.categoryNumber}>{item.categoryName}</MenuItem>
   )
 
   return(
