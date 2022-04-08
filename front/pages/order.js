@@ -1,12 +1,13 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import { useState, useRef, useContext } from "react";
 import RecepientForm from "../components/orderPage/recepientForm";
 import { motion } from "framer-motion";
 import Image from 'next/image';
-import OptionTable from "../components/orderPage/optionTable";
 import { UserContext } from "../lib/UserContext";
 import CustomButton from "../components/ui/button/button";
 import FinalConfirm from "../components/orderPage/finalConfirm";
 import AddSubt from "../components/orderPage/addsubt";
+import Send from "../lib/Send";
+import Router from "next/router";
 // import {useRouter} from 'next/router';
 
 const Order = () => {
@@ -15,6 +16,8 @@ const Order = () => {
   const [openPostSearch, setOpenPostSearch] = useState(false);
 
   const {curOption, setCurOption} = useContext(UserContext);
+  const {userSeq, setUserSeq} = useContext(UserContext);
+  const {fundSeq, setFundSeq} = useContext(UserContext);
 
   const [address, setAddress] = useState('');
   const [address2, setAddress2] = useState('');
@@ -83,6 +86,29 @@ const Order = () => {
     setOrderProcess(2);
   } 
 
+  const confirmFinalOrder = (e) => {
+    e.preventDefault();
+    for (let i = 0; i < choices.length; i++) {
+      let data = {
+        "userSeq": userSeq,
+        "fundingSeq": fundSeq,
+        "optionNum": choices[i],
+        "optionSeq": i,
+      }
+      if (data.optionNum) {
+        Send.post('/history', data)
+          .then((res) => {
+            console.log(res);
+            setCurOption([]);
+            setFundSeq('');
+            Router.push('/paymentDone');
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
+    }
+  }
   
 
   return (
@@ -116,7 +142,7 @@ const Order = () => {
       {orderProcess === 0 && (
         <section className="flex flex-col items-center gap-[2rem] border-2 py-[1rem] mx-[255px]">
           <section className="flex flex-wrap justify-center gap-x-[45px] gap-y-[96px] my-10">
-            {curOption.map((option, idx) => (
+            {curOption && curOption.map((option, idx) => (
               <AddSubt choices={choices} setChoices={setChoices} option={option} idx={idx} key={option.optionTitle}>
               </AddSubt>
             ))}
@@ -143,7 +169,7 @@ const Order = () => {
       )
       }
       {orderProcess === 2 && (
-        <FinalConfirm />
+        <FinalConfirm confirmFinalOrder={confirmFinalOrder} curOption={curOption} choices={choices} />
       )}
       
 

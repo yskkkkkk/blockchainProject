@@ -11,10 +11,11 @@ function MyApp({ Component, pageProps, router }) {
   const [userSeq, setUserSeq] = useState('');  // 임의값
   const [userInfo, setUserInfo] = useState('');
   const [curOption, setCurOption] = useState([]);
+  const [fundSeq, setFundSeq] = useState('');
   // 유저 번호 값이 바뀔때만 userSeq 값 수정
   const userInfoValue = useMemo(() => ({
-    userSeq, setUserSeq, userInfo, setUserInfo, curOption, setCurOption}), 
-    [userSeq, setUserSeq, userInfo, setUserInfo, curOption, setCurOption]);
+    userSeq, setUserSeq, userInfo, setUserInfo, curOption, setCurOption, fundSeq, setFundSeq}), 
+    [userSeq, setUserSeq, userInfo, setUserInfo, curOption, setCurOption, fundSeq, setFundSeq]);
 
   return (
     <>
