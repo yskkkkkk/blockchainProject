@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import Router from "next/router";
+import {useRouter} from "next/router";
+import Router from "next/router"
 
 import {useEffect, useContext, useState} from 'react';
 import {follow, unfollow} from '../../../lib/User.js';
@@ -10,6 +11,7 @@ import {UserContext} from "../../../lib/UserContext";
 import contractGetter from '../../../lib/ContractGetter';
 
 const ProductBasics = ({src, fundInfo}) => {
+  const router = useRouter()
 
   const {userSeq, setUserSeq} = useContext(UserContext);  // 현 유저의 userSeq 값
 
@@ -76,7 +78,7 @@ const ProductBasics = ({src, fundInfo}) => {
         </div>
         <div className="flex flex-row justify-evenly">
           <p className="basis-1/2">파트너 정보:
-            <button>{fundInfo.userNickname}</button>
+            <button onClick={()=>router.push(`/profile/${fundInfo.userSeq}`)}>{fundInfo.userNickname}</button>
           </p>
           <div className="flex flex-row justify-end gap-[1rem] basis-1/2">  
             {/* 팔로우 버튼 토글 애니매이션 폭망. 다시짜야함  */}
