@@ -1,8 +1,15 @@
 import styles from '../styles/Home.module.css'
 import { Fade, Slide, Flip, JackInTheBox, Bounce, Rotate } from "react-awesome-reveal";
+import Router from 'next/router';
 
 export default function intro() {
+
+  const goToLogin = () => {
+    Router.push('/login')
+  }
+
   return (
+    <>
     <div style={{margin: "auto", marginBottom: "200px", width: "70%"}}>
       <Fade>
         <h1 className="text-4xl antialiased font-semibold text-left text-gray-700 mb-10">"판매자를 어떻게 믿어요 ㅠㅠ"</h1>
@@ -34,7 +41,7 @@ export default function intro() {
       <Fade fraction={0.8}>
         <h1 className="text-4xl antialiased font-bold text-left text-gray-700 mb-20">1. 메타마스크 지갑을 준비해요.</h1>
       </Fade>
-      <iframe width="800" height="400" src="https://www.youtube.com/embed/dHANMtxLXt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="800" height="400" src="https://www.youtube.com/embed/dHANMtxLXt0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
       <h1 className="text-4xl mt-60 antialiased font-bold text-right text-gray-700 mb-20">2. 네이버, 카카오, 구글 <br/> 어떤 것이든 이용하실 수 있어요.</h1>
       <div style={{margin: "auto", marginBottom: "2rem", marginLeft: "max(50%, 400px)"}}>
@@ -66,8 +73,17 @@ export default function intro() {
       </div>
 
 
+      <JackInTheBox fraction={0.8}>
+        <h1 onClick={goToLogin} className="mt-64 cursor-pointer text-5xl antialiased font-bold text-center text-gray-700 mb-8">자, 그럼 시작해볼까요?!</h1>
+      </JackInTheBox>
+
+      <Bounce fraction={1}>
+        <h1 className="mt-16 text-2xl antialiased font-bold text-center text-gray-700 mb-40">↑ 클릭!</h1>
+      </Bounce>
+
       
       
     </div>
+  </>
   )
 }
