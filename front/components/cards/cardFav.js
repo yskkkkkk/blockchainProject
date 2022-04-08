@@ -38,7 +38,6 @@ const FundCard = ({fund}) => {
 
       <article className="flex flex-col gap-[16px] overflow-hidden flex-wrap shadow-lg">
         <img className="w-full" src={fund.fundingImage} alt="fund card image" />
-        {console.log(fund.fundingImage)}
         <section className="px-6">
           <div className="mb-2 text-base font-bold">{fund.fundingTitle}</div>
           <p className="text-sm text-gray-700">{fund.fundingSimple}</p>
