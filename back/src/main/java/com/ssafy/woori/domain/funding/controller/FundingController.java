@@ -224,9 +224,9 @@ public class FundingController {
         HttpStatus status = HttpStatus.OK;
 
         Map<String, Object> response = new HashMap<>();
-        Optional<List<UserBuyListResponse>> dto = historyService.getBuyerList(fundingSeq);
+        List<DeliveryList> dto = fundingService.getDeliveryList(fundingSeq);
 
-        if(dto.isPresent()){
+        if(dto != null){
             message = SUCCESS;
             status = HttpStatus.OK;
             response.put("data", dto);
