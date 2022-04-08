@@ -1,4 +1,3 @@
-import CustomButton from "../../ui/button/button";
 import { motion } from "framer-motion";
 import OptionTable from "../optionTable";
 
@@ -31,9 +30,9 @@ const addSubt = ({ option, idx, choices, setChoices }) => {
       >
         <OptionTable option={option} key={option.optionTitle} />
       </motion.button>
-      <div className="flex justify-evenly my-4">
+      <div className="flex my-4 justify-evenly">
       <button onClick={minus} style={{borderRadius: "0.5rem", display: "block"}} className="mx-auto text-center border-2 p-3 text-white bg-[#6667AB] font-semibold border-[#6667AB]">-</button>
-        <div style={{borderRadius: "0.5rem"}} className="border-2 p-3 w-32 text-center border-theme-color text-xl text-bold">
+        <div style={{borderRadius: "0.5rem"}} className="w-32 p-3 text-xl text-center border-2 border-theme-color text-bold">
           {choices[idx]}
         </div>
       <button onClick={add} style={{borderRadius: "0.5rem", display: "block"}} className="mx-auto text-center border-2 p-3 text-white bg-theme-color font-semibold border-[#6667AB]">+</button>
