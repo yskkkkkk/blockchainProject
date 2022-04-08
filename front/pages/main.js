@@ -31,7 +31,7 @@ export const getStaticProps = async () => {
 
 
 const Products = ({funds}) => {
-
+  console.log(funds)
   return (
     <>
       <Banner />
@@ -58,7 +58,7 @@ const Products = ({funds}) => {
         </Grid>
         <Grid item xs={4} style={{ paddingLeft: "15px", borderLeft: "1px solid #e5e7eb" }}>
           <div>
-            <h2 className="mt-2 pl-2" style={{ fontSize: "26px", marginBottom: "5px" }}>인기 펀딩</h2>
+            <h2 className="mt-2 pl-3" style={{ fontSize: "26px", marginBottom: "5px" }}>인기 펀딩</h2>
             <div className="flex flex-col flex-wrap justify-center gap-x-[16px] gap-y-[25px] mt-4 mb-8">
               {funds[0][0].slice(0, 5).map((fund, index) => (
                 // <Link href={'/products/' + fund.id} key={fund.id} passHref>
