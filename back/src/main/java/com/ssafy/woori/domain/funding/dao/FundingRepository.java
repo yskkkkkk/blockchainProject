@@ -41,4 +41,11 @@ public interface FundingRepository extends JpaRepository<Funding, Integer> {
 
     @Query(value = "select f.userSeq from Funding f where f.fundingSeq = :fundingSeq")
     Integer getSeller(int fundingSeq);
+    
+    @Query(value = "select distinct u.userNickname as userNickname, d.address as address, d.addressDetail as addressDetail, "
+    		+  "(select o.option_text from Option o where h.optionSeq = o.optionSeq) as optionText "
+    		+ "from User u, Delivery d, History h "
+    		+ "where u.userSeq = d.userSeq and h.userSeq = u.userSeq and u.userSeq in "
+    		+ "(select a.userSeq from History a where a.fundingSeq = :fundingSeq)")
+    Optional<List<DeliveryList>> getDeliveryList(int fundingSeq);
 }
