@@ -52,36 +52,36 @@ useEffect()내에서 여러 가지 데이터들을 axios로 가져와서 이 데
 
 1. 펀딩 이력 및 현황
 
-![image-20220408172041373](../../../../../Desktop/Readme.assets/image-20220408172041373.png)
+![image-20220408172041373](Readme.assets/image-20220408172041373.png)
 
-2. 후원 이력 및 현황![profile2](../../../../../Desktop/Readme.assets/profile2.PNG)
+2. 후원 이력 및 현황![profile2](Readme.assets/profile2.PNG)
 
 3. 펀딩진행중
 
-![profile6](../../../../../Desktop/Readme.assets/profile6.PNG)
+![profile6](Readme.assets/profile6.PNG)
 
-4. 펀딩종료![profile7](../../../../../Desktop/Readme.assets/profile7.PNG)
+4. 펀딩종료![profile7](Readme.assets/profile7.PNG)
 
 ### 펀딩 개설 페이지
 
 1. 창작자 정보 컴포넌트
 
-![funding1](../../../../../Desktop/Readme.assets/funding1.PNG)
+![funding1](Readme.assets/funding1.PNG)
 
 2. 프로젝트 정보 컴포넌트
 
-![funding2](../../../../../Desktop/Readme.assets/funding2.PNG)
+![funding2](Readme.assets/funding2.PNG)
 
 3. 펀딩 계획 컴포넌트
 
-![funding3](../../../../../Desktop/Readme.assets/funding3.PNG)
+![funding3](Readme.assets/funding3.PNG)
 
-4. 정책 안내 및 펀딩 진행![funding4](../../../../../Desktop/Readme.assets/funding4.PNG)
+4. 정책 안내 및 펀딩 진행![funding4](Readme.assets/funding4.PNG)
 
 ### 유저 설정 페이지
 
-1. 프로필 설정![setting1](../../../../../Desktop/Readme.assets/setting1.PNG)
+1. 프로필 설정![setting1](Readme.assets/setting1.PNG)
 
 2. 지갑 연동
 
-![setting2](../../../../../Desktop/Readme.assets/setting2.PNG)
+![setting2](Readme.assets/setting2.PNG)
