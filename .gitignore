@@ -1,0 +1,14 @@
+### Eclipse / STS ###
+.project
+.classpath
+.settings/
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
